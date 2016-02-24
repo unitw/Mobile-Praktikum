@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 /.nb-gradle/
-=======
-/dist/*
-/build/*
->>>>>>> origin/master
-/Jamaican Fashion Sisters/nbproject/private/
+/Future Bazooka Safari/nbproject/*
+/Future Bazooka Safari/dist/
+/Future Bazooka Safari/build/
