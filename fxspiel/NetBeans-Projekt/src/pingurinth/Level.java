@@ -212,7 +212,7 @@ public class Level {
          Label levelNr= new Label(showLvNr);  
         
         
-        Label footer= new Label("© J.Baade, T.Bratzke, J.Matthiesen");
+       
         
         
         int logoSmaler= 10;
@@ -232,16 +232,11 @@ public class Level {
         );
 
          
-        footer.setLayoutX(490);
-        footer.setLayoutY(670);
-        footer.setStyle(
-                "-fx-font: 12px \"SansSerif\";" +
-                "-fx-text-fill: white;"
-        );
+     
         
         pane.getChildren().add(levelNr);
         pane.getChildren().add(logo);
-        pane.getChildren().add(footer);
+ 
         
       
         
