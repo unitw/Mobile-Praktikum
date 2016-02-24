@@ -1,1 +1,6 @@
+<<<<<<< HEAD
 /.nb-gradle/
+=======
+/dist/*
+/build/*
+>>>>>>> origin/master
