@@ -16,11 +16,11 @@ import javafx.stage.Stage;
  * @author rw
  */
 public class JamaicanFashionSisters extends Application {
-    
+      
     @Override
-    public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
-        
+    public void start(Stage stage) throws Exception { 
+        Parent root = FXMLLoader.load(getClass().getResource("/FBS_MainMenu/FXMLMainMenu.fxml"));
+
         Scene scene = new Scene(root);
         
         stage.setScene(scene);
