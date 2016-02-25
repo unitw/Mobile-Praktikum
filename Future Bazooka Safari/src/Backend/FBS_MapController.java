@@ -16,6 +16,8 @@ import static java.lang.Math.abs;
 import java.util.ArrayList;
 import javafx.animation.AnimationTimer;
 import static java.lang.Math.abs;
+import static java.lang.Math.abs;
+import static java.lang.Math.abs;
 
 /**
  *
@@ -25,7 +27,7 @@ public class FBS_MapController {
 
     int[][] map = new int[10][10];
     FBS_Map mapshower;
-    
+
     private ArrayList<FBS_MonsterInterface> monsterlist = new ArrayList();
     private ArrayList<FBS_TowerInterface> turmlist = new ArrayList();
     private ArrayList<FBS_Projektil_Interface> projektillist = new ArrayList();
@@ -33,12 +35,13 @@ public class FBS_MapController {
     FBS_MonsterInterface monsterratte = new FBS_Monster_Ratte(0, 0);
     FBS_TowerInterface lasertower = new FBS_Laser_Tower(5, 5);
     private AnimationTimer timer;
+    private AnimationTimer projektiltimer;
 
     public FBS_MapController(FBS_Map map) {
 
         monsterlist.add(monsterratte);
         turmlist.add(lasertower);
-        
+
     }
     int iteration = 0;
 
@@ -51,57 +54,53 @@ public class FBS_MapController {
 
                 MonsterMovement(iteration);
                 TowerShoot(iteration);
-                
+
                 iteration++;
 
             }
 
-            
         };
 
     }
-    
+
     private void TowerShoot(int iteration) {
         for (FBS_TowerInterface tower : turmlist) {
-            if(iteration % tower.getAttackspeed()==0)
-            {
-                    ArrayList<FBS_MonsterInterface> aggrolist = inRange(tower);
-                    FireAction(tower, aggrolist);
+            if (iteration % tower.getAttackspeed() == 0) {
+                ArrayList<FBS_MonsterInterface> aggrolist = inRange(tower);
+                FireAction(tower, aggrolist);
             }
-                }
-            }
+        }
+    }
 
-    public void animationTimer(final FBS_Projektil_Interface projektil2) {
+    public void projektilTimer() {
 
-        AnimationTimer projektiltimer = new AnimationTimer() {
-
+        projektiltimer = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                FBS_Projektil_Interface projektil1 = projektil2;
-
-                bewege(projektil1);
-                if (projektil1.getPositionx() == projektil1.getTarget().getPositionx() && projektil1.getPositiony() == projektil1.getTarget().getPositiony()) {
-
-                 //TODO
-                    //   projektiltimer.stop();
+                for (FBS_Projektil_Interface projektil : FBS_MapController.this.getProjektillist()) {
+                    bewege(projektil);
+                    if (projektil.getPositionx() == projektil.getTarget().getPositionx() && projektil.getPositiony() == projektil.getTarget().getPositiony()) {
+                        FBS_MapController.this.getProjektillist().remove(projektil);
+                    }
                 }
             }
 
         };
         projektiltimer.start();
+
     }
 
     public void Schadensberechnung(FBS_Projektil_Interface project) {
-        
-        FBS_MonsterInterface mon= project.getTarget();
-        
-        int lifemon= mon.getLife()-project.getDamage();
-        if(lifemon<=0){
+
+        FBS_MonsterInterface mon = project.getTarget();
+
+        int lifemon = mon.getLife() - project.getDamage();
+        if (lifemon <= 0) {
             this.getMonsterlist().remove(mon);
-        }else{
+        } else {
             mon.setLife(lifemon);
         }
-    
+
     }
 
     public void FireAction(FBS_TowerInterface tower, ArrayList<FBS_MonsterInterface> aggrolist) {
@@ -115,7 +114,6 @@ public class FBS_MapController {
         if (mon != null) {
             FBS_Projektil_Interface projektil = new FBS_LaserProjektil(mon, tower.getPositionx(), tower.getPositiony(), tower.getDamage(), tower.getAOE());
             this.getProjektillist().add(projektil);
-            animationTimer(projektil);
         }
 
     }
