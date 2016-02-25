@@ -5,39 +5,17 @@
  */
 package Backend;
 
-import java.util.ArrayList;
 
 /**
- *
+ * place objects on map
  * @author rw
  */
 public class FBS_Map {
+
     
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
-    
-    
-    
+    public FBS_Map() {
+        
+    }   
     
     
     
