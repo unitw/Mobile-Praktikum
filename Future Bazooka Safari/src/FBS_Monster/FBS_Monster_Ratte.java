@@ -5,78 +5,23 @@
  */
 package FBS_Monster;
 
-import FBS_Interfaces.FBS_MonsterInterface;
+import FBS_Interfaces.FBS_AbstractMonster;
 
 /**
  *
  * @author rw
  */
-public class FBS_Monster_Ratte implements FBS_MonsterInterface {
+public class FBS_Monster_Ratte extends FBS_AbstractMonster {
 
-    private int posx;
-    private int posy;
-
-    private int life = 30;
-
-    private int speed = 20;
-
-    final int loot = 100;
-
-    /**
-     *
-     * @param posx
-     * @param posy
-     */
     public FBS_Monster_Ratte(int posx, int posy) {
-        this.posx = posx;
-        this.posy = posy;
-
+        this.setPosition(posx, posy);
+        this.setLife(30);
+        this.setSpeed(20);
+        this.setLoot(100);
     }
 
-    @Override
-    public void setPosition(int posx, int posy) {
-        this.posx = posx;
-        this.posy = posy;
-
-    }
-
-    @Override
-    public int getPositionx() {
-
-        return this.posx;
-    }
-
-    @Override
-    public int getPositiony() {
-
-        return this.posy;
-    }
-
-    @Override
-    public void setLife(int life) {
-        this.life = life;
-    }
-
-    @Override
-    public int getLife() {
-        return this.life;
-    }
-
-    @Override
-    public void setSpeed(int speed) {
-        this.speed = speed;
-
-    }
-
-    @Override
-    public int getSpeed() {
-
-        return this.speed;
-    }
-
-    @Override
-    public int getLoot() {
-        return this.loot;
-    }
-
+    
+    
+    
+    
 }

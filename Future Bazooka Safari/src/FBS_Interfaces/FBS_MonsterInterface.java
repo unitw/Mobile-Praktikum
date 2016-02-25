@@ -25,7 +25,7 @@ public interface FBS_MonsterInterface {
     public int getSpeed();
     
     
-    
+    public void setLoot(int loot);
     public int getLoot();
     
     
