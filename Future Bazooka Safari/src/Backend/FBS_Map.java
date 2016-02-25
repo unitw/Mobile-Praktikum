@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class FBS_Map {
     
- int[][] feld= new int[1000][1000]; 
+ 
  
  
  
