@@ -18,6 +18,8 @@ public class FBS_AbstractMonster implements FBS_MonsterInterface{
     private int speed ;
 
     private int loot;
+    
+    private int exp;
 
    
    
@@ -71,6 +73,16 @@ public class FBS_AbstractMonster implements FBS_MonsterInterface{
     @Override
     public int getLoot() {
         return this.loot;
+    }
+
+    @Override
+    public void setExp(int exp) {
+        this.exp = exp;
+    }
+
+    @Override
+    public int getExp() {
+        return this.exp;
     }
 
 }

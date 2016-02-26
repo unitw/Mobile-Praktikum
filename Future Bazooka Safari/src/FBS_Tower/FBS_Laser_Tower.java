@@ -22,6 +22,7 @@ public class FBS_Laser_Tower extends FBS_AbstractTower {
         this.setUpgradestufe(0);
         this.setRange(100);
         this.setBaukosten(100);
+        this.setLvl(1);
 
     }
 

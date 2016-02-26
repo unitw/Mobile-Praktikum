@@ -28,7 +28,9 @@ public interface FBS_MonsterInterface {
     public void setLoot(int loot);
     public int getLoot();
     
-    
+    // Die, vom Monster erhaltenen Erfahrungspunkte.
+    public void setExp(int exp);
+    public int getExp();
     
     
 }

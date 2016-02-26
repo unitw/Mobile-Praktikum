@@ -48,5 +48,9 @@ public interface FBS_TowerInterface {
     public void setBaukosten(int Baukosten);
 
     public int getBaukosten();
+    
+    public void setLvl(int lvl);
+    
+    public int getLvl();
 
 }

@@ -21,6 +21,7 @@ public class FBS_AbstractTower implements FBS_TowerInterface {
     private int range;
     private int upgradestufe;
     private int baukosten;
+    private int lvl;
 
     @Override
     public void setPosition(int posx, int posy) {
@@ -41,7 +42,7 @@ public class FBS_AbstractTower implements FBS_TowerInterface {
 
     @Override
     public int getRange() {
-        return this.getRange();
+        return this.range;
     }
 
     @Override
@@ -120,6 +121,16 @@ public class FBS_AbstractTower implements FBS_TowerInterface {
     @Override
     public int getBaukosten() {
         return this.baukosten;
+    }
+
+    @Override
+    public void setLvl(int lvl) {
+        this.lvl = lvl;
+    }
+
+    @Override
+    public int getLvl() {
+        return this.lvl;
     }
 
 }
