@@ -32,10 +32,11 @@ public class FBS_MapController {
     private ArrayList<FBS_TowerInterface> turmlist = new ArrayList();
     private ArrayList<FBS_Projektil_Interface> projektillist = new ArrayList();
 
-    FBS_MonsterInterface monsterratte = new FBS_Monster_Ratte(0, 0);
-    FBS_TowerInterface lasertower = new FBS_Laser_Tower(5, 5);
     private AnimationTimer timer;
     private AnimationTimer projektiltimer;
+    
+    FBS_MonsterInterface monsterratte = new FBS_Monster_Ratte(0, 0);
+    FBS_TowerInterface lasertower = new FBS_Laser_Tower(5, 5);
 
     public FBS_MapController(FBS_Map map) {
 
