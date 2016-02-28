@@ -131,6 +131,11 @@ public class FBS_MapController {
 
             if (i % mon.getSpeed() == 0) {
                 bewege(mon);
+                if (mon.getPositionx() <= this.map.getEndpunkt().getX()
+                        && mon.getPositiony() <= this.map.getEndpunkt().getY()) {
+
+                    //lose life
+                }
             }
 
         }
@@ -139,67 +144,74 @@ public class FBS_MapController {
 
     public void bewege(Object object) {
 
+        int posx = 0;
+        int posy = 0;
         if (object instanceof FBS_MonsterInterface) {
 
             FBS_MonsterInterface moveMon = (FBS_MonsterInterface) object;
-            int posxakt = moveMon.getPositionx();
+            posx = moveMon.getPositionx();
+            posy = moveMon.getPositiony();
 
-            int posyakt = moveMon.getPositiony();
-
-            moveMon.setPosition(posxakt + 4, posyakt);
-            
-            if (moveMon.getPositionx() == this.map.getEndpunkt().getX()
-                    && moveMon.getPositiony() == this.map.getEndpunkt().getY()) {
-                
-                //lose life
-            }
         } else if (object instanceof FBS_Projektil_Interface) {
 
             FBS_Projektil_Interface project = (FBS_Projektil_Interface) object;
-            int posx = project.getPositionx();
-            int posy = project.getPositiony();
-
-            ArrayList<Point> zuege = new ArrayList();
-
-            Point p1 = new Point(posx, posy + 1);
-            Point p2 = new Point(posx + 1, posy + 1);
-            Point p3 = new Point(posx + 1, posy);
-            Point p4 = new Point(posx + 1, posy - 1);
-            Point p5 = new Point(posx, posy - 1);
-            Point p6 = new Point(posx - 1, posy - 1);
-            Point p7 = new Point(posx - 1, posy);
-            Point p8 = new Point(posx - 1, posy + 1);
-
-            zuege.add(p1);
-            zuege.add(p2);
-            zuege.add(p3);
-            zuege.add(p4);
-            zuege.add(p5);
-            zuege.add(p6);
-            zuege.add(p7);
-            zuege.add(p8);
-
-            Point neuerZug = getnextZug(project, zuege);
-
-            project.setPosition((int) neuerZug.getX(), (int) neuerZug.getY());
-
+            posx = project.getPositionx();
+            posy = project.getPositiony();
         }
+        ArrayList<Point> zuege = new ArrayList();
 
+        Point p1 = new Point(posx, posy + 1);
+        Point p2 = new Point(posx + 1, posy + 1);
+        Point p3 = new Point(posx + 1, posy);
+        Point p4 = new Point(posx + 1, posy - 1);
+        Point p5 = new Point(posx, posy - 1);
+        Point p6 = new Point(posx - 1, posy - 1);
+        Point p7 = new Point(posx - 1, posy);
+        Point p8 = new Point(posx - 1, posy + 1);
+
+        zuege.add(p1);
+        zuege.add(p2);
+        zuege.add(p3);
+        zuege.add(p4);
+        zuege.add(p5);
+        zuege.add(p6);
+        zuege.add(p7);
+        zuege.add(p8);
+
+        Point neuerZug = getnextZug(object, zuege);
+
+        if (object instanceof FBS_MonsterInterface) {
+
+            FBS_MonsterInterface moveMon = (FBS_MonsterInterface) object;
+            moveMon.setPosition(neuerZug.x, neuerZug.y);
+
+        } else if (object instanceof FBS_Projektil_Interface) {
+
+            FBS_Projektil_Interface project = (FBS_Projektil_Interface) object;
+            project.setPosition((int) neuerZug.getX(), (int) neuerZug.getY());
+        }        
     }
 
     //A-Stern
-    public Point getnextZug(FBS_Projektil_Interface project, ArrayList<Point> zuege) {
+    public Point getnextZug(Object o, ArrayList<Point> zuege) {
 
         int heuristic = Integer.MAX_VALUE;
         Point neuerZug = null;
+        int posiytarget = 0;
+        int posixtarget = 0;
 
         for (Point zug : zuege) {
 
             int posix = (int) zug.getX();
             int posiy = (int) zug.getY();
-
-            int posixtarget = project.getTarget().getPositionx();
-            int posiytarget = project.getTarget().getPositiony();
+            if (o instanceof FBS_Projektil_Interface) {
+                FBS_Projektil_Interface project = (FBS_Projektil_Interface) o;
+                posixtarget = project.getTarget().getPositionx();
+                posiytarget = project.getTarget().getPositiony();
+            } else if (o instanceof FBS_MonsterInterface) {
+                posixtarget = this.map.getEndpunkt().x;
+                posiytarget = this.map.getEndpunkt().y;
+            }
 
             int heuristicneu = (int) getCost(posix, posiy, posixtarget, posiytarget);
 
