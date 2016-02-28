@@ -19,11 +19,12 @@ public class JamaicanFashionSisters extends Application {
       
     @Override
     public void start(Stage stage) throws Exception { 
-        Parent root = FXMLLoader.load(getClass().getResource("/FBS_MainMenu/FXMLMainMenu.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/FBS_LoginScreen/FXMLLoginScreen.fxml"));
 
         Scene scene = new Scene(root);
         
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
     }
 
