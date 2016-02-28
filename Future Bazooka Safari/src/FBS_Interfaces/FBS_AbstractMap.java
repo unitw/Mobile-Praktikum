@@ -56,6 +56,7 @@ public class FBS_AbstractMap implements FBS_MapInterface {
         this.mapsize = mapsize;
     }
 
+    @Override
     public int getMapsize() {
         return this.mapsize;
 

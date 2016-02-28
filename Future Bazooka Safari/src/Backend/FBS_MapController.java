@@ -5,6 +5,7 @@
  */
 package Backend;
 
+import FBS_Interfaces.FBS_MapInterface;
 import FBS_Interfaces.FBS_MonsterInterface;
 import FBS_Interfaces.FBS_Projektil_Interface;
 import FBS_Interfaces.FBS_TowerInterface;
@@ -12,11 +13,8 @@ import FBS_Monster.FBS_Monster_Ratte;
 import FBS_Projektile.FBS_LaserProjektil;
 import FBS_Tower.FBS_Laser_Tower;
 import java.awt.Point;
-import static java.lang.Math.abs;
 import java.util.ArrayList;
 import javafx.animation.AnimationTimer;
-import static java.lang.Math.abs;
-import static java.lang.Math.abs;
 import static java.lang.Math.abs;
 
 /**
@@ -25,23 +23,22 @@ import static java.lang.Math.abs;
  */
 public class FBS_MapController {
 
-    int[][] map = new int[10][10];
-    FBS_Map mapshower;
-
+    FBS_MapInterface map;
     private ArrayList<FBS_MonsterInterface> monsterlist = new ArrayList();
     private ArrayList<FBS_TowerInterface> turmlist = new ArrayList();
     private ArrayList<FBS_Projektil_Interface> projektillist = new ArrayList();
 
     private AnimationTimer timer;
     private AnimationTimer projektiltimer;
-    
-    FBS_MonsterInterface monsterratte = new FBS_Monster_Ratte(0, 0);
-    FBS_TowerInterface lasertower = new FBS_Laser_Tower(5, 5);
 
-    public FBS_MapController(FBS_Map map) {
+    FBS_MonsterInterface monsterratte = new FBS_Monster_Ratte(0, 0);
+    FBS_TowerInterface lasertower = new FBS_Laser_Tower(25, 25);
+
+    public FBS_MapController(FBS_MapInterface map) {
 
         monsterlist.add(monsterratte);
         turmlist.add(lasertower);
+        this.map = map;
 
     }
     int iteration = 0;
@@ -150,7 +147,12 @@ public class FBS_MapController {
             int posyakt = moveMon.getPositiony();
 
             moveMon.setPosition(posxakt + 4, posyakt);
-
+            
+            if (moveMon.getPositionx() == this.map.getEndpunkt().getX()
+                    && moveMon.getPositiony() == this.map.getEndpunkt().getY()) {
+                
+                //lose life
+            }
         } else if (object instanceof FBS_Projektil_Interface) {
 
             FBS_Projektil_Interface project = (FBS_Projektil_Interface) object;
@@ -218,8 +220,8 @@ public class FBS_MapController {
         int x1 = turm.getPositionx();
         int y1 = turm.getPositiony();
 
-        for (int x = Math.max(0, x1 - turm.getRange()); x < Math.min(this.getMap()[0].length, x1 + turm.getRange() + 1); x++) {
-            for (int y = Math.max(0, y1 - turm.getRange()); y < Math.min(this.getMap().length, y1 + turm.getRange() + 1); y++) {
+        for (int x = Math.max(0, x1 - turm.getRange()); x < Math.min(this.getMap().getMapsize(), x1 + turm.getRange() + 1); x++) {
+            for (int y = Math.max(0, y1 - turm.getRange()); y < Math.min(this.getMap().getMapsize(), y1 + turm.getRange() + 1); y++) {
 
                 for (FBS_MonsterInterface mon1 : this.getMonsterlist()) {
 
@@ -260,11 +262,11 @@ public class FBS_MapController {
         this.projektillist = projektillist;
     }
 
-    public int[][] getMap() {
+    public FBS_MapInterface getMap() {
         return map;
     }
 
-    public void setMap(int[][] map) {
+    public void setMap(FBS_MapInterface map) {
         this.map = map;
     }
 
