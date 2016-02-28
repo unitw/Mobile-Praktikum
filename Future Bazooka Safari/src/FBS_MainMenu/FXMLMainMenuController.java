@@ -5,6 +5,8 @@
  */
 package FBS_MainMenu;
 
+import FBS_Maps.FBS_Safari_Map;
+import Backend.FBS_MapController;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -21,6 +23,7 @@ public class FXMLMainMenuController implements Initializable {
     @FXML
     private void newGamePressed(ActionEvent event) {
         System.out.println("pressed \"Neues Spiel\"");
+        
     }
     
     @FXML

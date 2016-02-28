@@ -24,6 +24,7 @@ import static java.lang.Math.abs;
 public class FBS_MapController {
 
     FBS_MapInterface map;
+    FBS_Map mapshower;
     private ArrayList<FBS_MonsterInterface> monsterlist = new ArrayList();
     private ArrayList<FBS_TowerInterface> turmlist = new ArrayList();
     private ArrayList<FBS_Projektil_Interface> projektillist = new ArrayList();
@@ -39,6 +40,7 @@ public class FBS_MapController {
         monsterlist.add(monsterratte);
         turmlist.add(lasertower);
         this.map = map;
+        mapshower = new FBS_Map(map);
 
     }
     int iteration = 0;
