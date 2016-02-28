@@ -11,15 +11,15 @@ import java.awt.Point;
  *
  * @author marvin
  */
-public class FBS_AbstractMap implements FBS_MapInterface{
+public class FBS_AbstractMap implements FBS_MapInterface {
 
     //map als boolean dargestellt: true = bebaubar
     //false = nicht bebaubar
     private boolean[][] map;
+    private int mapsize;
     private Point spawnpoint;
     private Point endpoint;
-    
-    
+
     @Override
     public Point getStartpunkt() {
         return spawnpoint;
@@ -39,17 +39,25 @@ public class FBS_AbstractMap implements FBS_MapInterface{
     public void setEndpunkt(Point Endpunkt) {
         this.endpoint = Endpunkt;
     }
+
     @Override
-    public boolean isbuildable(Point p){
-        return this.map[(int)p.getX()][(int)p.getY()];
+    public boolean isbuildable(Point p) {
+        return this.map[(int) p.getX()][(int) p.getY()];
     }
+
     @Override
-    public void setbuildable(Point p, boolean buildable){
-        this.map[(int)p.getX()][(int)p.getY()] = buildable;
+    public void setbuildable(Point p, boolean buildable) {
+        this.map[(int) p.getX()][(int) p.getY()] = buildable;
     }
-    
-    
-    
-    
-    
+
+    @Override
+    public void setMapsize(int mapsize) {
+        this.map = new boolean[mapsize][mapsize];
+        this.mapsize = mapsize;
+    }
+
+    public int getMapsize() {
+        return this.mapsize;
+
+    }
 }

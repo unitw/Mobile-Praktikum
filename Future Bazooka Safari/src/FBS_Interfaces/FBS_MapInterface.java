@@ -24,4 +24,6 @@ public interface FBS_MapInterface {
     public boolean isbuildable(Point p);
     public void setbuildable(Point p, boolean buildable);
     
+    public void setMapsize(int size);
+    public int getMapsize();
 }
