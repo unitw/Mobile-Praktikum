@@ -6,6 +6,7 @@
 package FBS_Interfaces;
 
 import java.awt.Point;
+import java.util.ArrayList;
 
 /**
  *
@@ -27,6 +28,7 @@ public interface FBS_MapInterface {
 
     public int getMapsize();
 
-    public Object[][] getArray();
-
+    public ArrayList getHindernislist();
+    
+   
 }

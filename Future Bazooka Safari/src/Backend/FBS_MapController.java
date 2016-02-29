@@ -19,6 +19,8 @@ import java.awt.Point;
 import java.util.ArrayList;
 import javafx.animation.AnimationTimer;
 import static java.lang.Math.abs;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -42,19 +44,21 @@ public class FBS_MapController {
     private int spielerleben;
     private int spielergold;
     private FBS_Canvas canvas;
-int iteration = 0;
+    private int iteration = 0;
+
     public FBS_MapController(FBS_MapInterface map, FBS_Canvas canvas) {
 
         monsterlist.add(monsterratte);
         turmlist.add(lasertower);
+
         this.map = map;
         this.canvas = canvas;
         spieler = new FBS_Spieler(0, 1000, 600, 100);
         spielerleben = spieler.getmaxLife();
         spielergold = spieler.getstartGold();
 
+        initTimer();
     }
-    
 
     public void initTimer() {
 
@@ -64,17 +68,27 @@ int iteration = 0;
             public void handle(long now) {
 
                 MonsterMovement(iteration);
-                TowerShoot(iteration);
+                //          TowerShoot(iteration);
 
-                for(FBS_MonsterInterface mon:monsterlist){
+                for (FBS_MonsterInterface mon : monsterlist) {
                     canvas.drawObject(mon);
                 }
-                
+
                 iteration++;
 
             }
 
         };
+        timer.start();
+
+    }
+
+    public void buildTower(FBS_TowerInterface tower) {
+
+        
+        
+        turmlist.add(tower);
+        canvas.drawObject(tower);
 
     }
 
@@ -95,7 +109,7 @@ int iteration = 0;
                 for (FBS_Projektil_Interface projektil : FBS_MapController.this.getProjektillist()) {
                     bewege(projektil);
                     canvas.drawObject(projektil);
-                    
+
                     if (projektil.getPositionx() == projektil.getTarget().getPositionx() && projektil.getPositiony() == projektil.getTarget().getPositiony()) {
                         FBS_MapController.this.getProjektillist().remove(projektil);
                     }
@@ -201,16 +215,25 @@ int iteration = 0;
             posx = project.getPositionx();
             posy = project.getPositiony();
         }
+        HashMap<Point, Integer> zuegemap = new HashMap<>();
         ArrayList<Point> zuege = new ArrayList();
-
-        Point p1 = new Point(posx, posy + 1);
-        Point p2 = new Point(posx + 1, posy + 1);
+        Point p1 = new Point(posx, posy - 1);
+        Point p2 = new Point(posx + 1, posy - 1);
         Point p3 = new Point(posx + 1, posy);
-        Point p4 = new Point(posx + 1, posy - 1);
-        Point p5 = new Point(posx, posy - 1);
-        Point p6 = new Point(posx - 1, posy - 1);
+        Point p4 = new Point(posx + 1, posy + 1);
+        Point p5 = new Point(posx, posy + 1);
+        Point p6 = new Point(posx - 1, posy + 1);
         Point p7 = new Point(posx - 1, posy);
-        Point p8 = new Point(posx - 1, posy + 1);
+        Point p8 = new Point(posx - 1, posy - 1);
+
+        zuegemap.put(p1, 180);
+        zuegemap.put(p2, 225);
+        zuegemap.put(p3, 270);
+        zuegemap.put(p4, 315);
+        zuegemap.put(p5, 0);
+        zuegemap.put(p6, 45);
+        zuegemap.put(p7, 90);
+        zuegemap.put(p8, 135);
 
         zuege.add(p1);
         zuege.add(p2);
@@ -227,6 +250,7 @@ int iteration = 0;
 
             FBS_MonsterInterface moveMon = (FBS_MonsterInterface) object;
             moveMon.setPosition(neuerZug.x, neuerZug.y);
+            moveMon.setangle(zuegemap.get(neuerZug));
 
         } else if (object instanceof FBS_Projektil_Interface) {
 

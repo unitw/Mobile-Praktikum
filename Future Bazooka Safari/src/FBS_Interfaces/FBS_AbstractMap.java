@@ -52,8 +52,5 @@ public class FBS_AbstractMap implements FBS_MapInterface {
 
     }
 
-    @Override
-    public Object[][] getArray() {
-    return this.map;
-    }
+   
 }

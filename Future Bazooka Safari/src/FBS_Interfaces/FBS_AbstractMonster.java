@@ -27,6 +27,10 @@ public class FBS_AbstractMonster implements FBS_MonsterInterface {
 
     private Image pic;
 
+    private int angle;
+
+    private int groesse;
+
     @Override
     public void setPosition(int posx, int posy) {
         this.posx = posx;
@@ -96,6 +100,27 @@ public class FBS_AbstractMonster implements FBS_MonsterInterface {
     @Override
     public Image getPicture() {
         return this.pic;
+    }
+
+    @Override
+    public void setangle(int angle) {
+        this.angle = angle;
+
+    }
+
+    @Override
+    public int getangle() {
+        return this.angle;
+    }
+
+    @Override
+    public int getGroesse() {
+        return this.groesse;
+    }
+
+    @Override
+    public void setGroesse(int Groesse) {
+        this.groesse = Groesse;
     }
 
 }

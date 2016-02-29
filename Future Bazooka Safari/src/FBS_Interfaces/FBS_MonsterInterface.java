@@ -38,5 +38,11 @@ public interface FBS_MonsterInterface {
     public void setPicture(Image pic);
     public Image getPicture();
     
+    public void setangle(int angle);
+    public int getangle();
+    
+    public int getGroesse();
+
+    public void setGroesse(int Groesse);
     
 }
