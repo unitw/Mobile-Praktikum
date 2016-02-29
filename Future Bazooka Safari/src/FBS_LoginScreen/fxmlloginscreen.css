@@ -1,5 +1,5 @@
 .loginScreen {
-    -fx-background-color: #ccc;
+    -fx-background-color: linear-gradient(to bottom, #a7c7dc 0%,#85b2d3 100%);
 }
 
 .loginScreen .logoLabel {

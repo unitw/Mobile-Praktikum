@@ -20,14 +20,25 @@ public class JamaicanFashionSisters extends Application {
     @Override
     public void start(Stage stage) throws Exception { 
         Parent root = FXMLLoader.load(getClass().getResource("/FBS_LoginScreen/FXMLLoginScreen.fxml"));
-
+       
         Scene scene = new Scene(root);
         
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
+        
+//        BorderPane borderPane = new BorderPane();
+//        WebView webView = new WebView();
+//        String url = getClass().getResource("/FBS_HTML/index.html").toExternalForm();
+//        webView.getEngine().load(url);
+//        borderPane.setCenter(webView);
+//        final Scene scene = new Scene(borderPane);
+//        stage.setScene(scene);
+//        stage.setHeight(512);
+//        stage.setWidth(288);
+//        stage.show();
     }
-
+    
     /**
      * @param args the command line arguments
      */
