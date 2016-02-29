@@ -14,6 +14,7 @@ import FBS_Interfaces.FBS_TowerInterface;
 import FBS_Monster.FBS_Monster_Ratte;
 import FBS_Projektile.FBS_LaserProjektil;
 import FBS_Tower.FBS_Laser_Tower;
+import Frontend.FBS_Canvas;
 import java.awt.Point;
 import java.util.ArrayList;
 import javafx.animation.AnimationTimer;
@@ -26,7 +27,7 @@ import static java.lang.Math.abs;
 public class FBS_MapController {
 
     FBS_MapInterface map;
-    FBS_MapZeichner mapshower;
+
     private ArrayList<FBS_MonsterInterface> monsterlist = new ArrayList();
     private ArrayList<FBS_TowerInterface> turmlist = new ArrayList();
     private ArrayList<FBS_Projektil_Interface> projektillist = new ArrayList();
@@ -40,23 +41,20 @@ public class FBS_MapController {
     FBS_SpielerInterface spieler;
     private int spielerleben;
     private int spielergold;
-
-    
-    
-    
-    public FBS_MapController(FBS_MapInterface map) {
+    private FBS_Canvas canvas;
+int iteration = 0;
+    public FBS_MapController(FBS_MapInterface map, FBS_Canvas canvas) {
 
         monsterlist.add(monsterratte);
         turmlist.add(lasertower);
         this.map = map;
-
+        this.canvas = canvas;
         spieler = new FBS_Spieler(0, 1000, 600, 100);
         spielerleben = spieler.getmaxLife();
         spielergold = spieler.getstartGold();
-        mapshower = new FBS_MapZeichner(map);
 
     }
-    int iteration = 0;
+    
 
     public void initTimer() {
 
@@ -68,6 +66,10 @@ public class FBS_MapController {
                 MonsterMovement(iteration);
                 TowerShoot(iteration);
 
+                for(FBS_MonsterInterface mon:monsterlist){
+                    canvas.drawObject(mon);
+                }
+                
                 iteration++;
 
             }
@@ -92,6 +94,8 @@ public class FBS_MapController {
             public void handle(long now) {
                 for (FBS_Projektil_Interface projektil : FBS_MapController.this.getProjektillist()) {
                     bewege(projektil);
+                    canvas.drawObject(projektil);
+                    
                     if (projektil.getPositionx() == projektil.getTarget().getPositionx() && projektil.getPositiony() == projektil.getTarget().getPositiony()) {
                         FBS_MapController.this.getProjektillist().remove(projektil);
                     }

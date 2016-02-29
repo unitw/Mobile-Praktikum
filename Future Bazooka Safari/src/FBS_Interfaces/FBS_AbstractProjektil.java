@@ -7,6 +7,7 @@ package FBS_Interfaces;
 
 import FBS_Interfaces.FBS_MonsterInterface;
 import FBS_Interfaces.FBS_Projektil_Interface;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 /**
@@ -22,7 +23,7 @@ public class FBS_AbstractProjektil implements FBS_Projektil_Interface {
     private int Speed;
     private int Damage;
     private FBS_MonsterInterface mon;
-    private ImageView pic;
+    private Image pic;
     
 
     @Override
@@ -92,12 +93,12 @@ public class FBS_AbstractProjektil implements FBS_Projektil_Interface {
 
     }
 @Override
-    public void setPicture(ImageView pic) {
+    public void setPicture(Image pic) {
         this.pic = pic;
     }
 
     @Override
-    public ImageView getPicture() {
+    public Image getPicture() {
         return this.pic;
     }
 

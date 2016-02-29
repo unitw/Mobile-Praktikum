@@ -6,6 +6,7 @@
 package FBS_Monster;
 
 import FBS_Interfaces.FBS_AbstractMonster;
+import javafx.scene.image.Image;
 
 /**
  *
@@ -18,6 +19,8 @@ public class FBS_Monster_Ratte extends FBS_AbstractMonster {
         this.setLife(30);
         this.setSpeed(20);
         this.setLoot(100);
+        this.setPicture(new Image("/resources/monsterrat.png"));
+       
     }
 
     
