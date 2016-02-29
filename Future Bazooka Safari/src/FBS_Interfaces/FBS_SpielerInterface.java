@@ -24,6 +24,8 @@ public interface FBS_SpielerInterface {
     public int getstartGold();
     
     
+    
+    
     //TODO
     // public upgrades 
     

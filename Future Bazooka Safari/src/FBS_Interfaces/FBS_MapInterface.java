@@ -21,9 +21,7 @@ public interface FBS_MapInterface {
     public Point getEndpunkt();
     public void setEndpunkt(Point Endpunkt);
     
-    public boolean isbuildable(Point p);
-    public void setbuildable(Point p, boolean buildable);
-    
+  
     public void setMapsize(int size);
     public int getMapsize();
 }

@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package FBS_Projektile;
+package FBS_Interfaces;
 
 import FBS_Interfaces.FBS_MonsterInterface;
 import FBS_Interfaces.FBS_Projektil_Interface;
+import javafx.scene.image.ImageView;
 
 /**
  *
@@ -21,6 +22,8 @@ public class FBS_AbstractProjektil implements FBS_Projektil_Interface {
     private int Speed;
     private int Damage;
     private FBS_MonsterInterface mon;
+    private ImageView pic;
+    
 
     @Override
     public void setPosition(int Posx, int Posy) {
@@ -87,6 +90,15 @@ public class FBS_AbstractProjektil implements FBS_Projektil_Interface {
     public FBS_MonsterInterface getTarget() {
         return this.mon;
 
+    }
+@Override
+    public void setPicture(ImageView pic) {
+        this.pic = pic;
+    }
+
+    @Override
+    public ImageView getPicture() {
+        return this.pic;
     }
 
 }

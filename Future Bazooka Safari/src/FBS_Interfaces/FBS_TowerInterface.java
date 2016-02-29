@@ -5,6 +5,8 @@
  */
 package FBS_Interfaces;
 
+import javafx.scene.image.ImageView;
+
 /**
  *
  * @author rw
@@ -52,5 +54,9 @@ public interface FBS_TowerInterface {
     public void setLvl(int lvl);
     
     public int getLvl();
+    
+    
+     public void setPicture(ImageView pic);
+    public ImageView getPicture();
 
 }

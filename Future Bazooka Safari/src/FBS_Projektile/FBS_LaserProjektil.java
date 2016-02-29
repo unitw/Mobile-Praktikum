@@ -5,6 +5,7 @@
  */
 package FBS_Projektile;
 
+import FBS_Interfaces.FBS_AbstractProjektil;
 import FBS_Interfaces.FBS_MonsterInterface;
 
 /**

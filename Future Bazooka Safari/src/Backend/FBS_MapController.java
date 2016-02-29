@@ -8,6 +8,8 @@ package Backend;
 import FBS_Interfaces.FBS_MapInterface;
 import FBS_Interfaces.FBS_MonsterInterface;
 import FBS_Interfaces.FBS_Projektil_Interface;
+import FBS_Interfaces.FBS_Spieler;
+import FBS_Interfaces.FBS_SpielerInterface;
 import FBS_Interfaces.FBS_TowerInterface;
 import FBS_Monster.FBS_Monster_Ratte;
 import FBS_Projektile.FBS_LaserProjektil;
@@ -24,7 +26,7 @@ import static java.lang.Math.abs;
 public class FBS_MapController {
 
     FBS_MapInterface map;
-    FBS_Map mapshower;
+    FBS_MapZeichner mapshower;
     private ArrayList<FBS_MonsterInterface> monsterlist = new ArrayList();
     private ArrayList<FBS_TowerInterface> turmlist = new ArrayList();
     private ArrayList<FBS_Projektil_Interface> projektillist = new ArrayList();
@@ -35,12 +37,23 @@ public class FBS_MapController {
     FBS_MonsterInterface monsterratte = new FBS_Monster_Ratte(0, 0);
     FBS_TowerInterface lasertower = new FBS_Laser_Tower(25, 25);
 
+    FBS_SpielerInterface spieler;
+    private int spielerleben;
+    private int spielergold;
+
+    
+    
+    
     public FBS_MapController(FBS_MapInterface map) {
 
         monsterlist.add(monsterratte);
         turmlist.add(lasertower);
         this.map = map;
-        mapshower = new FBS_Map(map);
+
+        spieler = new FBS_Spieler(0, 1000, 600, 100);
+        spielerleben = spieler.getmaxLife();
+        spielergold = spieler.getstartGold();
+        mapshower = new FBS_MapZeichner(map);
 
     }
     int iteration = 0;
@@ -133,15 +146,39 @@ public class FBS_MapController {
 
             if (i % mon.getSpeed() == 0) {
                 bewege(mon);
-                if (mon.getPositionx() <= this.map.getEndpunkt().getX()
-                        && mon.getPositiony() <= this.map.getEndpunkt().getY()) {
+                if (mon.getPositionx() == this.map.getEndpunkt().getX()
+                        && mon.getPositiony() == this.map.getEndpunkt().getY()) {
+                    this.setSpielerleben(spielerleben - 1);
 
-                    //lose life
                 }
             }
 
         }
 
+    }
+
+    public FBS_SpielerInterface getSpieler() {
+        return spieler;
+    }
+
+    public void setSpieler(FBS_SpielerInterface spieler) {
+        this.spieler = spieler;
+    }
+
+    public int getSpielerleben() {
+        return spielerleben;
+    }
+
+    public void setSpielerleben(int spielerleben) {
+        this.spielerleben = spielerleben;
+    }
+
+    public int getSpielergold() {
+        return spielergold;
+    }
+
+    public void setSpielergold(int spielergold) {
+        this.spielergold = spielergold;
     }
 
     public void bewege(Object object) {
@@ -191,7 +228,7 @@ public class FBS_MapController {
 
             FBS_Projektil_Interface project = (FBS_Projektil_Interface) object;
             project.setPosition((int) neuerZug.getX(), (int) neuerZug.getY());
-        }        
+        }
     }
 
     //A-Stern

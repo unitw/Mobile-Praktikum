@@ -5,24 +5,26 @@
  */
 package FBS_Interfaces;
 
+import javafx.scene.image.ImageView;
+
 /**
  *
  * @author rw
  */
-public class FBS_AbstractMonster implements FBS_MonsterInterface{
+public class FBS_AbstractMonster implements FBS_MonsterInterface {
+
     private int posx;
     private int posy;
 
-    private int life ;
+    private int life;
 
-    private int speed ;
+    private int speed;
 
     private int loot;
-    
+
     private int exp;
 
-   
-   
+    private ImageView pic;
 
     @Override
     public void setPosition(int posx, int posy) {
@@ -66,10 +68,10 @@ public class FBS_AbstractMonster implements FBS_MonsterInterface{
     }
 
     @Override
-    public void setLoot(int loot){
-        this.loot=loot;
+    public void setLoot(int loot) {
+        this.loot = loot;
     }
-    
+
     @Override
     public int getLoot() {
         return this.loot;
@@ -83,6 +85,16 @@ public class FBS_AbstractMonster implements FBS_MonsterInterface{
     @Override
     public int getExp() {
         return this.exp;
+    }
+
+    @Override
+    public void setPicture(ImageView pic) {
+        this.pic = pic;
+    }
+
+    @Override
+    public ImageView getPicture() {
+        return this.pic;
     }
 
 }

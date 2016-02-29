@@ -5,6 +5,8 @@
  */
 package FBS_Interfaces;
 
+import javafx.scene.image.ImageView;
+
 /**
  *
  * @author rw
@@ -31,6 +33,9 @@ public interface FBS_MonsterInterface {
     // Die, vom Monster erhaltenen Erfahrungspunkte.
     public void setExp(int exp);
     public int getExp();
+    
+    public void setPicture(ImageView pic);
+    public ImageView getPicture();
     
     
 }

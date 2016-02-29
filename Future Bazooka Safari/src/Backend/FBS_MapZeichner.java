@@ -12,10 +12,12 @@ import FBS_Interfaces.FBS_MapInterface;
  * place objects on map
  * @author rw
  */
-public class FBS_Map {
+public class FBS_MapZeichner  {
 
     private FBS_MapInterface mapdata;
-    public FBS_Map(FBS_MapInterface map) {
+    
+    
+    public FBS_MapZeichner(FBS_MapInterface map) {
         this.mapdata = map;
         drawmap();
     }   
