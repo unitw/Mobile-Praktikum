@@ -5,6 +5,9 @@
  */
 package FBS_Interfaces;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 /**
  *
  * @author rw
@@ -22,7 +25,9 @@ public class FBS_AbstractTower implements FBS_TowerInterface {
     private int upgradestufe;
     private int baukosten;
     private int lvl;
-
+    private Image pic;
+    
+    
     @Override
     public void setPosition(int posx, int posy) {
         this.posx = posx;
@@ -131,6 +136,16 @@ public class FBS_AbstractTower implements FBS_TowerInterface {
     @Override
     public int getLvl() {
         return this.lvl;
+    }
+
+    @Override
+    public void setPicture(Image pic) {
+        this.pic = pic;
+    }
+
+    @Override
+    public Image getPicture() {
+        return this.pic;
     }
 
 }

@@ -6,24 +6,32 @@
 package FBS_Interfaces;
 
 import java.awt.Point;
+import java.util.ArrayList;
 
 /**
  *
  * @author marvin
  */
 public interface FBS_MapInterface {
-    
+
     //Monster spawnpoint
     public Point getStartpunkt();
+
     public void setStartpunkt(Point Startpunkt);
-    
+
     //Monster endpoint
     public Point getEndpunkt();
+
     public void setEndpunkt(Point Endpunkt);
-    
-    public boolean isbuildable(Point p);
-    public void setbuildable(Point p, boolean buildable);
-    
+
     public void setMapsize(int size);
+
     public int getMapsize();
+
+    public ArrayList getHindernislist();
+    
+    public void setmousepressed(Point p);
+    
+    
+   
 }

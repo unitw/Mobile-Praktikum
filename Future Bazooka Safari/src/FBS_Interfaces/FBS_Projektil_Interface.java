@@ -5,6 +5,9 @@
  */
 package FBS_Interfaces;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 /**
  *
  * @author rw
@@ -30,6 +33,13 @@ public interface FBS_Projektil_Interface {
     
     public void setTarget(FBS_MonsterInterface monster);
     public FBS_MonsterInterface getTarget();
+    
+    public void setPicture(Image pic);
+    public Image getPicture();
+    
+    public void setGroesse(int groesse);
+    public int getGroesse();
+    
     
    
     

@@ -18,11 +18,7 @@ public class FBS_Safari_Map extends FBS_AbstractMap {
         this.setStartpunkt(new Point(0, 250));
         this.setEndpunkt(new Point(500, 250));
         this.setMapsize(500);
-        for (int x = 0; x < 500; x++) {
-            for (int y = 150; y < 350; y++) {
-                this.setbuildable(new Point(x, y), true);
-            }
-        }
+        
     }
 
 }

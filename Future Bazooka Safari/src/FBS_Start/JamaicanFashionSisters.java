@@ -5,10 +5,14 @@
  */
 package FBS_Start;
 
+import Backend.FBS_MapController;
+import FBS_Maps.FBS_Safari_Map;
+import Frontend.FBS_Canvas;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 /**
@@ -16,15 +20,23 @@ import javafx.stage.Stage;
  * @author rw
  */
 public class JamaicanFashionSisters extends Application {
-      
+
     @Override
-    public void start(Stage stage) throws Exception { 
-        Parent root = FXMLLoader.load(getClass().getResource("/FBS_LoginScreen/FXMLLoginScreen.fxml"));
-       
-        Scene scene = new Scene(root);
+    public void start(Stage stage) throws Exception {
+        //Parent root = FXMLLoader.load(getClass().getResource("/FBS_LoginScreen/FXMLLoginScreen.fxml"));
+
+        StackPane root = new StackPane();
         
+        FBS_Safari_Map map= new FBS_Safari_Map();
+        FBS_Canvas canvas= new FBS_Canvas(map);
+        FBS_MapController con= new FBS_MapController(map,canvas);
+        
+        root.getChildren().add(canvas);
+
+        Scene scene = new Scene(root, 500, 500);
+
+        stage.setTitle("Canvas");
         stage.setScene(scene);
-        stage.setResizable(false);
         stage.show();
         
 //        BorderPane borderPane = new BorderPane();
@@ -45,5 +57,5 @@ public class JamaicanFashionSisters extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }

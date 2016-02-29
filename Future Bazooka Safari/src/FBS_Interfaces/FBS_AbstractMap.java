@@ -6,6 +6,7 @@
 package FBS_Interfaces;
 
 import java.awt.Point;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,10 +16,12 @@ public class FBS_AbstractMap implements FBS_MapInterface {
 
     //map als boolean dargestellt: true = bebaubar
     //false = nicht bebaubar
-    private boolean[][] map;
+    private Object[][] map;
     private int mapsize;
     private Point spawnpoint;
     private Point endpoint;
+    private ArrayList hindernislist;
+    private Point mousepoint;
 
     @Override
     public Point getStartpunkt() {
@@ -41,18 +44,8 @@ public class FBS_AbstractMap implements FBS_MapInterface {
     }
 
     @Override
-    public boolean isbuildable(Point p) {
-        return this.map[(int) p.getX()][(int) p.getY()];
-    }
-
-    @Override
-    public void setbuildable(Point p, boolean buildable) {
-        this.map[(int) p.getX()][(int) p.getY()] = buildable;
-    }
-
-    @Override
     public void setMapsize(int mapsize) {
-        this.map = new boolean[mapsize][mapsize];
+        this.map = new Object[mapsize][mapsize];
         this.mapsize = mapsize;
     }
 
@@ -61,4 +54,15 @@ public class FBS_AbstractMap implements FBS_MapInterface {
         return this.mapsize;
 
     }
+
+    @Override
+    public ArrayList getHindernislist() {
+        return this.hindernislist;
+    }
+
+    @Override
+    public void setmousepressed(Point p) {
+   this.mousepoint=p;
+    }
+
 }
