@@ -16,11 +16,16 @@ import FBS_Projektile.FBS_LaserProjektil;
 import FBS_Tower.FBS_Laser_Tower;
 import Frontend.FBS_Canvas;
 import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import javafx.animation.AnimationTimer;
 import static java.lang.Math.abs;
 import java.util.HashMap;
 import java.util.Map;
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TouchEvent;
 
 /**
  *
@@ -38,7 +43,6 @@ public class FBS_MapController {
     private AnimationTimer projektiltimer;
 
     FBS_MonsterInterface monsterratte = new FBS_Monster_Ratte(0, 0);
-    FBS_TowerInterface lasertower = new FBS_Laser_Tower(25, 25);
 
     FBS_SpielerInterface spieler;
     private int spielerleben;
@@ -49,15 +53,15 @@ public class FBS_MapController {
     public FBS_MapController(FBS_MapInterface map, FBS_Canvas canvas) {
 
         monsterlist.add(monsterratte);
-        turmlist.add(lasertower);
 
         this.map = map;
         this.canvas = canvas;
         spieler = new FBS_Spieler(0, 1000, 600, 100);
         spielerleben = spieler.getmaxLife();
         spielergold = spieler.getstartGold();
-
+        mouseactions();
         initTimer();
+        projektilTimer();
     }
 
     public void initTimer() {
@@ -68,10 +72,11 @@ public class FBS_MapController {
             public void handle(long now) {
 
                 MonsterMovement(iteration);
-                //          TowerShoot(iteration);
+                TowerShoot(iteration);
 
                 for (FBS_MonsterInterface mon : monsterlist) {
                     canvas.drawObject(mon);
+
                 }
 
                 iteration++;
@@ -83,12 +88,51 @@ public class FBS_MapController {
 
     }
 
-    public void buildTower(FBS_TowerInterface tower) {
+    public void mouseactions() {
+//        canvas.setOnTouchPressed(new EventHandler<TouchEvent>() {
+//            @Override
+//            public void handle(TouchEvent event) {
+//                if (event.getTouchCount() == 1) {
+//
+//                    FBS_TowerInterface tower = new FBS_Laser_Tower((int) event.getTouchPoint().getSceneX(), (int) event.getTouchPoint().getSceneY());
+//
+//                    if (buildTower(tower)) {
+//                        turmlist.add(tower);
+//                        canvas.drawObject(tower);
+//                    }
+//
+//                }
+//                event.consume();
+//            }
+//        });
 
-        
-        
-        turmlist.add(tower);
-        canvas.drawObject(tower);
+        canvas.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                FBS_TowerInterface tower = new FBS_Laser_Tower((int) event.getSceneX(), (int) event.getSceneY());
+
+                if (buildTower(tower)) {
+                    turmlist.add(tower);
+                    canvas.drawObject(tower);
+                }
+
+            }
+        });
+    }
+
+    public boolean buildTower(FBS_TowerInterface tower) {
+
+        Rectangle rect = new Rectangle(tower.getPositionx(), tower.getPositiony(), tower.getGroesse(), tower.getGroesse());
+
+        for (FBS_TowerInterface tw : turmlist) {
+
+            if (rect.contains(new Point(tw.getPositionx(), tw.getPositiony()))) {
+                return false;
+
+            }
+
+        }
+        return true;
 
     }
 
@@ -106,14 +150,26 @@ public class FBS_MapController {
         projektiltimer = new AnimationTimer() {
             @Override
             public void handle(long now) {
+                final ArrayList<FBS_Projektil_Interface> loeschliste = new ArrayList();
+
+                if (FBS_MapController.this.getProjektillist().isEmpty()) {
+                    return;
+                }
+
                 for (FBS_Projektil_Interface projektil : FBS_MapController.this.getProjektillist()) {
                     bewege(projektil);
                     canvas.drawObject(projektil);
 
                     if (projektil.getPositionx() == projektil.getTarget().getPositionx() && projektil.getPositiony() == projektil.getTarget().getPositiony()) {
-                        FBS_MapController.this.getProjektillist().remove(projektil);
+                        loeschliste.add(projektil);
+
+                        Schadensberechnung(projektil);
                     }
                 }
+                for (FBS_Projektil_Interface projektil : loeschliste) {
+                    FBS_MapController.this.getProjektillist().remove(projektil);
+                }
+
             }
 
         };
@@ -143,6 +199,7 @@ public class FBS_MapController {
 
         }
         if (mon != null) {
+
             FBS_Projektil_Interface projektil = new FBS_LaserProjektil(mon, tower.getPositionx(), tower.getPositiony(), tower.getDamage(), tower.getAOE());
             this.getProjektillist().add(projektil);
         }
@@ -209,54 +266,130 @@ public class FBS_MapController {
             posx = moveMon.getPositionx();
             posy = moveMon.getPositiony();
 
-        } else if (object instanceof FBS_Projektil_Interface) {
+            HashMap<Point, Integer> zuegemap = new HashMap<>();
+            ArrayList<Point> zuege = new ArrayList();
+            Point p1 = new Point(posx, posy - 1);
+            Point p2 = new Point(posx + 1, posy - 1);
+            Point p3 = new Point(posx + 1, posy);
+            Point p4 = new Point(posx + 1, posy + 1);
+            Point p5 = new Point(posx, posy + 1);
+            Point p6 = new Point(posx - 1, posy + 1);
+            Point p7 = new Point(posx - 1, posy);
+            Point p8 = new Point(posx - 1, posy - 1);
 
-            FBS_Projektil_Interface project = (FBS_Projektil_Interface) object;
-            posx = project.getPositionx();
-            posy = project.getPositiony();
-        }
-        HashMap<Point, Integer> zuegemap = new HashMap<>();
-        ArrayList<Point> zuege = new ArrayList();
-        Point p1 = new Point(posx, posy - 1);
-        Point p2 = new Point(posx + 1, posy - 1);
-        Point p3 = new Point(posx + 1, posy);
-        Point p4 = new Point(posx + 1, posy + 1);
-        Point p5 = new Point(posx, posy + 1);
-        Point p6 = new Point(posx - 1, posy + 1);
-        Point p7 = new Point(posx - 1, posy);
-        Point p8 = new Point(posx - 1, posy - 1);
+            zuegemap.put(p1, 180);
+            zuegemap.put(p2, 225);
+            zuegemap.put(p3, 270);
+            zuegemap.put(p4, 315);
+            zuegemap.put(p5, 0);
+            zuegemap.put(p6, 45);
+            zuegemap.put(p7, 90);
+            zuegemap.put(p8, 135);
 
-        zuegemap.put(p1, 180);
-        zuegemap.put(p2, 225);
-        zuegemap.put(p3, 270);
-        zuegemap.put(p4, 315);
-        zuegemap.put(p5, 0);
-        zuegemap.put(p6, 45);
-        zuegemap.put(p7, 90);
-        zuegemap.put(p8, 135);
+            if (zugmoeglich(p1, moveMon.getGroesse())) {
+                zuege.add(p1);
+            }
+            if (zugmoeglich(p2, moveMon.getGroesse())) {
+                zuege.add(p2);
+            }
+            if (zugmoeglich(p3, moveMon.getGroesse())) {
+                zuege.add(p3);
+            }
+            if (zugmoeglich(p4, moveMon.getGroesse())) {
+                zuege.add(p4);
+            }
+            if (zugmoeglich(p5, moveMon.getGroesse())) {
+                zuege.add(p5);
+            }
+            if (zugmoeglich(p6, moveMon.getGroesse())) {
+                zuege.add(p6);
+            }
+            if (zugmoeglich(p7, moveMon.getGroesse())) {
+                zuege.add(p7);
+            }
+            if (zugmoeglich(p8, moveMon.getGroesse())) {
+                zuege.add(p8);
+            }
 
-        zuege.add(p1);
-        zuege.add(p2);
-        zuege.add(p3);
-        zuege.add(p4);
-        zuege.add(p5);
-        zuege.add(p6);
-        zuege.add(p7);
-        zuege.add(p8);
+            Point neuerZug = getnextZug(object, zuege);
 
-        Point neuerZug = getnextZug(object, zuege);
-
-        if (object instanceof FBS_MonsterInterface) {
-
-            FBS_MonsterInterface moveMon = (FBS_MonsterInterface) object;
             moveMon.setPosition(neuerZug.x, neuerZug.y);
             moveMon.setangle(zuegemap.get(neuerZug));
 
         } else if (object instanceof FBS_Projektil_Interface) {
 
             FBS_Projektil_Interface project = (FBS_Projektil_Interface) object;
+            posx = project.getPositionx();
+            posy = project.getPositiony();
+
+            HashMap<Point, Integer> zuegemap = new HashMap<>();
+            ArrayList<Point> zuege = new ArrayList();
+            Point p1 = new Point(posx, posy - 1);
+            Point p2 = new Point(posx + 1, posy - 1);
+            Point p3 = new Point(posx + 1, posy);
+            Point p4 = new Point(posx + 1, posy + 1);
+            Point p5 = new Point(posx, posy + 1);
+            Point p6 = new Point(posx - 1, posy + 1);
+            Point p7 = new Point(posx - 1, posy);
+            Point p8 = new Point(posx - 1, posy - 1);
+
+            zuegemap.put(p1, 180);
+            zuegemap.put(p2, 225);
+            zuegemap.put(p3, 270);
+            zuegemap.put(p4, 315);
+            zuegemap.put(p5, 0);
+            zuegemap.put(p6, 45);
+            zuegemap.put(p7, 90);
+            zuegemap.put(p8, 135);
+
+            zuege.add(p1);
+
+            zuege.add(p2);
+
+            zuege.add(p3);
+
+            zuege.add(p4);
+
+            zuege.add(p5);
+
+            zuege.add(p6);
+
+            zuege.add(p7);
+
+            zuege.add(p8);
+
+            Point neuerZug = getnextZug(object, zuege);
+
             project.setPosition((int) neuerZug.getX(), (int) neuerZug.getY());
         }
+
+    }
+
+    public boolean zugmoeglich(Point zug, int groesse) {
+
+        for (FBS_TowerInterface tower : turmlist) {
+
+            Rectangle2D rect = new Rectangle(tower.getPositionx(), tower.getPositiony(), tower.getGroesse(), tower.getGroesse());
+            Rectangle2D rect1 = new Rectangle((int) zug.getX(), (int) zug.getY(), groesse, groesse);
+
+//            if ((rect.getX() + rect.getWidth()) - rect1.getX() >= 0 && (rect1.getX() + rect1.getWidth()) - rect.getX() >= 0) {
+//
+//                System.out.println("Zug nicht moeglich");
+//                return false;
+//            }
+            if (rect1.intersects(rect)) {
+
+                return false;
+            }
+        }
+
+//        Hinderniss implementieren
+//          for(FBS_TowerInterface tower:turmlist){
+//            
+//        }
+//        
+        return true;
+
     }
 
     //A-Stern

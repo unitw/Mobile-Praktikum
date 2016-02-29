@@ -6,6 +6,7 @@
 package FBS_Interfaces;
 
 import java.awt.Point;
+import java.util.ArrayList;
 
 /**
  *
@@ -19,6 +20,8 @@ public class FBS_AbstractMap implements FBS_MapInterface {
     private int mapsize;
     private Point spawnpoint;
     private Point endpoint;
+    private ArrayList hindernislist;
+    private Point mousepoint;
 
     @Override
     public Point getStartpunkt() {
@@ -52,5 +55,14 @@ public class FBS_AbstractMap implements FBS_MapInterface {
 
     }
 
-   
+    @Override
+    public ArrayList getHindernislist() {
+        return this.hindernislist;
+    }
+
+    @Override
+    public void setmousepressed(Point p) {
+   this.mousepoint=p;
+    }
+
 }

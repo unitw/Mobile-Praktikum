@@ -24,7 +24,7 @@ public class FBS_AbstractProjektil implements FBS_Projektil_Interface {
     private int Damage;
     private FBS_MonsterInterface mon;
     private Image pic;
-    
+    private int groesse;
 
     @Override
     public void setPosition(int Posx, int Posy) {
@@ -92,7 +92,8 @@ public class FBS_AbstractProjektil implements FBS_Projektil_Interface {
         return this.mon;
 
     }
-@Override
+
+    @Override
     public void setPicture(Image pic) {
         this.pic = pic;
     }
@@ -100,6 +101,16 @@ public class FBS_AbstractProjektil implements FBS_Projektil_Interface {
     @Override
     public Image getPicture() {
         return this.pic;
+    }
+
+    @Override
+    public void setGroesse(int groesse) {
+        this.groesse = groesse;
+    }
+
+    @Override
+    public int getGroesse() {
+        return this.groesse;
     }
 
 }

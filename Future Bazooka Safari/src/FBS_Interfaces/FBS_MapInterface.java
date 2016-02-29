@@ -30,5 +30,8 @@ public interface FBS_MapInterface {
 
     public ArrayList getHindernislist();
     
+    public void setmousepressed(Point p);
+    
+    
    
 }

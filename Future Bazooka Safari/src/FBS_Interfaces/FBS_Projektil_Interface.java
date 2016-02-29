@@ -37,6 +37,9 @@ public interface FBS_Projektil_Interface {
     public void setPicture(Image pic);
     public Image getPicture();
     
+    public void setGroesse(int groesse);
+    public int getGroesse();
+    
     
    
     
