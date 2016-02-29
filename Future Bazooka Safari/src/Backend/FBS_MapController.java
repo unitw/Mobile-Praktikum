@@ -59,9 +59,10 @@ public class FBS_MapController {
         spieler = new FBS_Spieler(0, 1000, 600, 100);
         spielerleben = spieler.getmaxLife();
         spielergold = spieler.getstartGold();
+        //canvas.drawMap(monsterlist, turmlist, projektillist);
         mouseactions();
         initTimer();
-        projektilTimer();
+        
     }
 
     public void initTimer() {
@@ -74,13 +75,27 @@ public class FBS_MapController {
                 MonsterMovement(iteration);
                 TowerShoot(iteration);
 
-                for (FBS_MonsterInterface mon : monsterlist) {
-                    canvas.drawObject(mon);
+                final ArrayList<FBS_Projektil_Interface> loeschliste = new ArrayList();
 
+                if (FBS_MapController.this.getProjektillist().isEmpty()) {
+                    return;
+                }
+
+                for (FBS_Projektil_Interface projektil : FBS_MapController.this.getProjektillist()) {
+                    bewege(projektil);
+
+                    if (projektil.getPositionx() == projektil.getTarget().getPositionx() && projektil.getPositiony() == projektil.getTarget().getPositiony()) {
+                        loeschliste.add(projektil);
+
+                        Schadensberechnung(projektil);
+                    }
+                }
+                for (FBS_Projektil_Interface projektil : loeschliste) {
+                    FBS_MapController.this.getProjektillist().remove(projektil);
                 }
 
                 iteration++;
-
+                canvas.drawMap(monsterlist, turmlist, projektillist);
             }
 
         };
@@ -113,7 +128,7 @@ public class FBS_MapController {
 
                 if (buildTower(tower)) {
                     turmlist.add(tower);
-                    canvas.drawObject(tower);
+                    canvas.drawMap(monsterlist, turmlist, projektillist);
                 }
 
             }
@@ -145,47 +160,21 @@ public class FBS_MapController {
         }
     }
 
-    public void projektilTimer() {
-
-        projektiltimer = new AnimationTimer() {
-            @Override
-            public void handle(long now) {
-                final ArrayList<FBS_Projektil_Interface> loeschliste = new ArrayList();
-
-                if (FBS_MapController.this.getProjektillist().isEmpty()) {
-                    return;
-                }
-
-                for (FBS_Projektil_Interface projektil : FBS_MapController.this.getProjektillist()) {
-                    bewege(projektil);
-                    canvas.drawObject(projektil);
-
-                    if (projektil.getPositionx() == projektil.getTarget().getPositionx() && projektil.getPositiony() == projektil.getTarget().getPositiony()) {
-                        loeschliste.add(projektil);
-
-                        Schadensberechnung(projektil);
-                    }
-                }
-                for (FBS_Projektil_Interface projektil : loeschliste) {
-                    FBS_MapController.this.getProjektillist().remove(projektil);
-                }
-
-            }
-
-        };
-        projektiltimer.start();
-
-    }
+    
 
     public void Schadensberechnung(FBS_Projektil_Interface project) {
 
         FBS_MonsterInterface mon = project.getTarget();
 
-        int lifemon = mon.getLife() - project.getDamage();
-        if (lifemon <= 0) {
-            this.getMonsterlist().remove(mon);
+        if (!this.getMonsterlist().contains(mon)) {
+            return;
         } else {
-            mon.setLife(lifemon);
+            int lifemon = mon.getLife() - project.getDamage();
+            if (lifemon <= 0) {
+                this.getMonsterlist().remove(mon);
+            } else {
+                mon.setLife(lifemon);
+            }
         }
 
     }

@@ -34,54 +34,33 @@ public class FBS_Canvas extends Canvas {
     public FBS_Canvas(FBS_MapInterface map) {
         super(map.getMapsize(), map.getMapsize());
         this.map = map;
-        initMap();
+       
 
     }
 
-    public void initMap() {
-       // gc.drawImage(img, 0, 0);
-
-    }
-
-    public void drawObject(Object drawable) {
-
-        if (drawable instanceof FBS_MonsterInterface) {
-            FBS_MonsterInterface mon = (FBS_MonsterInterface) drawable;
-           // gc.drawImage(img, 0, 0);
-            gc.setFill(Color.BEIGE);
-            gc.fillRect(0, 0, 500, 500);
-            
-            gc.save(); // saves the current state on stack, including the current transform
-               
+    public void drawMap(ArrayList<FBS_MonsterInterface> monsterlist, ArrayList<FBS_TowerInterface> towerlist, ArrayList<FBS_Projektil_Interface> projektillist) {
+        gc.setFill(Color.BEIGE);
+        gc.fillRect(0, 0, 500, 500);
+        for (FBS_MonsterInterface mon : monsterlist) {
+            gc.save();
             rotate(gc, mon.getangle(), mon.getPositionx() + mon.getGroesse() / 2, mon.getPositiony() + mon.getGroesse() / 2);
             gc.drawImage(mon.getPicture(), mon.getPositionx(), mon.getPositiony(), mon.getGroesse(), mon.getGroesse());
             gc.restore(); // back to original state (before rotation)
-            for (FBS_TowerInterface tower : towerlist) {
-                gc.setFill(Color.BLACK);
-                gc.fillRect(tower.getPositionx()-1, tower.getPositiony()-1, tower.getGroesse()+2, tower.getGroesse()+2);
-                gc.drawImage(tower.getPicture(), tower.getPositionx(), tower.getPositiony(),tower.getGroesse(),tower.getGroesse());
-                
-              
-            }
-            
-
-//            gc.drawImage(mon.getPicture(), mon.getPositionx(), mon.getPositiony(), 64, 64);
-//             gc.rotate(mon.getangle());
         }
-        if (drawable instanceof FBS_TowerInterface) {
-            FBS_TowerInterface tower = (FBS_TowerInterface) drawable;
-            towerlist.add(tower);
-           gc.drawImage(tower.getPicture(), tower.getPositionx(), tower.getPositiony(),tower.getGroesse(),tower.getGroesse());
+        for (FBS_TowerInterface tower : towerlist) {
+            gc.setFill(Color.BLACK);
+            gc.fillRect(tower.getPositionx() - 1, tower.getPositiony() - 1, tower.getGroesse() + 2, tower.getGroesse() + 2);
+            gc.drawImage(tower.getPicture(), tower.getPositionx(), tower.getPositiony(), tower.getGroesse(), tower.getGroesse());
 
         }
-        if (drawable instanceof FBS_Projektil_Interface) {
-           
-            FBS_Projektil_Interface projectil = (FBS_Projektil_Interface) drawable;
-            gc.drawImage(projectil.getPicture(), projectil.getPositionx(), projectil.getPositiony());
+        for (FBS_Projektil_Interface pro : projektillist) {
+            gc.drawImage(pro.getPicture(), pro.getPositionx(), pro.getPositiony(), pro.getGroesse(), pro.getGroesse());
 
         }
 
     }
+
+    
 
     private void rotate(GraphicsContext gc, double angle, double px, double py) {
         Rotate r = new Rotate(angle, px, py);
