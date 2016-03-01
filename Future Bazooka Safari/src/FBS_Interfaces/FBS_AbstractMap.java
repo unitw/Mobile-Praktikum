@@ -17,11 +17,13 @@ public class FBS_AbstractMap implements FBS_MapInterface {
     //map als boolean dargestellt: true = bebaubar
     //false = nicht bebaubar
     private Object[][] map;
-    private int mapsize;
+
     private Point spawnpoint;
     private Point endpoint;
     private ArrayList hindernislist;
     private Point mousepoint;
+    private double mapx;
+    private double mapy;
 
     @Override
     public Point getStartpunkt() {
@@ -44,14 +46,14 @@ public class FBS_AbstractMap implements FBS_MapInterface {
     }
 
     @Override
-    public void setMapsize(int mapsize) {
-        this.map = new Object[mapsize][mapsize];
-        this.mapsize = mapsize;
+    public void setMapsizex(double mapsize) {
+
+        this.mapx = mapsize;
     }
 
     @Override
-    public int getMapsize() {
-        return this.mapsize;
+    public double getMapsizex() {
+        return this.mapx;
 
     }
 
@@ -62,7 +64,17 @@ public class FBS_AbstractMap implements FBS_MapInterface {
 
     @Override
     public void setmousepressed(Point p) {
-   this.mousepoint=p;
+        this.mousepoint = p;
+    }
+
+    @Override
+    public void setMapsizey(double size) {
+        this.mapy = size;
+    }
+
+    @Override
+    public double getMapsizey() {
+        return mapy;
     }
 
 }

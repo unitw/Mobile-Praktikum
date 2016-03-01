@@ -5,6 +5,8 @@
  */
 package FBS_Interfaces;
 
+import java.awt.Point;
+import java.util.ArrayList;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -30,6 +32,26 @@ public class FBS_AbstractMonster implements FBS_MonsterInterface {
     private int angle;
 
     private int groesse;
+
+    ArrayList<Point> letztenachtzuege = new ArrayList();
+
+    public void insertzug(Point p) {
+        
+        letztenachtzuege.add(p);
+
+    }
+
+    public boolean testZug(Point p) {
+
+        for (Point p1 : letztenachtzuege) {
+
+            if (p1.getX() == p.getX() && p1.getY() == p.getY()) {
+                return false;
+            }
+
+        }
+        return true;
+    }
 
     @Override
     public void setPosition(int posx, int posy) {

@@ -19,7 +19,7 @@ public class FBS_Laser_Tower extends FBS_AbstractTower {
         this.setPosition(posx, posy);
         this.setisAOE(false);
         this.setAttackspeed(1);
-        this.setDamage(31);
+        this.setDamage(0);
         this.setGroesse(64);
         this.setUpgradestufe(0);
         this.setRange(100);
