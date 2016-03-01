@@ -14,10 +14,11 @@ import java.awt.Point;
  */
 public class FBS_Safari_Map extends FBS_AbstractMap {
 
-    public FBS_Safari_Map() {
+    public FBS_Safari_Map(double mapx,double mapy) {
         this.setStartpunkt(new Point(0, 0));
         this.setEndpunkt(new Point(500, 250));
-        this.setMapsize(500);
+        this.setMapsizex(mapx);
+        this.setMapsizey(mapy);
         
     }
 

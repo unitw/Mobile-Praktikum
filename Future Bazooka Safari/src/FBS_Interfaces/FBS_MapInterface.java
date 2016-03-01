@@ -24,14 +24,16 @@ public interface FBS_MapInterface {
 
     public void setEndpunkt(Point Endpunkt);
 
-    public void setMapsize(int size);
+    public void setMapsizex(double size);
 
-    public int getMapsize();
+    public double getMapsizex();
+
+    public void setMapsizey(double size);
+
+    public double getMapsizey();
 
     public ArrayList getHindernislist();
-    
+
     public void setmousepressed(Point p);
-    
-    
-   
+
 }
