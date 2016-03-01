@@ -12,7 +12,9 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
 /**
@@ -41,13 +43,13 @@ public class JamaicanFashionSisters extends Application {
         
 //        BorderPane borderPane = new BorderPane();
 //        WebView webView = new WebView();
-//        String url = getClass().getResource("/FBS_HTML/index.html").toExternalForm();
-//        webView.getEngine().load(url);
+//        webView.getEngine().load("http://localhost/projects/uni_web_shop/index.html");
 //        borderPane.setCenter(webView);
-//        final Scene scene = new Scene(borderPane);
+//        Scene scene = new Scene(borderPane);
 //        stage.setScene(scene);
 //        stage.setHeight(512);
 //        stage.setWidth(288);
+//        stage.setResizable(false);
 //        stage.show();
     }
     

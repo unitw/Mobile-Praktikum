@@ -10,10 +10,10 @@ body {
 }
 
 .outer-container {
-    height: 95%;
-    width: 95%;
+    height: 92vh;
+    width: 95vw;
     position: fixed;
-    padding: 5% 2.5%;
+    padding: 4vh 2.5vw;
 
     background: linear-gradient(to bottom, #a7c7dc 0%,#85b2d3 100%);
 }
@@ -98,22 +98,43 @@ body {
 }
 
 .body-section .box-container .inner-box-container{
-    height: 90%;
+    height: 100%;
     width: 85%;
-    padding: 8% 7.5%;
+    padding: 0 7.5%;
     position: relative;
     overflow-y: scroll;
 }
 
+.body-section .box-container .inner-box-container:before,
+.body-section .box-container .inner-box-container:after{
+    height: 5%;
+    width: 85%;
+    display: block;
+    content: "";
+}
+
 .body-section .box-container .scroll-container{
-    height: 100%;
     width: 100%;
     position: relative;
 }
 
+.body-section .box-container .scroll-container:before,
+.body-section .box-container .scroll-container:after{
+    content: '\0020';
+    display: block;
+    overflow: hidden;
+    visibility: hidden;
+    width: 0;
+    height: 0;
+}
+
+.body-section .box-container .scroll-container:after{
+    clear: both;
+}
+
 .body-section .box-container .scroll-container .box{
     width: 50%;
-    height: 30%;
+    height: 23vh;
     position: relative;
     float: left;
 }
