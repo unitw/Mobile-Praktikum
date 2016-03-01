@@ -433,8 +433,8 @@ public class FBS_MapController {
         int x1 = turm.getPositionx();
         int y1 = turm.getPositiony();
 
-        for (int x = Math.max(0, x1 - turm.getRange()); x < Math.min(this.getMap().getMapsize(), x1 + turm.getRange() + 1); x++) {
-            for (int y = Math.max(0, y1 - turm.getRange()); y < Math.min(this.getMap().getMapsize(), y1 + turm.getRange() + 1); y++) {
+        for (int x = Math.max(0, x1 - turm.getRange()); x < Math.min(this.getMap().getMapsizex(), x1 + turm.getRange() + 1); x++) {
+            for (int y = Math.max(0, y1 - turm.getRange()); y < Math.min(this.getMap().getMapsizey(), y1 + turm.getRange() + 1); y++) {
 
                 for (FBS_MonsterInterface mon1 : this.getMonsterlist()) {
 
