@@ -5,6 +5,7 @@
  */
 package FBS_Interfaces;
 
+import java.awt.Point;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -13,36 +14,44 @@ import javafx.scene.image.ImageView;
  * @author rw
  */
 public interface FBS_MonsterInterface {
-   
-    
-   
-    
-    public void setPosition(int Posx,int Posy);
+
+    public void setPosition(int Posx, int Posy);
+
     public int getPositionx();
+
     public int getPositiony();
-    
+
     public void setLife(int Life);
+
     public int getLife();
-    
-    public void setSpeed( int Speed);
+
+    public void setSpeed(int Speed);
+
     public int getSpeed();
-    
-    
+
     public void setLoot(int loot);
+
     public int getLoot();
-    
+
     // Die, vom Monster erhaltenen Erfahrungspunkte.
     public void setExp(int exp);
+
     public int getExp();
-    
+
     public void setPicture(Image pic);
+
     public Image getPicture();
-    
+
     public void setangle(int angle);
+
     public int getangle();
-    
+
     public int getGroesse();
 
     public void setGroesse(int Groesse);
-    
+
+    public void insertzug(Point p);
+
+    public boolean testZug(Point p);
+
 }

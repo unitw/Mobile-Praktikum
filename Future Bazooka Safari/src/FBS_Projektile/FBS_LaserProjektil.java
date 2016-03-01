@@ -20,7 +20,7 @@ public class FBS_LaserProjektil extends FBS_AbstractProjektil {
         this.setPosition(posx, posy);
         this.setDamage(damage);
         this.setAOE(AOE);
-        this.setGroesse(32);
+        this.setGroesse(16);
         this.setPicture(new Image("/resources/laserbeam.png"));
     }
 

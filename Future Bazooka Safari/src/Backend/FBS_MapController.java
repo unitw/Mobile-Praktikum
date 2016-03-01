@@ -42,7 +42,7 @@ public class FBS_MapController {
     private AnimationTimer timer;
     private AnimationTimer projektiltimer;
 
-    FBS_MonsterInterface monsterratte = new FBS_Monster_Ratte(0, 0);
+    FBS_MonsterInterface monsterratte;
 
     FBS_SpielerInterface spieler;
     private int spielerleben;
@@ -52,9 +52,11 @@ public class FBS_MapController {
 
     public FBS_MapController(FBS_MapInterface map, FBS_Canvas canvas) {
 
+        this.map = map;
+
+        monsterratte = new FBS_Monster_Ratte(map.getStartpunkt().x, map.getStartpunkt().y);
         monsterlist.add(monsterratte);
 
-        this.map = map;
         this.canvas = canvas;
         spieler = new FBS_Spieler(0, 1000, 600, 100);
         spielerleben = spieler.getmaxLife();
@@ -62,7 +64,7 @@ public class FBS_MapController {
         //canvas.drawMap(monsterlist, turmlist, projektillist);
         mouseactions();
         initTimer();
-        
+
     }
 
     public void initTimer() {
@@ -73,8 +75,9 @@ public class FBS_MapController {
             public void handle(long now) {
 
                 MonsterMovement(iteration);
+                canvas.drawMap(monsterlist, turmlist, projektillist);
                 TowerShoot(iteration);
-
+                canvas.drawMap(monsterlist, turmlist, projektillist);
                 final ArrayList<FBS_Projektil_Interface> loeschliste = new ArrayList();
 
                 if (FBS_MapController.this.getProjektillist().isEmpty()) {
@@ -140,10 +143,13 @@ public class FBS_MapController {
         Rectangle rect = new Rectangle(tower.getPositionx(), tower.getPositiony(), tower.getGroesse(), tower.getGroesse());
 
         for (FBS_TowerInterface tw : turmlist) {
+            Rectangle rect1 = new Rectangle(tw.getPositionx(), tw.getPositiony(), tw.getGroesse(), tw.getGroesse());
 
-            if (rect.contains(new Point(tw.getPositionx(), tw.getPositiony()))) {
+            if (rect.intersects(rect1)) {
                 return false;
 
+            }else if(rect.contains(map.getEndpunkt())){
+                return false;
             }
 
         }
@@ -160,8 +166,6 @@ public class FBS_MapController {
         }
     }
 
-    
-
     public void Schadensberechnung(FBS_Projektil_Interface project) {
 
         FBS_MonsterInterface mon = project.getTarget();
@@ -169,6 +173,7 @@ public class FBS_MapController {
         if (!this.getMonsterlist().contains(mon)) {
             return;
         } else {
+            System.out.println("HIT");
             int lifemon = mon.getLife() - project.getDamage();
             if (lifemon <= 0) {
                 this.getMonsterlist().remove(mon);
@@ -205,6 +210,7 @@ public class FBS_MapController {
     }
 
     public void MonsterMovement(int i) {
+        ArrayList<FBS_MonsterInterface> loeschliste = new ArrayList();
 
         for (FBS_MonsterInterface mon : this.getMonsterlist()) {
 
@@ -213,9 +219,15 @@ public class FBS_MapController {
                 if (mon.getPositionx() == this.map.getEndpunkt().getX()
                         && mon.getPositiony() == this.map.getEndpunkt().getY()) {
                     this.setSpielerleben(spielerleben - 1);
+                    loeschliste.add(mon);
 
                 }
             }
+
+        }
+
+        for (FBS_MonsterInterface mon : loeschliste) {
+            monsterlist.remove(mon);
 
         }
 
@@ -275,32 +287,33 @@ public class FBS_MapController {
             zuegemap.put(p7, 90);
             zuegemap.put(p8, 135);
 
-            if (zugmoeglich(p1, moveMon.getGroesse())) {
+            if (zugmoeglich(p1, moveMon)) {
                 zuege.add(p1);
             }
-            if (zugmoeglich(p2, moveMon.getGroesse())) {
+            if (zugmoeglich(p2, moveMon)) {
                 zuege.add(p2);
             }
-            if (zugmoeglich(p3, moveMon.getGroesse())) {
+            if (zugmoeglich(p3, moveMon)) {
                 zuege.add(p3);
             }
-            if (zugmoeglich(p4, moveMon.getGroesse())) {
+            if (zugmoeglich(p4, moveMon)) {
                 zuege.add(p4);
             }
-            if (zugmoeglich(p5, moveMon.getGroesse())) {
+            if (zugmoeglich(p5, moveMon)) {
                 zuege.add(p5);
             }
-            if (zugmoeglich(p6, moveMon.getGroesse())) {
+            if (zugmoeglich(p6, moveMon)) {
                 zuege.add(p6);
             }
-            if (zugmoeglich(p7, moveMon.getGroesse())) {
+            if (zugmoeglich(p7, moveMon)) {
                 zuege.add(p7);
             }
-            if (zugmoeglich(p8, moveMon.getGroesse())) {
+            if (zugmoeglich(p8, moveMon)) {
                 zuege.add(p8);
             }
 
             Point neuerZug = getnextZug(object, zuege);
+            moveMon.insertzug(new Point(moveMon.getPositionx(), moveMon.getPositiony()));
 
             moveMon.setPosition(neuerZug.x, neuerZug.y);
             moveMon.setangle(zuegemap.get(neuerZug));
@@ -354,22 +367,21 @@ public class FBS_MapController {
 
     }
 
-    public boolean zugmoeglich(Point zug, int groesse) {
+    public boolean zugmoeglich(Point Zielzug, FBS_MonsterInterface mon) {
 
         for (FBS_TowerInterface tower : turmlist) {
 
             Rectangle2D rect = new Rectangle(tower.getPositionx(), tower.getPositiony(), tower.getGroesse(), tower.getGroesse());
-            Rectangle2D rect1 = new Rectangle((int) zug.getX(), (int) zug.getY(), groesse, groesse);
+            Rectangle2D rect1 = new Rectangle((int) Zielzug.getX(), (int) Zielzug.getY(), mon.getGroesse(), mon.getGroesse());
 
-//            if ((rect.getX() + rect.getWidth()) - rect1.getX() >= 0 && (rect1.getX() + rect1.getWidth()) - rect.getX() >= 0) {
-//
-//                System.out.println("Zug nicht moeglich");
-//                return false;
-//            }
             if (rect1.intersects(rect)) {
 
                 return false;
             }
+            if (!mon.testZug(Zielzug)) {
+                return false;
+            }
+
         }
 
 //        Hinderniss implementieren
