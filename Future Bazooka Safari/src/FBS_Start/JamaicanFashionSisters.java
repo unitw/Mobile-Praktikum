@@ -5,9 +5,6 @@
  */
 package FBS_Start;
 
-import Backend.FBS_MapController;
-import FBS_Maps.FBS_Safari_Map;
-import Frontend.FBS_Canvas;
 import Frontend.FBS_Spieloberflaeche;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -26,36 +23,14 @@ public class JamaicanFashionSisters extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        //Parent root = FXMLLoader.load(getClass().getResource("/FBS_LoginScreen/FXMLLoginScreen.fxml"));
-
-        StackPane root = new StackPane();
         
-       
-
-         Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
-         
-          FBS_Spieloberflaeche flaeche = new FBS_Spieloberflaeche(primScreenBounds.getWidth(),primScreenBounds.getHeight());
-       
-        root.getChildren().add(flaeche);
-         
-         
+        Parent root = FXMLLoader.load(getClass().getResource("/FBS_LoginScreen/FXMLLoginScreen.fxml")); 
+        Scene scene = new Scene(root, 288, 512);
         
-        Scene scene = new Scene(root, primScreenBounds.getWidth(),primScreenBounds.getHeight());
-
-        stage.setTitle("Canvas");
+        stage.setTitle("Future Bazooka Safari");
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
-        
-//        BorderPane borderPane = new BorderPane();
-//        WebView webView = new WebView();
-//        String url = getClass().getResource("/FBS_HTML/index.html").toExternalForm();
-//        webView.getEngine().load(url);
-//        borderPane.setCenter(webView);
-//        final Scene scene = new Scene(borderPane);
-//        stage.setScene(scene);
-//        stage.setHeight(512);
-//        stage.setWidth(288);
-//        stage.show();
     }
     
     /**
