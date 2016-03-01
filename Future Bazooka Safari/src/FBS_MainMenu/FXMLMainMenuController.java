@@ -5,13 +5,21 @@
  */
 package FBS_MainMenu;
 
-import FBS_Maps.FBS_Safari_Map;
-import Backend.FBS_MapController;
+import Frontend.FBS_Spieloberflaeche;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.web.WebView;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -23,6 +31,17 @@ public class FXMLMainMenuController implements Initializable {
     @FXML
     private void newGamePressed(ActionEvent event) {
         System.out.println("pressed \"Neues Spiel\"");
+
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        StackPane root = new StackPane();
+
+        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+        FBS_Spieloberflaeche flaeche = new FBS_Spieloberflaeche(primScreenBounds.getWidth(),primScreenBounds.getHeight());
+        root.getChildren().add(flaeche);
+        Scene scene = new Scene(root, primScreenBounds.getWidth(),primScreenBounds.getHeight());
+        
+        stage.setScene(scene);
+        stage.show();
         
     }
     
@@ -32,8 +51,16 @@ public class FXMLMainMenuController implements Initializable {
     }
     
     @FXML
-    private void shopPressed(ActionEvent event) {
+    private void shopPressed(ActionEvent event) throws IOException {
         System.out.println("pressed \"Shop\"");
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        
+        BorderPane borderPane = new BorderPane();
+        WebView webView = new WebView();
+        webView.getEngine().load("http://localhost/projects/uni_web_shop/index.html");
+        borderPane.setCenter(webView);
+        stage.setScene(new Scene(borderPane, 288, 512));
+        stage.show();
     }
 
     /**
