@@ -32,15 +32,14 @@ public class FBS_Canvas extends Canvas {
     ArrayList<FBS_TowerInterface> towerlist = new ArrayList();
 
     public FBS_Canvas(FBS_MapInterface map) {
-        super(map.getMapsize(), map.getMapsize());
+        super(map.getMapsizex()/2, map.getMapsizey()/2);
         this.map = map;
-       
 
     }
 
     public void drawMap(ArrayList<FBS_MonsterInterface> monsterlist, ArrayList<FBS_TowerInterface> towerlist, ArrayList<FBS_Projektil_Interface> projektillist) {
         gc.setFill(Color.BEIGE);
-        gc.fillRect(0, 0, 500, 500);
+        gc.fillRect(0, 0, map.getMapsizex(), map.getMapsizey());
         for (FBS_MonsterInterface mon : monsterlist) {
             gc.save();
             rotate(gc, mon.getangle(), mon.getPositionx() + mon.getGroesse() / 2, mon.getPositiony() + mon.getGroesse() / 2);
@@ -48,8 +47,6 @@ public class FBS_Canvas extends Canvas {
             gc.restore(); // back to original state (before rotation)
         }
         for (FBS_TowerInterface tower : towerlist) {
-            gc.setFill(Color.BLACK);
-            gc.fillRect(tower.getPositionx() - 1, tower.getPositiony() - 1, tower.getGroesse() + 2, tower.getGroesse() + 2);
             gc.drawImage(tower.getPicture(), tower.getPositionx(), tower.getPositiony(), tower.getGroesse(), tower.getGroesse());
 
         }
@@ -59,8 +56,6 @@ public class FBS_Canvas extends Canvas {
         }
 
     }
-
-    
 
     private void rotate(GraphicsContext gc, double angle, double px, double py) {
         Rotate r = new Rotate(angle, px, py);

@@ -14,12 +14,27 @@ import javafx.scene.image.Image;
  */
 public class FBS_Laser_Tower extends FBS_AbstractTower {
 
+
+    
+    public FBS_Laser_Tower() {
+        this.setisAOE(false);
+        this.setAttackspeed(20);
+        this.setDamage(8);
+        this.setGroesse(64);
+        this.setUpgradestufe(0);
+        this.setRange(100);
+        this.setBaukosten(100);
+        this.setLvl(1);
+        this.setPicture(new Image("/resources/Lazertower.png"));
+
+    }
+    
     
     public FBS_Laser_Tower(int posx, int posy) {
         this.setPosition(posx, posy);
         this.setisAOE(false);
-        this.setAttackspeed(1);
-        this.setDamage(0);
+        this.setAttackspeed(20);
+        this.setDamage(8);
         this.setGroesse(64);
         this.setUpgradestufe(0);
         this.setRange(100);
