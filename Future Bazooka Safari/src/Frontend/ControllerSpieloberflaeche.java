@@ -61,8 +61,7 @@ public class ControllerSpieloberflaeche {
 
     @FXML
     private AnchorPane anchorpane;
-    
-    
+
     @FXML
     protected void initialize() {
         
@@ -76,19 +75,11 @@ public class ControllerSpieloberflaeche {
         initMap();
         zeichneTowerList();
 
-        
 //       canvas.setLayoutX(0);
 //       canvas.setLayoutY(0);
 //       canvas.setTranslateX(200);
-       
-
-        
-        
-        anchorpane.getChildren().add(canvas);
-        
+        this.canvas1=canvas;
         towermenu.setContent(zeichneTowerList());
-        stackpane.getChildren().remove(gp_overlay);
-        stackpane.getChildren().add(gp_overlay);
 
     }
 
