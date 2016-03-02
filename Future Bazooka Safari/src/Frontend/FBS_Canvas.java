@@ -13,12 +13,23 @@ import FBS_Interfaces.FBS_HindernisInterface;
 import java.awt.Point;
 import java.util.ArrayList;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.TouchEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.RectangleBuilder;
+import javafx.scene.shape.SVGPath;
 import javafx.scene.transform.Rotate;
 
 /**
@@ -32,17 +43,30 @@ public class FBS_Canvas extends Canvas {
     Image img = new Image("/resources/grassbackground.png");
     ArrayList<FBS_TowerInterface> towerlist = new ArrayList();
     ArrayList<FBS_HindernisInterface> hindernislist = new ArrayList();
+    int ratio;
+    int ZELLEN = 20;
 
     public FBS_Canvas(FBS_MapInterface map) {
         super(map.getMapsizex(), map.getMapsizey());
         this.map = map;
+        this.ratio = (int) (map.getMapsizex() / this.ZELLEN);
 
     }
 
     public void drawMap(ArrayList<FBS_MonsterInterface> monsterlist, ArrayList<FBS_TowerInterface> towerlist, ArrayList<FBS_Projektil_Interface> projektillist, ArrayList<FBS_HindernisInterface> hindernislist) {
-        gc.setFill(Color.CADETBLUE);
-        gc.fillRect(0, 0, map.getMapsizex(), map.getMapsizey());
 
+        Image imggras = new Image("/resources/grassbackground.png");
+
+        for (int i = 0; i < ZELLEN; i++) {
+            for (int j = 0; j < ZELLEN; j++) {
+            
+            gc.drawImage(img, i*ratio, j*ratio, ratio, ratio);
+            
+            }
+        }
+
+//        gc.setFill(Color.CADETBLUE);
+//        gc.fillRect(0, 0, map.getMapsizex(), map.getMapsizey());
         for (FBS_MonsterInterface mon : monsterlist) {
             gc.save();
             rotate(gc, mon.getangle(), mon.getPositionx() + mon.getGroesse() / 2, mon.getPositiony() + mon.getGroesse() / 2);
@@ -51,13 +75,13 @@ public class FBS_Canvas extends Canvas {
         }
         for (FBS_TowerInterface tower : towerlist) {
             gc.drawImage(tower.getPicture(), tower.getPositionx(), tower.getPositiony(), tower.getGroesse(), tower.getGroesse());
-            
+
         }
         for (FBS_Projektil_Interface pro : projektillist) {
             gc.drawImage(pro.getPicture(), pro.getPositionx(), pro.getPositiony(), pro.getGroesse(), pro.getGroesse());
 
         }
-        
+
         for (FBS_HindernisInterface hindernis : hindernislist) {
             gc.drawImage(hindernis.getPicture(), hindernis.getPositionx(), hindernis.getPositiony(), hindernis.getGroesse(), hindernis.getGroesse());
         }

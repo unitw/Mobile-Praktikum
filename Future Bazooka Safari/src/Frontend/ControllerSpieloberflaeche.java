@@ -8,6 +8,7 @@ import java.util.HashMap;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
@@ -54,6 +55,12 @@ public class ControllerSpieloberflaeche {
     private AnchorPane anchorpansplit;
 
     @FXML
+    private AnchorPane anchorpansplitunten;
+
+    @FXML
+    private AnchorPane anchorpansplitoben;
+
+    @FXML
     private TitledPane towermenu;
 
     @FXML
@@ -78,6 +85,8 @@ public class ControllerSpieloberflaeche {
 
     }
 
+    SplitPane pane = new SplitPane();
+
     @FXML
     protected void initialize() {
 
@@ -98,7 +107,7 @@ public class ControllerSpieloberflaeche {
         stackpane.getChildren().add(canvas);
         stackpane.setAlignment(canvas, Pos.TOP_LEFT);
 
-        towermenu.setContent(zeichneTowerList());
+        anchorpansplitoben.getChildren().add(zeichneTowerList());
 
         gp_overlay.setAlignment(Pos.TOP_RIGHT);
 
@@ -109,7 +118,11 @@ public class ControllerSpieloberflaeche {
         stackpane.getChildren().add(gp_overlay);
         stackpane.setAlignment(gp_overlay, Pos.TOP_LEFT);
 
-       
+        pane.setOrientation(Orientation.VERTICAL);
+
+        pane.getItems().add(zeichneTowerList());
+        sc_pane.setContent(pane);
+
     }
 
     HashMap<String, FBS_TowerInterface> turmlist = new HashMap();
@@ -153,13 +166,10 @@ public class ControllerSpieloberflaeche {
 
                         String name = b_event.getId();
                         if (menuexists) {
-                            sp_pane.getItems().remove(1);
+                            pane.getItems().remove(1);
                         }
 
-//                        anchorpansplit.getChildren().remove(sp_pane);
-//
-//                        sp_pane.getItems().add(setContextPanetower(turmlist.get(name)));
-//                        anchorpansplit.getChildren().add(sp_pane);
+                        pane.getItems().add(1, setContextPanetower(turmlist.get(name)));
 
                         menuexists = true;
                     }
