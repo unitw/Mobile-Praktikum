@@ -19,6 +19,7 @@ import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Orientation;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -35,6 +36,8 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
 
 /**
  *
@@ -58,129 +61,27 @@ public class FBS_Spieloberflaeche extends AnchorPane {
     public FBS_Spieloberflaeche(double width, double height) {
         this.width = width;
         this.height = height;
-        
-        
-         Parent root = null; 
+
+        Parent root = null;
         try {
             root = FXMLLoader.load(getClass().getResource("/Frontend/Spieloberflaeche.fxml"));
         } catch (IOException ex) {
             Logger.getLogger(FBS_Spieloberflaeche.class.getName()).log(Level.SEVERE, null, ex);
         }
+
         
-       
+
         Scene scene = new Scene(root, width, height);
+        Stage stage = new Stage();
         
+        //set Stage boundaries to visible bounds of the main screen
+        
+        
+
         this.getChildren().add(root);
-        
-        
-        
-        
+
 //        initMap();
 //        initUI();
-    }
-
-    HashMap<String, FBS_TowerInterface> turmlist = new HashMap();
-
-    public void initMap() {
-        turmlist.put("Lasertower", new FBS_Laser_Tower());
-        turmlist.put("Lasertower1", new FBS_Laser_Tower());
-        turmlist.put("Lasertower2", new FBS_Laser_Tower());
-        turmlist.put("Lasertower3", new FBS_Laser_Tower());
-        turmlist.put("Lasertower4", new FBS_Laser_Tower());
-        turmlist.put("Lasertower5", new FBS_Laser_Tower());
-
-    }
-
-    public GridPane zeichneTowerList() {
-
-        GridPane gridpane = new GridPane();
-
-        int anzahltuerme = turmlist.keySet().size();
-
-        int i = 0;
-        for (String tower : turmlist.keySet()) {
-
-            FBS_TowerInterface tower2 = turmlist.get(tower);
-            tower2.setGroesse(32);
-
-            Image img = tower2.getPicture();
-            ImageView imgview = new ImageView(img);
-            imgview.setFitHeight(tower2.getGroesse());
-            imgview.setFitWidth(tower2.getGroesse());
-
-            Button b_tower = new Button(tower, imgview);
-            b_tower.setId(tower);
-            b_tower.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-
-                    if (event.getSource() instanceof Button) {
-
-                        Button b_event = (Button) event.getSource();
-
-                        String name = b_event.getId();
-                        if (menuexists) {
-                            sp_pane.getItems().remove(1);
-                        }
-                        sp_pane.getItems().add(setContextPanetower(turmlist.get(name)));
-                        menuexists = true;
-                    }
-
-                }
-            });
-
-            gridpane.add(b_tower, i % 2, i / 2);
-            i++;
-        }
-
-        return gridpane;
-    }
-
-    public GridPane setContextPanetower(FBS_TowerInterface tower) {
-        GridPane gridpane = new GridPane();
-
-        gridpane.add(new Label("Range: " + tower.getRange()), 0, 0);
-        gridpane.add(new Label("Damage: " + tower.getDamage()), 0, 1);
-        gridpane.add(new Label("AOE: " + tower.isAOE()), 0, 2);
-        gridpane.add(new Label("Attackspeed: " + tower.getAttackspeed()), 0, 3);
-        gridpane.add(new Label("Baukosten: " + tower.getBaukosten()), 0, 4);
-
-        return gridpane;
-    }
-
-    public void initUI() {
-
-        FBS_Safari_Map map = new FBS_Safari_Map(width, height);
-        FBS_Canvas canvas = new FBS_Canvas(map);
-
-        canvas.prefWidth(width);
-        canvas.prefHeight(height);
-
-        FBS_MapController con = new FBS_MapController(map, canvas);
-
-        FlowPane labelpane = new FlowPane(l_leben, l_gold);
-
-        gp_infos.add(l_gold, 0, 0);
-        gp_infos.add(l_leben, 1, 0);
-        gp_infos.add(l_runde, 2, 0);
-
-        towermenu.setText("Menu");
-        sp_pane.setOrientation(Orientation.VERTICAL);
-
-        towermenu.setContent(sp_pane);
-
-        sp_pane.getItems().add(sc_pane);
-        sc_pane.setContent(zeichneTowerList());
-
-        gp_overlay.add(gp_infos, 0, 0);
-        gp_overlay.add(towermenu, 3, 0, 1, 4);
-        gp_overlay.add(b_settings, 0, 3);
-        gp_overlay.prefWidth(width);
-        gp_overlay.prefHeight(height);
-
-        this.getChildren().add(canvas);
-        this.getChildren().add(gp_overlay);
-
     }
 
 }
