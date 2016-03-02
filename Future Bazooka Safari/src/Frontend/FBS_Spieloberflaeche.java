@@ -58,9 +58,9 @@ public class FBS_Spieloberflaeche extends AnchorPane {
     private double width;
     private double height;
 
-    public FBS_Spieloberflaeche(double width, double height) {
-        this.width = width;
-        this.height = height;
+    public FBS_Spieloberflaeche() {
+        //this.width = width;
+        //this.height = height;
 
         Parent root = null;
         try {
@@ -69,10 +69,11 @@ public class FBS_Spieloberflaeche extends AnchorPane {
             Logger.getLogger(FBS_Spieloberflaeche.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+       
         
 
-        Scene scene = new Scene(root, width, height);
-        Stage stage = new Stage();
+        //Scene scene = new Scene(root, width, height);
+        //Stage stage = new Stage();
         
         //set Stage boundaries to visible bounds of the main screen
         

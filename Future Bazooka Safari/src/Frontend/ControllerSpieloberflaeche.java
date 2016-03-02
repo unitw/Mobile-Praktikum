@@ -65,8 +65,11 @@ public class ControllerSpieloberflaeche {
     
     @FXML
     protected void initialize() {
+        
+        Rectangle2D scr = Screen.getPrimary().getVisualBounds();
 
-        FBS_Safari_Map map = new FBS_Safari_Map(1000, 1000);
+        FBS_Safari_Map map = new FBS_Safari_Map(scr.getWidth(), scr.getHeight());
+        
         FBS_Canvas canvas = new FBS_Canvas(map);
 
         FBS_MapController con = new FBS_MapController(map, canvas);
