@@ -8,6 +8,7 @@ import java.util.HashMap;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
@@ -18,6 +19,7 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Screen;
@@ -61,35 +63,36 @@ public class ControllerSpieloberflaeche {
 
     @FXML
     private AnchorPane anchorpane;
-    
-    
+
     @FXML
     protected void initialize() {
-        
+
         Rectangle2D scr = Screen.getPrimary().getVisualBounds();
 
         FBS_Safari_Map map = new FBS_Safari_Map(scr.getWidth(), scr.getHeight());
-        
+
         FBS_Canvas canvas = new FBS_Canvas(map);
 
         FBS_MapController con = new FBS_MapController(map, canvas);
         initMap();
         zeichneTowerList();
 
-        
 //       canvas.setLayoutX(0);
 //       canvas.setLayoutY(0);
 //       canvas.setTranslateX(200);
-       
-
+        //anchorpane.getChildren().add(canvas);
         
-        
-        anchorpane.getChildren().add(canvas);
-        
+        stackpane.getChildren().add(canvas);
+        stackpane.setAlignment(canvas, Pos.TOP_LEFT);
         towermenu.setContent(zeichneTowerList());
         stackpane.getChildren().remove(gp_overlay);
+        ColumnConstraints column1 = new ColumnConstraints();
+        column1.setPercentWidth(10);
+        gp_overlay.getColumnConstraints().add(column1);
         stackpane.getChildren().add(gp_overlay);
+        stackpane.setAlignment(gp_overlay, Pos.TOP_LEFT);
 
+        //anchorpane.getChildren().add(stackpane);
     }
 
     HashMap<String, FBS_TowerInterface> turmlist = new HashMap();
@@ -107,6 +110,7 @@ public class ControllerSpieloberflaeche {
     public GridPane zeichneTowerList() {
 
         GridPane gridpane = new GridPane();
+        
 
         int anzahltuerme = turmlist.keySet().size();
 
