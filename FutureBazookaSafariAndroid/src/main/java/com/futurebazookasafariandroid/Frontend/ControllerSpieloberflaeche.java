@@ -4,10 +4,13 @@ import com.futurebazookasafariandroid.Backend.FBS_MapController;
 import com.futurebazookasafariandroid.FBS_Interfaces.FBS_TowerInterface;
 import com.futurebazookasafariandroid.FBS_Maps.FBS_Safari_Map;
 import com.futurebazookasafariandroid.FBS_Tower.FBS_Laser_Tower;
+import com.futurebazookasafariandroid.Frontend.FBS_Canvas;
 import java.util.HashMap;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.geometry.Orientation;
+import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
@@ -17,7 +20,9 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Screen;
@@ -25,6 +30,7 @@ import javafx.stage.Screen;
 public class ControllerSpieloberflaeche {
 
     private boolean menuexists = false;
+    FBS_MapController con;
 
     @FXML
     private SplitPane sp_pane;
@@ -45,6 +51,15 @@ public class ControllerSpieloberflaeche {
     private Canvas canvas1;
 
     @FXML
+    private AnchorPane anchorpansplit;
+
+    @FXML
+    private AnchorPane anchorpansplitunten;
+
+    @FXML
+    private AnchorPane anchorpansplitoben;
+
+    @FXML
     private TitledPane towermenu;
 
     @FXML
@@ -61,31 +76,51 @@ public class ControllerSpieloberflaeche {
 
     @FXML
     private AnchorPane anchorpane;
-    
-    
+
+    @FXML
+    void stackpaneclicked(MouseEvent event) {
+
+        con.getMouseclicks(event.getSceneX(), event.getSceneY());
+
+    }
+
+    SplitPane pane = new SplitPane();
+
     @FXML
     protected void initialize() {
 
-        FBS_Safari_Map map = new FBS_Safari_Map(1000, 1000);
+        Rectangle2D scr = Screen.getPrimary().getVisualBounds();
+
+        FBS_Safari_Map map = new FBS_Safari_Map(scr.getWidth(), scr.getHeight());
+
         FBS_Canvas canvas = new FBS_Canvas(map);
 
-        FBS_MapController con = new FBS_MapController(map, canvas);
+        con = new FBS_MapController(map, canvas);
         initMap();
         zeichneTowerList();
 
-        
 //       canvas.setLayoutX(0);
 //       canvas.setLayoutY(0);
 //       canvas.setTranslateX(200);
-       
+        //anchorpane.getChildren().add(canvas);
+        stackpane.getChildren().add(canvas);
+        stackpane.setAlignment(canvas, Pos.TOP_LEFT);
 
-        
-        
-        anchorpane.getChildren().add(canvas);
-        
-        towermenu.setContent(zeichneTowerList());
+        anchorpansplitoben.getChildren().add(zeichneTowerList());
+
+        gp_overlay.setAlignment(Pos.TOP_RIGHT);
+
         stackpane.getChildren().remove(gp_overlay);
+        ColumnConstraints column1 = new ColumnConstraints();
+        column1.setPercentWidth(10);
+        gp_overlay.getColumnConstraints().add(column1);
         stackpane.getChildren().add(gp_overlay);
+        stackpane.setAlignment(gp_overlay, Pos.TOP_LEFT);
+
+        pane.setOrientation(Orientation.VERTICAL);
+
+        pane.getItems().add(zeichneTowerList());
+        sc_pane.setContent(pane);
 
     }
 
@@ -130,15 +165,18 @@ public class ControllerSpieloberflaeche {
 
                         String name = b_event.getId();
                         if (menuexists) {
-                            sp_pane.getItems().remove(1);
+                            pane.getItems().remove(1);
                         }
-                        sp_pane.getItems().add(setContextPanetower(turmlist.get(name)));
+
+                        pane.getItems().add(1, setContextPanetower(turmlist.get(name)));
+
                         menuexists = true;
                     }
 
                 }
             });
 
+            gridpane.setOpacity(1);
             gridpane.add(b_tower, i % 2, i / 2);
             i++;
         }
