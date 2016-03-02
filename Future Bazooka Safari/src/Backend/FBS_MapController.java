@@ -108,6 +108,17 @@ public class FBS_MapController {
 
     }
 
+    
+    public void getMouseclicks(double x,double y){
+         FBS_TowerInterface tower = new FBS_Laser_Tower((int) x, (int) y);
+
+                if (buildTower(tower)) {
+                    turmlist.add(tower);
+                    canvas.drawMap(monsterlist, turmlist, projektillist, hindernislist);
+                }
+        
+    }
+    
     public void mouseactions() {
 //        canvas.setOnTouchPressed(new EventHandler<TouchEvent>() {
 //            @Override

@@ -7,9 +7,9 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="anchorpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="628.0" prefWidth="881.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Frontend.ControllerSpieloberflaeche">
+<AnchorPane fx:id="anchorpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="628.0" prefWidth="881.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Frontend.ControllerSpieloberflaeche">
    <children>
-      <StackPane fx:id="stackpane" prefHeight="-Infinity" prefWidth="-Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <StackPane fx:id="stackpane" onMouseClicked="#stackpaneclicked" prefHeight="-Infinity" prefWidth="-Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <AnchorPane fx:id="anchorpane1">
                <children>
@@ -54,18 +54,18 @@
                               </Label>
                            </children>
                         </GridPane>
-                        <TitledPane fx:id="towermenu" expanded="false" prefHeight="401.0" prefWidth="150.0" text="Tower Menu" GridPane.columnIndex="3" GridPane.rowSpan="4">
+                        <TitledPane fx:id="towermenu" expanded="false" prefHeight="401.0" prefWidth="150.0" text="Tower Menu" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowSpan="4" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="72.0" prefWidth="73.0">
                                  <children>
                                     <ScrollPane fx:id="sc_pane" prefHeight="372.0" prefWidth="148.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                       <content>
-                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="331.0" prefWidth="126.0">
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" opacity="0.0" prefHeight="331.0" prefWidth="126.0">
                                              <children>
-                                                <SplitPane fx:id="sp_pane" dividerPositions="0.5" orientation="VERTICAL" prefHeight="331.0" prefWidth="126.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <SplitPane fx:id="sp_pane" dividerPositions="0.5" opacity="0.0" orientation="VERTICAL" prefHeight="331.0" prefWidth="126.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                   <items>
-                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
-                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" opacity="0.0" prefHeight="100.0" prefWidth="160.0" />
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" opacity="0.0" prefHeight="100.0" prefWidth="160.0" />
                                                   </items>
                                                 </SplitPane>
                                              </children>
@@ -76,7 +76,7 @@
                               </AnchorPane>
                           </content>
                         </TitledPane>
-                        <Button fx:id="b_settings" mnemonicParsing="false" text="Button" GridPane.rowIndex="3">
+                        <Button fx:id="b_settings" mnemonicParsing="false" text="Settings" GridPane.rowIndex="3">
                            <GridPane.margin>
                               <Insets left="20.0" />
                            </GridPane.margin>
