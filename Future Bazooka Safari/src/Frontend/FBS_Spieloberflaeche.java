@@ -41,6 +41,7 @@ public class FBS_Spieloberflaeche extends BorderPane {
     private Button b_settings = new Button("Einstellungen");
     private SplitPane sp_pane = new SplitPane();
     private ScrollPane sc_pane = new ScrollPane();
+    private boolean menuexists =false;
 
     private double width;
     private double height;
@@ -92,7 +93,11 @@ public class FBS_Spieloberflaeche extends BorderPane {
                         Button b_event = (Button) event.getSource();
 
                         String name = b_event.getId();
+                        if(menuexists){
+                            sp_pane.getItems().remove(1);
+                        }
                         sp_pane.getItems().add(setContextPanetower(turmlist.get(name)));
+                        menuexists=true;
                     }
 
                 }
@@ -130,7 +135,7 @@ public class FBS_Spieloberflaeche extends BorderPane {
         FlowPane labelpane = new FlowPane(l_leben, l_gold);
 
         towermenu.setText("Menu");
-        sp_pane.setOrientation(Orientation.HORIZONTAL);
+        sp_pane.setOrientation(Orientation.VERTICAL);
 
         towermenu.setContent(sp_pane);
 
