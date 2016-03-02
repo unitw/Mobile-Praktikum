@@ -80,6 +80,7 @@ public class ControllerSpieloberflaeche {
 //       canvas.setLayoutX(0);
 //       canvas.setLayoutY(0);
 //       canvas.setTranslateX(200);
+<<<<<<< HEAD
         //anchorpane.getChildren().add(canvas);
         
         stackpane.getChildren().add(canvas);
@@ -91,6 +92,10 @@ public class ControllerSpieloberflaeche {
         gp_overlay.getColumnConstraints().add(column1);
         stackpane.getChildren().add(gp_overlay);
         stackpane.setAlignment(gp_overlay, Pos.TOP_LEFT);
+=======
+        this.canvas1=canvas;
+        towermenu.setContent(zeichneTowerList());
+>>>>>>> 107c60197d701ed32b7ed2923df52b6ac20a5165
 
         //anchorpane.getChildren().add(stackpane);
     }
