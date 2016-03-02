@@ -27,34 +27,39 @@ import javafx.stage.Stage;
  * @author benjamin.wolf
  */
 public class FXMLMainMenuController implements Initializable {
-    
+
     @FXML
     private void newGamePressed(ActionEvent event) {
         System.out.println("pressed \"Neues Spiel\"");
 
-        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         StackPane root = new StackPane();
 
         Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
-        FBS_Spieloberflaeche flaeche = new FBS_Spieloberflaeche(primScreenBounds.getWidth(),primScreenBounds.getHeight());
+        FBS_Spieloberflaeche flaeche = new FBS_Spieloberflaeche(primScreenBounds.getWidth(), primScreenBounds.getHeight());
         root.getChildren().add(flaeche);
-        Scene scene = new Scene(root, primScreenBounds.getWidth(),primScreenBounds.getHeight());
+        Scene scene = new Scene(root, primScreenBounds.getWidth(), primScreenBounds.getHeight());
+
         
+        //set Stage boundaries to visible bounds of the main screen
+       
+        stage.setX(0);
+        stage.setY(0);
         stage.setScene(scene);
         stage.show();
-        
+
     }
-    
+
     @FXML
     private void loadGamePressed(ActionEvent event) {
         System.out.println("pressed \"Spiel laden\"");
     }
-    
+
     @FXML
     private void shopPressed(ActionEvent event) throws IOException {
         System.out.println("pressed \"Shop\"");
-        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
         BorderPane borderPane = new BorderPane();
         WebView webView = new WebView();
         webView.getEngine().load("http://localhost/projects/uni_web_shop/index.html");
@@ -65,6 +70,7 @@ public class FXMLMainMenuController implements Initializable {
 
     /**
      * Initializes the controller class.
+     *
      * @param url
      * @param rb
      */
@@ -72,5 +78,5 @@ public class FXMLMainMenuController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
-    
+
 }
