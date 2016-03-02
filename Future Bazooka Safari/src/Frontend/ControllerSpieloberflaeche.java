@@ -30,7 +30,7 @@ import javafx.stage.Screen;
 public class ControllerSpieloberflaeche {
 
     private boolean menuexists = false;
-     FBS_MapController con;
+    FBS_MapController con;
 
     @FXML
     private SplitPane sp_pane;
@@ -49,6 +49,9 @@ public class ControllerSpieloberflaeche {
 
     @FXML
     private Canvas canvas1;
+
+    @FXML
+    private AnchorPane anchorpansplit;
 
     @FXML
     private TitledPane towermenu;
@@ -70,10 +73,8 @@ public class ControllerSpieloberflaeche {
 
     @FXML
     void stackpaneclicked(MouseEvent event) {
-        
-      
-        con.getMouseclicks(event.getSceneX(),event.getSceneY());
-        
+
+        con.getMouseclicks(event.getSceneX(), event.getSceneY());
 
     }
 
@@ -86,7 +87,7 @@ public class ControllerSpieloberflaeche {
 
         FBS_Canvas canvas = new FBS_Canvas(map);
 
-         con = new FBS_MapController(map, canvas);
+        con = new FBS_MapController(map, canvas);
         initMap();
         zeichneTowerList();
 
@@ -108,8 +109,7 @@ public class ControllerSpieloberflaeche {
         stackpane.getChildren().add(gp_overlay);
         stackpane.setAlignment(gp_overlay, Pos.TOP_LEFT);
 
-        gp_overlay.setStyle("-fx-border-color: black;");
-        //anchorpane.getChildren().add(stackpane);
+       
     }
 
     HashMap<String, FBS_TowerInterface> turmlist = new HashMap();
@@ -155,7 +155,12 @@ public class ControllerSpieloberflaeche {
                         if (menuexists) {
                             sp_pane.getItems().remove(1);
                         }
-                        sp_pane.getItems().add(setContextPanetower(turmlist.get(name)));
+
+//                        anchorpansplit.getChildren().remove(sp_pane);
+//
+//                        sp_pane.getItems().add(setContextPanetower(turmlist.get(name)));
+//                        anchorpansplit.getChildren().add(sp_pane);
+
                         menuexists = true;
                     }
 
