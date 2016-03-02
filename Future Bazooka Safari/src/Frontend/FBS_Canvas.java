@@ -32,7 +32,7 @@ public class FBS_Canvas extends Canvas {
     ArrayList<FBS_TowerInterface> towerlist = new ArrayList();
 
     public FBS_Canvas(FBS_MapInterface map) {
-        super(map.getMapsizex()/2, map.getMapsizey()/2);
+        super(map.getMapsizex(), map.getMapsizey());
         this.map = map;
 
     }
@@ -40,6 +40,7 @@ public class FBS_Canvas extends Canvas {
     public void drawMap(ArrayList<FBS_MonsterInterface> monsterlist, ArrayList<FBS_TowerInterface> towerlist, ArrayList<FBS_Projektil_Interface> projektillist) {
         gc.setFill(Color.BEIGE);
         gc.fillRect(0, 0, map.getMapsizex(), map.getMapsizey());
+
         for (FBS_MonsterInterface mon : monsterlist) {
             gc.save();
             rotate(gc, mon.getangle(), mon.getPositionx() + mon.getGroesse() / 2, mon.getPositiony() + mon.getGroesse() / 2);

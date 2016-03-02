@@ -8,6 +8,7 @@ import java.util.HashMap;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -16,8 +17,10 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Screen;
 
 public class ControllerSpieloberflaeche {
 
@@ -39,7 +42,7 @@ public class ControllerSpieloberflaeche {
     private Label l_gold;
 
     @FXML
-    private Canvas canvas;
+    private Canvas canvas1;
 
     @FXML
     private TitledPane towermenu;
@@ -57,14 +60,32 @@ public class ControllerSpieloberflaeche {
     private ScrollPane sc_pane;
 
     @FXML
+    private AnchorPane anchorpane;
+    
+    
+    @FXML
     protected void initialize() {
-        FBS_Safari_Map map = new FBS_Safari_Map(500, 500);
+
+        FBS_Safari_Map map = new FBS_Safari_Map(1000, 1000);
         FBS_Canvas canvas = new FBS_Canvas(map);
 
         FBS_MapController con = new FBS_MapController(map, canvas);
         initMap();
         zeichneTowerList();
+
+        
+//       canvas.setLayoutX(0);
+//       canvas.setLayoutY(0);
+//       canvas.setTranslateX(200);
+       
+
+        
+        
+        anchorpane.getChildren().add(canvas);
+        
         towermenu.setContent(zeichneTowerList());
+        stackpane.getChildren().remove(gp_overlay);
+        stackpane.getChildren().add(gp_overlay);
 
     }
 
