@@ -14,12 +14,12 @@ import java.awt.Graphics;
  *
  * @author Nico
  */
-public class Raster extends FBS_Canvas {
+public class TileGrid extends FBS_Canvas {
     
 static int[][] tilemap;
 static int rows, columns;
 
-    public Raster(FBS_MapInterface map) {
+    public TileGrid(FBS_MapInterface map) {
         super(map);
     }
    
