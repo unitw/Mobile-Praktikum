@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="512" prefWidth="288" styleClass="mainMenu" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FBS_MainMenu.FXMLMainMenuController">
+    <stylesheets>
+        <URL value="@fxmlmainmenu.css"/>
+    </stylesheets>
+    <children>
+        <Label 
+            text="Future Bazooka Safari"
+            prefHeight="20"
+            prefWidth="288"
+            styleClass="logoLabel"
+            layoutY="75" 
+        />
+        <Button 
+            text="Neues Spiel"
+            prefHeight="30"
+            prefWidth="150"
+            styleClass="mainMenuButton"
+            layoutX="75" 
+            layoutY="190" 
+            onAction="#newGamePressed" 
+        />
+        <Button 
+            text="Spiel laden"
+            prefHeight="30"
+            prefWidth="150"
+            styleClass="mainMenuButton"
+            layoutX="75" 
+            layoutY="240" 
+            onAction="#loadGamePressed" 
+        />
+        <Button 
+            text="Shop"
+            prefHeight="30"
+            prefWidth="150"
+            styleClass="mainMenuButton"
+            layoutX="75" 
+            layoutY="290" 
+            onAction="#shopPressed" 
+        />
+    </children>
+</AnchorPane>
+        
