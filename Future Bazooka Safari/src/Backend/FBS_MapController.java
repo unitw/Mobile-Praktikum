@@ -11,6 +11,7 @@ import FBS_Interfaces.FBS_Projektil_Interface;
 import FBS_Interfaces.FBS_Spieler;
 import FBS_Interfaces.FBS_SpielerInterface;
 import FBS_Interfaces.FBS_TowerInterface;
+import FBS_Interfaces.FBS_HindernisInterface;
 import FBS_Monster.FBS_Monster_Ratte;
 import FBS_Projektile.FBS_LaserProjektil;
 import FBS_Tower.FBS_Laser_Tower;
@@ -38,7 +39,8 @@ public class FBS_MapController {
     private ArrayList<FBS_MonsterInterface> monsterlist = new ArrayList();
     private ArrayList<FBS_TowerInterface> turmlist = new ArrayList();
     private ArrayList<FBS_Projektil_Interface> projektillist = new ArrayList();
-
+    private ArrayList<FBS_HindernisInterface> hindernislist = new ArrayList();
+    
     private AnimationTimer timer;
     private AnimationTimer projektiltimer;
 
@@ -61,7 +63,7 @@ public class FBS_MapController {
         spieler = new FBS_Spieler(0, 1000, 600, 100);
         spielerleben = spieler.getmaxLife();
         spielergold = spieler.getstartGold();
-        //canvas.drawMap(monsterlist, turmlist, projektillist);
+        //canvas.drawMap(monsterlist, turmlist, projektillist, hindernislist);
         mouseactions();
         initTimer();
 
@@ -75,9 +77,9 @@ public class FBS_MapController {
             public void handle(long now) {
 
                 MonsterMovement(iteration);
-                canvas.drawMap(monsterlist, turmlist, projektillist);
+                canvas.drawMap(monsterlist, turmlist, projektillist, hindernislist);
                 TowerShoot(iteration);
-                canvas.drawMap(monsterlist, turmlist, projektillist);
+                canvas.drawMap(monsterlist, turmlist, projektillist, hindernislist);
                 final ArrayList<FBS_Projektil_Interface> loeschliste = new ArrayList();
 
                 if (FBS_MapController.this.getProjektillist().isEmpty()) {
@@ -98,7 +100,7 @@ public class FBS_MapController {
                 }
 
                 iteration++;
-                canvas.drawMap(monsterlist, turmlist, projektillist);
+                canvas.drawMap(monsterlist, turmlist, projektillist, hindernislist);
             }
 
         };
@@ -131,7 +133,7 @@ public class FBS_MapController {
 
                 if (buildTower(tower)) {
                     turmlist.add(tower);
-                    canvas.drawMap(monsterlist, turmlist, projektillist);
+                    canvas.drawMap(monsterlist, turmlist, projektillist, hindernislist);
                 }
 
             }
@@ -164,6 +166,25 @@ public class FBS_MapController {
                 FireAction(tower, aggrolist);
             }
         }
+    }
+    
+        public boolean buildHindernis(FBS_HindernisInterface hindernis) {
+
+        Rectangle rect = new Rectangle(hindernis.getPositionx(), hindernis.getPositiony(), hindernis.getGroesse(), hindernis.getGroesse());
+
+        for (FBS_HindernisInterface hn : hindernislist) {
+            Rectangle rect1 = new Rectangle(hn.getPositionx(), hn.getPositiony(), hn.getGroesse(), hn.getGroesse());
+
+            if (rect.intersects(rect1)) {
+                return false;
+
+            } else if (rect.contains(map.getEndpunkt())) {
+                return false;
+            }
+
+        }
+        return true;
+
     }
 
     public void Schadensberechnung(FBS_Projektil_Interface project) {
@@ -468,6 +489,14 @@ public class FBS_MapController {
 
     public void setTurmlist(ArrayList<FBS_TowerInterface> turmlist) {
         this.turmlist = turmlist;
+    }
+    
+    public void setHindernislist(ArrayList<FBS_HindernisInterface> hindernislist) {
+        this.hindernislist = hindernislist;
+    }
+    
+    public ArrayList<FBS_HindernisInterface> getHindernislist() {
+        return this.getHindernislist();
     }
 
     public ArrayList<FBS_Projektil_Interface> getProjektillist() {
