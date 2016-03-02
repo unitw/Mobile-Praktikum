@@ -1,18 +1,16 @@
+package com.futurebazookasafariandroid;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.futurebazookasafariandroid;
 
-import Frontend.FBS_Spieloberflaeche;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 /**
@@ -24,7 +22,7 @@ public class FutureBazookaSafariAndroid extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         
-        Parent root = FXMLLoader.load(getClass().getResource("/FBS_LoginScreen/FXMLLoginScreen.fxml")); 
+        Parent root = FXMLLoader.load(getClass().getResource("FXMLLoginScreen.fxml")); 
         Scene scene = new Scene(root, 288, 512);
         
         stage.setTitle("Future Bazooka Safari");
