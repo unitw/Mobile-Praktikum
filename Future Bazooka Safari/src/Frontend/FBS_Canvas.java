@@ -9,6 +9,7 @@ import FBS_Interfaces.FBS_MapInterface;
 import FBS_Interfaces.FBS_MonsterInterface;
 import FBS_Interfaces.FBS_Projektil_Interface;
 import FBS_Interfaces.FBS_TowerInterface;
+import FBS_Interfaces.FBS_HindernisInterface;
 import java.awt.Point;
 import java.util.ArrayList;
 import javafx.event.EventHandler;
@@ -30,6 +31,7 @@ public class FBS_Canvas extends Canvas {
     FBS_MapInterface map;
     Image img = new Image("/resources/grassbackground.png");
     ArrayList<FBS_TowerInterface> towerlist = new ArrayList();
+    ArrayList<FBS_HindernisInterface> hindernislist = new ArrayList();
 
     public FBS_Canvas(FBS_MapInterface map) {
         super(map.getMapsizex()/2, map.getMapsizey()/2);
@@ -37,7 +39,7 @@ public class FBS_Canvas extends Canvas {
 
     }
 
-    public void drawMap(ArrayList<FBS_MonsterInterface> monsterlist, ArrayList<FBS_TowerInterface> towerlist, ArrayList<FBS_Projektil_Interface> projektillist) {
+    public void drawMap(ArrayList<FBS_MonsterInterface> monsterlist, ArrayList<FBS_TowerInterface> towerlist, ArrayList<FBS_Projektil_Interface> projektillist, ArrayList<FBS_HindernisInterface> hindernislist) {
         gc.setFill(Color.BEIGE);
         gc.fillRect(0, 0, map.getMapsizex(), map.getMapsizey());
         for (FBS_MonsterInterface mon : monsterlist) {
@@ -48,11 +50,15 @@ public class FBS_Canvas extends Canvas {
         }
         for (FBS_TowerInterface tower : towerlist) {
             gc.drawImage(tower.getPicture(), tower.getPositionx(), tower.getPositiony(), tower.getGroesse(), tower.getGroesse());
-
+            
         }
         for (FBS_Projektil_Interface pro : projektillist) {
             gc.drawImage(pro.getPicture(), pro.getPositionx(), pro.getPositiony(), pro.getGroesse(), pro.getGroesse());
 
+        }
+        
+        for (FBS_HindernisInterface hindernis : hindernislist) {
+            gc.drawImage(hindernis.getPicture(), hindernis.getPositionx(), hindernis.getPositiony(), hindernis.getGroesse(), hindernis.getGroesse());
         }
 
     }
