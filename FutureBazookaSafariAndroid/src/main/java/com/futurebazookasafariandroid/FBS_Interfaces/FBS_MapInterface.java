@@ -32,8 +32,13 @@ public interface FBS_MapInterface {
 
     public double getMapsizey();
 
-    public ArrayList getHindernislist();
+    public ArrayList<FBS_HindernisInterface> getHindernislist();
+    
+    public void AddHindernis(FBS_HindernisInterface hindernis);
+    
+    public void initHindernislist();
 
     public void setmousepressed(Point p);
+    
 
 }

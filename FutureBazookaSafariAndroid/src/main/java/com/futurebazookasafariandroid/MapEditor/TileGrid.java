@@ -5,21 +5,24 @@
  */
 package com.futurebazookasafariandroid.MapEditor;
 
+
 import com.futurebazookasafariandroid.FBS_Interfaces.FBS_MapInterface;
 import com.futurebazookasafariandroid.Frontend.FBS_Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 
 /**
- *
+ * Zukünftiges Raster für den Level-Editor.
+ * Zur Zeit ist nur das Setzen von Erde und Gras geplant.
+ * Ressourcen sind im 'ressources'-Ordner zu finden.
  * @author Nico
  */
-public class Raster extends FBS_Canvas {
+public class TileGrid extends FBS_Canvas {
     
 static int[][] tilemap;
 static int rows, columns;
 
-    public Raster(FBS_MapInterface map) {
+    public TileGrid(FBS_MapInterface map) {
         super(map);
     }
    

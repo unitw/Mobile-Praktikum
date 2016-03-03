@@ -4,7 +4,6 @@ import com.futurebazookasafariandroid.Backend.FBS_MapController;
 import com.futurebazookasafariandroid.FBS_Interfaces.FBS_TowerInterface;
 import com.futurebazookasafariandroid.FBS_Maps.FBS_Safari_Map;
 import com.futurebazookasafariandroid.FBS_Tower.FBS_Laser_Tower;
-import com.futurebazookasafariandroid.Frontend.FBS_Canvas;
 import java.util.HashMap;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
