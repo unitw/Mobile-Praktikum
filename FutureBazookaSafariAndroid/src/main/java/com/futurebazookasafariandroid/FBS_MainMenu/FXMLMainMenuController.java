@@ -42,9 +42,6 @@ public class FXMLMainMenuController implements Initializable {
 
         
         //set Stage boundaries to visible bounds of the main screen
-       
-        stage.setX(0);
-        stage.setY(0);
         stage.setScene(scene);
         stage.show();
 
