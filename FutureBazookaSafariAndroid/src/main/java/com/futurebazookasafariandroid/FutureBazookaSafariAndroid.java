@@ -9,8 +9,10 @@ package com.futurebazookasafariandroid;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 /**
@@ -23,10 +25,14 @@ public class FutureBazookaSafariAndroid extends Application {
     public void start(Stage stage) throws Exception {
         
         Parent root = FXMLLoader.load(getClass().getResource("FXMLLoginScreen.fxml")); 
-        Scene scene = new Scene(root, 288, 512);
+        
+        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+        Scene scene = new Scene(root, primScreenBounds.getWidth(), primScreenBounds.getHeight());
         
         stage.setTitle("Future Bazooka Safari");
         stage.setScene(scene);
+        stage.setX(0);
+        stage.setY(0);
         stage.setResizable(false);
         stage.show();
     }

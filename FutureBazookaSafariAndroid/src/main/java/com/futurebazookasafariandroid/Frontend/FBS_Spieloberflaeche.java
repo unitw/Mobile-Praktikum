@@ -5,21 +5,10 @@
  */
 package com.futurebazookasafariandroid.Frontend;
 
-import com.futurebazookasafariandroid.Backend.FBS_MapController;
-import com.futurebazookasafariandroid.FBS_Interfaces.FBS_TowerInterface;
-import com.futurebazookasafariandroid.FBS_Maps.FBS_Safari_Map;
-import com.futurebazookasafariandroid.FBS_Tower.FBS_Laser_Tower;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Orientation;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -28,15 +17,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TitledPane;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 /**

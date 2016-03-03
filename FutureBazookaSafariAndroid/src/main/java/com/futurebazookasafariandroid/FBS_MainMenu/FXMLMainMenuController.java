@@ -64,7 +64,9 @@ public class FXMLMainMenuController implements Initializable {
         WebView webView = new WebView();
         webView.getEngine().load("http://localhost/projects/uni_web_shop/index.html");
         borderPane.setCenter(webView);
-        stage.setScene(new Scene(borderPane, 288, 512));
+        
+        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+        stage.setScene(new Scene(borderPane, primScreenBounds.getWidth(), primScreenBounds.getHeight()));
         stage.show();
     }
 
