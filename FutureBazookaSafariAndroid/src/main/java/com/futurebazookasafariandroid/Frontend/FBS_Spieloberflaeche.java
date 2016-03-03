@@ -48,10 +48,10 @@ public class FBS_Spieloberflaeche extends AnchorPane {
         } catch (IOException ex) {
             Logger.getLogger(FBS_Spieloberflaeche.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-       
+        
         
 
+       
         //Scene scene = new Scene(root, width, height);
         //Stage stage = new Stage();
         
