@@ -36,7 +36,7 @@ public class FXMLMainMenuController implements Initializable {
         StackPane root = new StackPane();
 
         Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
-        FBS_Spieloberflaeche flaeche = new FBS_Spieloberflaeche(primScreenBounds.getWidth(), primScreenBounds.getHeight());
+        FBS_Spieloberflaeche flaeche = new FBS_Spieloberflaeche();
         root.getChildren().add(flaeche);
         Scene scene = new Scene(root, primScreenBounds.getWidth(), primScreenBounds.getHeight());
 

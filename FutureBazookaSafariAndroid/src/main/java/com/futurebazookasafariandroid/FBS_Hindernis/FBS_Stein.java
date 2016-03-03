@@ -16,7 +16,7 @@ public class FBS_Stein extends FBS_AbstractHindernis {
     public FBS_Stein(int posx, int posy) {
         this.setPosition(posx, posy);
         this.setLife(10);
-        this.setPicture(new Image("/resources/stein.png"));
+        this.setPicture(new Image("stein.png"));
         this.setGroesse(64);  
     }
 }
