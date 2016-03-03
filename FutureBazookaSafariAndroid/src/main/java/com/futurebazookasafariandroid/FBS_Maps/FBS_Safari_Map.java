@@ -18,7 +18,7 @@ public class FBS_Safari_Map extends FBS_AbstractMap {
 
     public FBS_Safari_Map(double mapx,double mapy) {
         this.setStartpunkt(new Point2D(0, 0));
-        this.setEndpunkt(new Point2D(300, 200));
+        this.setEndpunkt(new Point2D(mapx, mapy));
         this.setMapsizex(mapx);
         this.setMapsizey(mapy);
         this.initHindernislist();

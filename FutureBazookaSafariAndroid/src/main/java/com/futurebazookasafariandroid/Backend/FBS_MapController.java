@@ -79,6 +79,8 @@ public class FBS_MapController {
                 TowerShoot(iteration);
                 canvas.drawMap(monsterlist, turmlist, projektillist, hindernislist);
                 final ArrayList<FBS_Projektil_Interface> loeschliste = new ArrayList();
+                
+                iteration++;
 
                 if (FBS_MapController.this.getProjektillist().isEmpty()) {
                     return;
@@ -97,7 +99,7 @@ public class FBS_MapController {
                     FBS_MapController.this.getProjektillist().remove(projektil);
                 }
 
-                iteration++;
+                
                 canvas.drawMap(monsterlist, turmlist, projektillist, hindernislist);
             }
 
@@ -111,8 +113,8 @@ public class FBS_MapController {
 
         if (buildTower(tower)) {
             turmlist.add(tower);
-            canvas.drawMap(monsterlist, turmlist, projektillist, hindernislist);
         }
+        monsterlist.add(new FBS_Monster_Ratte((int) map.getStartpunkt().getX(), (int) map.getStartpunkt().getY()));
 
     }
 
