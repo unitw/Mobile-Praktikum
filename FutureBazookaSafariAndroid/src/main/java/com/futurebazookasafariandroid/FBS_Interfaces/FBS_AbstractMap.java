@@ -77,4 +77,14 @@ public class FBS_AbstractMap implements FBS_MapInterface {
         return mapy;
     }
 
+    @Override
+    public void AddHindernis(FBS_HindernisInterface hindernis) {
+        this.hindernislist.add(hindernis);
+    }
+
+    @Override
+    public void initHindernislist() {
+        this.hindernislist = new ArrayList();
+    }
+
 }
