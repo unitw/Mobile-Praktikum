@@ -31,17 +31,7 @@ import javafx.stage.Screen;
 
 public class ControllerSpieloberflaeche extends Pane {
 
-    public ControllerSpieloberflaeche() {
-
-        Rectangle2D scr = Screen.getPrimary().getVisualBounds();
-
-        FBS_Safari_Map map = new FBS_Safari_Map(scr.getWidth(), scr.getHeight());
-
-        FBS_Canvas canvas = new FBS_Canvas(map);
-
-        con = new FBS_MapController(map, canvas);
-        this.getChildren().add(canvas);
-    }
+    
 
     private boolean menuexists = false;
     FBS_MapController con;
