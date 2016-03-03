@@ -9,7 +9,7 @@
 
 
 
-<AnchorPane id="AnchorPane" prefHeight="512" prefWidth="288" styleClass="loginScreen" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.futurebazookasafariandroid.FXMLLoginScreenController">
+<AnchorPane id="AnchorPane" styleClass="loginScreen" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.futurebazookasafariandroid.FXMLLoginScreenController">
     <stylesheets>
         <URL value="@fxmlloginscreen.css"/>
     </stylesheets>

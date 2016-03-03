@@ -40,7 +40,7 @@ public class FBS_MapController {
     private ArrayList<FBS_TowerInterface> turmlist = new ArrayList();
     private ArrayList<FBS_Projektil_Interface> projektillist = new ArrayList();
     private ArrayList<FBS_HindernisInterface> hindernislist = new ArrayList();
-    
+
     private AnimationTimer timer;
     private AnimationTimer projektiltimer;
 
@@ -58,6 +58,7 @@ public class FBS_MapController {
 
         monsterratte = new FBS_Monster_Ratte(map.getStartpunkt().x, map.getStartpunkt().y);
         monsterlist.add(monsterratte);
+        this.hindernislist = map.getHindernislist();
 
         this.canvas = canvas;
         spieler = new FBS_Spieler(0, 1000, 600, 100);
@@ -108,17 +109,16 @@ public class FBS_MapController {
 
     }
 
-    
-    public void getMouseclicks(double x,double y){
-         FBS_TowerInterface tower = new FBS_Laser_Tower((int) x, (int) y);
+    public void getMouseclicks(double x, double y) {
+        FBS_TowerInterface tower = new FBS_Laser_Tower((int) x, (int) y);
 
-                if (buildTower(tower)) {
-                    turmlist.add(tower);
-                    canvas.drawMap(monsterlist, turmlist, projektillist, hindernislist);
-                }
-        
+        if (buildTower(tower)) {
+            turmlist.add(tower);
+            canvas.drawMap(monsterlist, turmlist, projektillist, hindernislist);
+        }
+
     }
-    
+
     public void mouseactions() {
 //        canvas.setOnTouchPressed(new EventHandler<TouchEvent>() {
 //            @Override
@@ -166,6 +166,13 @@ public class FBS_MapController {
             }
 
         }
+        for (FBS_HindernisInterface h : hindernislist) {
+            Rectangle rect2 = new Rectangle(h.getPositionx(), h.getPositiony(), h.getGroesse(), h.getGroesse());
+            if (rect.intersects(rect2)) {
+                return false;
+            }
+
+        }
         return true;
 
     }
@@ -178,8 +185,8 @@ public class FBS_MapController {
             }
         }
     }
-    
-        public boolean buildHindernis(FBS_HindernisInterface hindernis) {
+
+    public boolean buildHindernis(FBS_HindernisInterface hindernis) {
 
         Rectangle rect = new Rectangle(hindernis.getPositionx(), hindernis.getPositiony(), hindernis.getGroesse(), hindernis.getGroesse());
 
@@ -401,10 +408,11 @@ public class FBS_MapController {
 
     public boolean zugmoeglich(Point Zielzug, FBS_MonsterInterface mon) {
 
+        Rectangle rect1 = new Rectangle((int) Zielzug.getX(), (int) Zielzug.getY(), mon.getGroesse(), mon.getGroesse());
+
         for (FBS_TowerInterface tower : turmlist) {
 
-            Rectangle2D rect = new Rectangle(tower.getPositionx(), tower.getPositiony(), tower.getGroesse(), tower.getGroesse());
-            Rectangle2D rect1 = new Rectangle((int) Zielzug.getX(), (int) Zielzug.getY(), mon.getGroesse(), mon.getGroesse());
+            Rectangle rect = new Rectangle(tower.getPositionx(), tower.getPositiony(), tower.getGroesse(), tower.getGroesse());
 
             if (rect1.intersects(rect)) {
 
@@ -415,15 +423,22 @@ public class FBS_MapController {
             }
 
         }
+        for (FBS_HindernisInterface h : hindernislist) {
+            Rectangle rect2 = new Rectangle(h.getPositionx(), h.getPositiony(), h.getGroesse(), h.getGroesse());
+            if (rect1.intersects(rect2)) {
+                return false;
+            }
+
+        }
+        return true;
+    }
 
 //        Hinderniss implementieren
 //          for(FBS_TowerInterface tower:turmlist){
 //            
 //        }
-//        
-        return true;
+   
 
-    }
 
     //A-Stern
     public Point getnextZug(Object o, ArrayList<Point> zuege) {
@@ -467,7 +482,6 @@ public class FBS_MapController {
 
         //TODO
         //KD-Baum
-
         for (int x = Math.max(0, x1 - turm.getRange()); x < Math.min(this.getMap().getMapsizex(), x1 + turm.getRange() + 1); x++) {
             for (int y = Math.max(0, y1 - turm.getRange()); y < Math.min(this.getMap().getMapsizey(), y1 + turm.getRange() + 1); y++) {
 
@@ -501,11 +515,11 @@ public class FBS_MapController {
     public void setTurmlist(ArrayList<FBS_TowerInterface> turmlist) {
         this.turmlist = turmlist;
     }
-    
+
     public void setHindernislist(ArrayList<FBS_HindernisInterface> hindernislist) {
         this.hindernislist = hindernislist;
     }
-    
+
     public ArrayList<FBS_HindernisInterface> getHindernislist() {
         return this.hindernislist;
     }

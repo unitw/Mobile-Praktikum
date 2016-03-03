@@ -5,6 +5,7 @@
  */
 package FBS_Maps;
 
+import FBS_Hindernis.FBS_Stein;
 import FBS_Interfaces.FBS_AbstractMap;
 import java.awt.Point;
 
@@ -19,6 +20,8 @@ public class FBS_Safari_Map extends FBS_AbstractMap {
         this.setEndpunkt(new Point(2000, 500));
         this.setMapsizex(mapx);
         this.setMapsizey(mapy);
+        this.initHindernislist();
+        this.AddHindernis(new FBS_Stein(200,200));
         
     }
 
