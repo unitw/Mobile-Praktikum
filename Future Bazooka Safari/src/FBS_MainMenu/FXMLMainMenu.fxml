@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.net.*?>
 <?import java.util.*?>
@@ -7,45 +8,15 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="512" prefWidth="288" styleClass="mainMenu" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FBS_MainMenu.FXMLMainMenuController">
+<AnchorPane id="AnchorPane" prefHeight="512" prefWidth="288" styleClass="mainMenu" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="FBS_MainMenu.FXMLMainMenuController">
     <stylesheets>
-        <URL value="@fxmlmainmenu.css"/>
+        <URL value="@fxmlmainmenu.css" />
     </stylesheets>
     <children>
-        <Label 
-            text="Future Bazooka Safari"
-            prefHeight="20"
-            prefWidth="288"
-            styleClass="logoLabel"
-            layoutY="75" 
-        />
-        <Button 
-            text="Neues Spiel"
-            prefHeight="30"
-            prefWidth="150"
-            styleClass="mainMenuButton"
-            layoutX="75" 
-            layoutY="190" 
-            onAction="#newGamePressed" 
-        />
-        <Button 
-            text="Spiel laden"
-            prefHeight="30"
-            prefWidth="150"
-            styleClass="mainMenuButton"
-            layoutX="75" 
-            layoutY="240" 
-            onAction="#loadGamePressed" 
-        />
-        <Button 
-            text="Shop"
-            prefHeight="30"
-            prefWidth="150"
-            styleClass="mainMenuButton"
-            layoutX="75" 
-            layoutY="290" 
-            onAction="#shopPressed" 
-        />
+        <Label layoutY="14.0" prefHeight="20" prefWidth="288" styleClass="logoLabel" text="Future Bazooka Safari" />
+        <Button layoutX="75" layoutY="190" onAction="#newGamePressed" prefHeight="30" prefWidth="150" styleClass="mainMenuButton" text="Neues Spiel" />
+        <Button layoutX="75" layoutY="240" onAction="#loadGamePressed" prefHeight="30" prefWidth="150" styleClass="mainMenuButton" text="Spiel laden" />
+        <Button layoutX="75" layoutY="290" onAction="#shopPressed" prefHeight="30" prefWidth="150" styleClass="mainMenuButton" text="Shop" />
+      <ImageView fitHeight="114.0" fitWidth="143.0" layoutX="73.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true" style="-fx-image: /ressources/icon.png;" AnchorPane.topAnchor="49.0" />
     </children>
 </AnchorPane>
-        
