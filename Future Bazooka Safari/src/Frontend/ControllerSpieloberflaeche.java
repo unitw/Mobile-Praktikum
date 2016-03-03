@@ -25,10 +25,23 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Screen;
 
-public class ControllerSpieloberflaeche {
+public class ControllerSpieloberflaeche extends Pane {
+
+    public ControllerSpieloberflaeche() {
+
+        Rectangle2D scr = Screen.getPrimary().getVisualBounds();
+
+        FBS_Safari_Map map = new FBS_Safari_Map(scr.getWidth(), scr.getHeight());
+
+        FBS_Canvas canvas = new FBS_Canvas(map);
+
+        con = new FBS_MapController(map, canvas);
+        this.getChildren().add(canvas);
+    }
 
     private boolean menuexists = false;
     FBS_MapController con;
