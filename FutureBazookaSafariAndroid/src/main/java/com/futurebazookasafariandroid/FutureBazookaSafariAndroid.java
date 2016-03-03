@@ -33,7 +33,6 @@ public class FutureBazookaSafariAndroid extends Application {
         stage.setScene(scene);
         stage.setX(0);
         stage.setY(0);
-        stage.setResizable(false);
         stage.show();
     }
     

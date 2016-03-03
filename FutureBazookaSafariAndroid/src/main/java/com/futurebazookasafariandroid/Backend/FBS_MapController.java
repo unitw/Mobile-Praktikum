@@ -16,13 +16,13 @@ import com.futurebazookasafariandroid.FBS_Monster.FBS_Monster_Ratte;
 import com.futurebazookasafariandroid.FBS_Projektile.FBS_LaserProjektil;
 import com.futurebazookasafariandroid.FBS_Tower.FBS_Laser_Tower;
 import com.futurebazookasafariandroid.Frontend.FBS_Canvas;
-import java.awt.Point;
-import java.awt.Rectangle;
 import java.util.ArrayList;
 import javafx.animation.AnimationTimer;
 import static java.lang.Math.abs;
 import java.util.HashMap;
 import javafx.event.EventHandler;
+import javafx.geometry.Point2D;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.input.MouseEvent;
 
 /**
@@ -53,7 +53,7 @@ public class FBS_MapController {
 
         this.map = map;
 
-        monsterratte = new FBS_Monster_Ratte(map.getStartpunkt().x, map.getStartpunkt().y);
+        monsterratte = new FBS_Monster_Ratte((int) map.getStartpunkt().getX(), (int) map.getStartpunkt().getY());
         monsterlist.add(monsterratte);
         this.hindernislist = map.getHindernislist();
 
@@ -150,10 +150,10 @@ public class FBS_MapController {
 
     public boolean buildTower(FBS_TowerInterface tower) {
 
-        Rectangle rect = new Rectangle(tower.getPositionx(), tower.getPositiony(), tower.getGroesse(), tower.getGroesse());
+        Rectangle2D rect = new Rectangle2D(tower.getPositionx(), tower.getPositiony(), tower.getGroesse(), tower.getGroesse());
 
         for (FBS_TowerInterface tw : turmlist) {
-            Rectangle rect1 = new Rectangle(tw.getPositionx(), tw.getPositiony(), tw.getGroesse(), tw.getGroesse());
+            Rectangle2D rect1 = new Rectangle2D(tw.getPositionx(), tw.getPositiony(), tw.getGroesse(), tw.getGroesse());
 
             if (rect.intersects(rect1)) {
                 return false;
@@ -164,7 +164,7 @@ public class FBS_MapController {
 
         }
         for (FBS_HindernisInterface h : hindernislist) {
-            Rectangle rect2 = new Rectangle(h.getPositionx(), h.getPositiony(), h.getGroesse(), h.getGroesse());
+            Rectangle2D rect2 = new Rectangle2D(h.getPositionx(), h.getPositiony(), h.getGroesse(), h.getGroesse());
             if (rect.intersects(rect2)) {
                 return false;
             }
@@ -185,10 +185,10 @@ public class FBS_MapController {
 
     public boolean buildHindernis(FBS_HindernisInterface hindernis) {
 
-        Rectangle rect = new Rectangle(hindernis.getPositionx(), hindernis.getPositiony(), hindernis.getGroesse(), hindernis.getGroesse());
+        Rectangle2D rect = new Rectangle2D(hindernis.getPositionx(), hindernis.getPositiony(), hindernis.getGroesse(), hindernis.getGroesse());
 
         for (FBS_HindernisInterface hn : hindernislist) {
-            Rectangle rect1 = new Rectangle(hn.getPositionx(), hn.getPositiony(), hn.getGroesse(), hn.getGroesse());
+            Rectangle2D rect1 = new Rectangle2D(hn.getPositionx(), hn.getPositiony(), hn.getGroesse(), hn.getGroesse());
 
             if (rect.intersects(rect1)) {
                 return false;
@@ -303,16 +303,16 @@ public class FBS_MapController {
             posx = moveMon.getPositionx();
             posy = moveMon.getPositiony();
 
-            HashMap<Point, Integer> zuegemap = new HashMap<>();
-            ArrayList<Point> zuege = new ArrayList();
-            Point p1 = new Point(posx, posy - 1);
-            Point p2 = new Point(posx + 1, posy - 1);
-            Point p3 = new Point(posx + 1, posy);
-            Point p4 = new Point(posx + 1, posy + 1);
-            Point p5 = new Point(posx, posy + 1);
-            Point p6 = new Point(posx - 1, posy + 1);
-            Point p7 = new Point(posx - 1, posy);
-            Point p8 = new Point(posx - 1, posy - 1);
+            HashMap<Point2D, Integer> zuegemap = new HashMap<>();
+            ArrayList<Point2D> zuege = new ArrayList();
+            Point2D p1 = new Point2D(posx, posy - 1);
+            Point2D p2 = new Point2D(posx + 1, posy - 1);
+            Point2D p3 = new Point2D(posx + 1, posy);
+            Point2D p4 = new Point2D(posx + 1, posy + 1);
+            Point2D p5 = new Point2D(posx, posy + 1);
+            Point2D p6 = new Point2D(posx - 1, posy + 1);
+            Point2D p7 = new Point2D(posx - 1, posy);
+            Point2D p8 = new Point2D(posx - 1, posy - 1);
 
             zuegemap.put(p1, 180);
             zuegemap.put(p2, 225);
@@ -348,10 +348,10 @@ public class FBS_MapController {
                 zuege.add(p8);
             }
 
-            Point neuerZug = getnextZug(object, zuege);
-            moveMon.insertzug(new Point(moveMon.getPositionx(), moveMon.getPositiony()));
+            Point2D neuerZug = getnextZug(object, zuege);
+            moveMon.insertzug(new Point2D(moveMon.getPositionx(), moveMon.getPositiony()));
 
-            moveMon.setPosition(neuerZug.x, neuerZug.y);
+            moveMon.setPosition((int) neuerZug.getX(), (int) neuerZug.getY());
             moveMon.setangle(zuegemap.get(neuerZug));
 
         } else if (object instanceof FBS_Projektil_Interface) {
@@ -360,16 +360,16 @@ public class FBS_MapController {
             posx = project.getPositionx();
             posy = project.getPositiony();
 
-            HashMap<Point, Integer> zuegemap = new HashMap<>();
-            ArrayList<Point> zuege = new ArrayList();
-            Point p1 = new Point(posx, posy - 1);
-            Point p2 = new Point(posx + 1, posy - 1);
-            Point p3 = new Point(posx + 1, posy);
-            Point p4 = new Point(posx + 1, posy + 1);
-            Point p5 = new Point(posx, posy + 1);
-            Point p6 = new Point(posx - 1, posy + 1);
-            Point p7 = new Point(posx - 1, posy);
-            Point p8 = new Point(posx - 1, posy - 1);
+            HashMap<Point2D, Integer> zuegemap = new HashMap<>();
+            ArrayList<Point2D> zuege = new ArrayList();
+            Point2D p1 = new Point2D(posx, posy - 1);
+            Point2D p2 = new Point2D(posx + 1, posy - 1);
+            Point2D p3 = new Point2D(posx + 1, posy);
+            Point2D p4 = new Point2D(posx + 1, posy + 1);
+            Point2D p5 = new Point2D(posx, posy + 1);
+            Point2D p6 = new Point2D(posx - 1, posy + 1);
+            Point2D p7 = new Point2D(posx - 1, posy);
+            Point2D p8 = new Point2D(posx - 1, posy - 1);
 
             zuegemap.put(p1, 180);
             zuegemap.put(p2, 225);
@@ -396,20 +396,20 @@ public class FBS_MapController {
 
             zuege.add(p8);
 
-            Point neuerZug = getnextZug(object, zuege);
+            Point2D neuerZug = getnextZug(object, zuege);
 
             project.setPosition((int) neuerZug.getX(), (int) neuerZug.getY());
         }
 
     }
 
-    public boolean zugmoeglich(Point Zielzug, FBS_MonsterInterface mon) {
+    public boolean zugmoeglich(Point2D Zielzug, FBS_MonsterInterface mon) {
 
-        Rectangle rect1 = new Rectangle((int) Zielzug.getX(), (int) Zielzug.getY(), mon.getGroesse(), mon.getGroesse());
+        Rectangle2D rect1 = new Rectangle2D((int) Zielzug.getX(), (int) Zielzug.getY(), mon.getGroesse(), mon.getGroesse());
 
         for (FBS_TowerInterface tower : turmlist) {
 
-            Rectangle rect = new Rectangle(tower.getPositionx(), tower.getPositiony(), tower.getGroesse(), tower.getGroesse());
+            Rectangle2D rect = new Rectangle2D(tower.getPositionx(), tower.getPositiony(), tower.getGroesse(), tower.getGroesse());
 
             if (rect1.intersects(rect)) {
 
@@ -421,7 +421,7 @@ public class FBS_MapController {
 
         }
         for (FBS_HindernisInterface h : hindernislist) {
-            Rectangle rect2 = new Rectangle(h.getPositionx(), h.getPositiony(), h.getGroesse(), h.getGroesse());
+            Rectangle2D rect2 = new Rectangle2D(h.getPositionx(), h.getPositiony(), h.getGroesse(), h.getGroesse());
             if (rect1.intersects(rect2)) {
                 return false;
             }
@@ -434,18 +434,15 @@ public class FBS_MapController {
 //          for(FBS_TowerInterface tower:turmlist){
 //            
 //        }
-   
-
-
     //A-Stern
-    public Point getnextZug(Object o, ArrayList<Point> zuege) {
+    public Point2D getnextZug(Object o, ArrayList<Point2D> zuege) {
 
         int heuristic = Integer.MAX_VALUE;
-        Point neuerZug = null;
+        Point2D neuerZug = null;
         int posiytarget = 0;
         int posixtarget = 0;
 
-        for (Point zug : zuege) {
+        for (Point2D zug : zuege) {
 
             int posix = (int) zug.getX();
             int posiy = (int) zug.getY();
@@ -454,15 +451,15 @@ public class FBS_MapController {
                 posixtarget = project.getTarget().getPositionx();
                 posiytarget = project.getTarget().getPositiony();
             } else if (o instanceof FBS_MonsterInterface) {
-                posixtarget = this.map.getEndpunkt().x;
-                posiytarget = this.map.getEndpunkt().y;
+                posixtarget = (int) this.map.getEndpunkt().getX();
+                posiytarget = (int) this.map.getEndpunkt().getY();
             }
 
             int heuristicneu = (int) getCost(posix, posiy, posixtarget, posiytarget);
 
             if (heuristic > heuristicneu) {
                 heuristic = heuristicneu;
-                neuerZug = new Point(posix, posiy);
+                neuerZug = new Point2D(posix, posiy);
             }
 
         }

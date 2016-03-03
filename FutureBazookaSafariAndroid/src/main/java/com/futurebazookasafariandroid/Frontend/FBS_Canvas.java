@@ -10,26 +10,11 @@ import com.futurebazookasafariandroid.FBS_Interfaces.FBS_MonsterInterface;
 import com.futurebazookasafariandroid.FBS_Interfaces.FBS_Projektil_Interface;
 import com.futurebazookasafariandroid.FBS_Interfaces.FBS_TowerInterface;
 import com.futurebazookasafariandroid.FBS_Interfaces.FBS_HindernisInterface;
-import java.awt.Point;
+
 import java.util.ArrayList;
-import javafx.event.EventHandler;
-import javafx.geometry.Insets;
-import javafx.geometry.Rectangle2D;
-import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.input.TouchEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.RectangleBuilder;
-import javafx.scene.shape.SVGPath;
 import javafx.scene.transform.Rotate;
 
 /**

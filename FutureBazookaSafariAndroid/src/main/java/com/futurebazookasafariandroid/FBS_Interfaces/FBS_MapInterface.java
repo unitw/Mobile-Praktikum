@@ -5,8 +5,10 @@
  */
 package com.futurebazookasafariandroid.FBS_Interfaces;
 
-import java.awt.Point;
+
 import java.util.ArrayList;
+import javafx.geometry.Point2D;
+
 
 /**
  *
@@ -15,14 +17,14 @@ import java.util.ArrayList;
 public interface FBS_MapInterface {
 
     //Monster spawnpoint
-    public Point getStartpunkt();
+    public Point2D getStartpunkt();
 
-    public void setStartpunkt(Point Startpunkt);
+    public void setStartpunkt(Point2D Startpunkt);
 
     //Monster endpoint
-    public Point getEndpunkt();
+    public Point2D getEndpunkt();
 
-    public void setEndpunkt(Point Endpunkt);
+    public void setEndpunkt(Point2D Endpunkt);
 
     public void setMapsizex(double size);
 
@@ -38,7 +40,7 @@ public interface FBS_MapInterface {
     
     public void initHindernislist();
 
-    public void setmousepressed(Point p);
+    public void setmousepressed(Point2D p);
     
 
 }
