@@ -55,7 +55,6 @@ public class FBS_Canvas extends Canvas {
 
     public void drawMap(ArrayList<FBS_MonsterInterface> monsterlist, ArrayList<FBS_TowerInterface> towerlist, ArrayList<FBS_Projektil_Interface> projektillist, ArrayList<FBS_HindernisInterface> hindernislist) {
 
-        Image imggras = new Image("/resources/grassbackground.png");
 
         for (int i = 0; i < ZELLEN; i++) {
             for (int j = 0; j < ZELLEN; j++) {
