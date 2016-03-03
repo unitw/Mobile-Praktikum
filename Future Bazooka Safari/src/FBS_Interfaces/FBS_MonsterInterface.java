@@ -5,7 +5,8 @@
  */
 package FBS_Interfaces;
 
-import java.awt.Point;
+
+import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 
 /**
@@ -49,8 +50,8 @@ public interface FBS_MonsterInterface {
 
     public void setGroesse(int Groesse);
 
-    public void insertzug(Point p);
+    public void insertzug(Point2D p);
 
-    public boolean testZug(Point p);
+    public boolean testZug(Point2D p);
 
 }

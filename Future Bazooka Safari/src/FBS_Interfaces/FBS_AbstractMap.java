@@ -5,8 +5,9 @@
  */
 package FBS_Interfaces;
 
-import java.awt.Point;
+
 import java.util.ArrayList;
+import javafx.geometry.Point2D;
 
 /**
  *
@@ -18,30 +19,30 @@ public class FBS_AbstractMap implements FBS_MapInterface {
     //false = nicht bebaubar
     private Object[][] map;
 
-    private Point spawnpoint;
-    private Point endpoint;
+    private Point2D spawnpoint;
+    private Point2D endpoint;
     private ArrayList hindernislist;
-    private Point mousepoint;
+    private Point2D mousepoint;
     private double mapx;
     private double mapy;
 
     @Override
-    public Point getStartpunkt() {
+    public Point2D getStartpunkt() {
         return spawnpoint;
     }
 
     @Override
-    public void setStartpunkt(Point Startpunkt) {
+    public void setStartpunkt(Point2D Startpunkt) {
         this.spawnpoint = Startpunkt;
     }
 
     @Override
-    public Point getEndpunkt() {
+    public Point2D getEndpunkt() {
         return endpoint;
     }
 
     @Override
-    public void setEndpunkt(Point Endpunkt) {
+    public void setEndpunkt(Point2D Endpunkt) {
         this.endpoint = Endpunkt;
     }
 
@@ -63,7 +64,7 @@ public class FBS_AbstractMap implements FBS_MapInterface {
     }
 
     @Override
-    public void setmousepressed(Point p) {
+    public void setmousepressed(Point2D p) {
         this.mousepoint = p;
     }
 
