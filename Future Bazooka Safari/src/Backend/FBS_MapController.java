@@ -521,7 +521,7 @@ public class FBS_MapController {
     }
 
     public ArrayList<FBS_HindernisInterface> getHindernislist() {
-        return this.getHindernislist();
+        return this.hindernislist;
     }
 
     public ArrayList<FBS_Projektil_Interface> getProjektillist() {
