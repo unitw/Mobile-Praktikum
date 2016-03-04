@@ -1,6 +1,7 @@
 package com.futurebazookasafariandroid.Frontend;
 
 import com.futurebazookasafariandroid.Backend.FBS_MapController;
+import com.futurebazookasafariandroid.Backend.FBS_RundenController;
 import com.futurebazookasafariandroid.FBS_Interfaces.FBS_TowerInterface;
 import com.futurebazookasafariandroid.FBS_Maps.FBS_Safari_Map;
 import com.futurebazookasafariandroid.FBS_Tower.FBS_Laser_Tower;
@@ -30,6 +31,7 @@ public class ControllerSpieloberflaeche {
 
     private boolean menuexists = false;
     FBS_MapController con;
+    
 
     @FXML
     private SplitPane sp_pane;
@@ -95,6 +97,9 @@ public class ControllerSpieloberflaeche {
         FBS_Canvas canvas = new FBS_Canvas(map);
 
         con = new FBS_MapController(map, canvas);
+        
+        FBS_RundenController roundcon = new FBS_RundenController(con);
+        
         initMap();
         zeichneTowerList();
 

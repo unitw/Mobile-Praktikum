@@ -31,19 +31,20 @@ import javafx.scene.input.MouseEvent;
  */
 public class FBS_MapController {
 
-    FBS_MapInterface map;
+    private FBS_MapInterface map;
 
     private ArrayList<FBS_MonsterInterface> monsterlist = new ArrayList();
+    private ArrayList<FBS_MonsterInterface> monsterspawnlist = new ArrayList();
     private ArrayList<FBS_TowerInterface> turmlist = new ArrayList();
     private ArrayList<FBS_Projektil_Interface> projektillist = new ArrayList();
     private ArrayList<FBS_HindernisInterface> hindernislist = new ArrayList();
+    private ArrayList<Integer> spawntimelist = new ArrayList();
 
     private AnimationTimer timer;
-    private AnimationTimer projektiltimer;
+    private boolean is_in_round;
+    private FBS_MonsterInterface monsterratte;
 
-    FBS_MonsterInterface monsterratte;
-
-    FBS_SpielerInterface spieler;
+    private FBS_SpielerInterface spieler;
     private int spielerleben;
     private int spielergold;
     private FBS_Canvas canvas;
@@ -56,30 +57,47 @@ public class FBS_MapController {
         monsterratte = new FBS_Monster_Ratte((int) map.getStartpunkt().getX(), (int) map.getStartpunkt().getY());
         monsterlist.add(monsterratte);
         this.hindernislist = map.getHindernislist();
+        this.is_in_round = false;
 
         this.canvas = canvas;
         spieler = new FBS_Spieler(0, 1000, 600, 100);
         spielerleben = spieler.getmaxLife();
         spielergold = spieler.getstartGold();
-        //canvas.drawMap(monsterlist, turmlist, projektillist, hindernislist);
+        canvas.drawMap(monsterlist, turmlist, projektillist, hindernislist);
         mouseactions();
-        initTimer();
 
+        //initTimer();
+    }
+
+    public void stopTimer() {
+        timer.stop();
+        this.is_in_round = false;
     }
 
     public void initTimer() {
 
+        this.is_in_round = true;
         timer = new AnimationTimer() {
 
             @Override
             public void handle(long now) {
 
+                if (!spawntimelist.isEmpty()) {
+                    if (iteration == spawntimelist.get(0)) {
+                        monsterlist.add(monsterspawnlist.get(0));
+                        spawntimelist.remove(0);
+                        monsterspawnlist.remove(0);
+                    }
+                }
+                if (monsterlist.isEmpty() && monsterspawnlist.isEmpty()) {
+                    stopTimer();
+                }
                 MonsterMovement(iteration);
                 canvas.drawMap(monsterlist, turmlist, projektillist, hindernislist);
                 TowerShoot(iteration);
                 canvas.drawMap(monsterlist, turmlist, projektillist, hindernislist);
                 final ArrayList<FBS_Projektil_Interface> loeschliste = new ArrayList();
-                
+
                 iteration++;
 
                 if (FBS_MapController.this.getProjektillist().isEmpty()) {
@@ -99,7 +117,6 @@ public class FBS_MapController {
                     FBS_MapController.this.getProjektillist().remove(projektil);
                 }
 
-                
                 canvas.drawMap(monsterlist, turmlist, projektillist, hindernislist);
             }
 
@@ -238,11 +255,11 @@ public class FBS_MapController {
 
     }
 
-    public int getCost(int sx, int sy, int tx, int ty) {
+    public double getCost(double sx, double sy, double tx, double ty) {
 
-        int dx = abs(tx - sx);
-        int dy = abs(ty - sy);
-        int heuristic = dx + dy;
+        double dx = abs(tx - sx);
+        double dy = abs(ty - sy);
+        double heuristic = dx + dy;
 
         return heuristic;
     }
@@ -297,8 +314,8 @@ public class FBS_MapController {
 
     public void bewege(Object object) {
 
-        int posx = 0;
-        int posy = 0;
+        double posx = 0;
+        double posy = 0;
         if (object instanceof FBS_MonsterInterface) {
 
             FBS_MonsterInterface moveMon = (FBS_MonsterInterface) object;
@@ -439,25 +456,25 @@ public class FBS_MapController {
     //A-Stern
     public Point2D getnextZug(Object o, ArrayList<Point2D> zuege) {
 
-        int heuristic = Integer.MAX_VALUE;
+        double heuristic = Double.MAX_VALUE;
         Point2D neuerZug = null;
-        int posiytarget = 0;
-        int posixtarget = 0;
+        double posiytarget = 0;
+        double posixtarget = 0;
 
         for (Point2D zug : zuege) {
 
-            int posix = (int) zug.getX();
-            int posiy = (int) zug.getY();
+            double posix = zug.getX();
+            double posiy = zug.getY();
             if (o instanceof FBS_Projektil_Interface) {
                 FBS_Projektil_Interface project = (FBS_Projektil_Interface) o;
                 posixtarget = project.getTarget().getPositionx();
                 posiytarget = project.getTarget().getPositiony();
             } else if (o instanceof FBS_MonsterInterface) {
-                posixtarget = (int) this.map.getEndpunkt().getX();
-                posiytarget = (int) this.map.getEndpunkt().getY();
+                posixtarget = this.map.getEndpunkt().getX();
+                posiytarget = this.map.getEndpunkt().getY();
             }
 
-            int heuristicneu = (int) getCost(posix, posiy, posixtarget, posiytarget);
+            double heuristicneu = getCost(posix, posiy, posixtarget, posiytarget);
 
             if (heuristic > heuristicneu) {
                 heuristic = heuristicneu;
@@ -534,6 +551,22 @@ public class FBS_MapController {
 
     public void setMap(FBS_MapInterface map) {
         this.map = map;
+    }
+
+    public ArrayList<FBS_MonsterInterface> getMonsterspawnlist() {
+        return monsterspawnlist;
+    }
+
+    public void setMonsterspawnlist(ArrayList<FBS_MonsterInterface> monsterspawnlist) {
+        this.monsterspawnlist = monsterspawnlist;
+    }
+
+    public ArrayList<Integer> getSpawntimelist() {
+        return spawntimelist;
+    }
+
+    public void setSpawntimelist(ArrayList<Integer> spawntimelist) {
+        this.spawntimelist = spawntimelist;
     }
 
 }

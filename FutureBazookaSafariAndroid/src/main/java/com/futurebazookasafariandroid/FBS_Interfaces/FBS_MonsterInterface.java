@@ -15,11 +15,11 @@ import javafx.scene.image.Image;
  */
 public interface FBS_MonsterInterface {
 
-    public void setPosition(int Posx, int Posy);
+    public void setPosition(double Posx, double Posy);
 
-    public int getPositionx();
+    public double getPositionx();
 
-    public int getPositiony();
+    public double getPositiony();
 
     public void setLife(int Life);
 

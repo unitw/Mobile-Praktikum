@@ -17,8 +17,8 @@ import javafx.scene.image.ImageView;
  */
 public class FBS_AbstractMonster implements FBS_MonsterInterface {
 
-    private int posx;
-    private int posy;
+    private double posx;
+    private double posy;
 
     private int life;
 
@@ -55,20 +55,20 @@ public class FBS_AbstractMonster implements FBS_MonsterInterface {
     }
 
     @Override
-    public void setPosition(int posx, int posy) {
+    public void setPosition(double posx, double posy) {
         this.posx = posx;
         this.posy = posy;
 
     }
 
     @Override
-    public int getPositionx() {
+    public double getPositionx() {
 
         return this.posx;
     }
 
     @Override
-    public int getPositiony() {
+    public double getPositiony() {
 
         return this.posy;
     }

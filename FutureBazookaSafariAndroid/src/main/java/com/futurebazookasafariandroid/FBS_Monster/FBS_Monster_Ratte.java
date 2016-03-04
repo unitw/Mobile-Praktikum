@@ -14,7 +14,7 @@ import javafx.scene.image.Image;
  */
 public class FBS_Monster_Ratte extends FBS_AbstractMonster {
 
-    public FBS_Monster_Ratte(int posx, int posy) {
+    public FBS_Monster_Ratte(double posx, double posy) {
         this.setPosition(posx, posy);
         this.setLife(30);
         this.setSpeed(2);

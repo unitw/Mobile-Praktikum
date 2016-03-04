@@ -28,7 +28,7 @@ dependencies {
 jfxmobile {
     android {
         manifest = 'src/android/AndroidManifest.xml'
-	androidSdk = '/Users/user/Documents/development/android-sdk-macosx'
+	androidSdk = 'D:/Programme/Android/sdk'
     }
     ios {
         infoPList = file('src/ios/Default-Info.plist')
