@@ -12,11 +12,11 @@ import javafx.scene.image.Image;
  *
  * @author
  */
-public class FBS_Laser_Tower extends FBS_AbstractTower {
+public class FBS_LaserTower extends FBS_AbstractTower {
 
 
     
-    public FBS_Laser_Tower() {
+    public FBS_LaserTower() {
         this.setisAOE(false);
         this.setAttackspeed(20);
         this.setDamage(8);
@@ -30,7 +30,7 @@ public class FBS_Laser_Tower extends FBS_AbstractTower {
     }
     
     
-    public FBS_Laser_Tower(int posx, int posy) {
+    public FBS_LaserTower(int posx, int posy) {
         this.setPosition(posx, posy);
         this.setisAOE(false);
         this.setAttackspeed(20);

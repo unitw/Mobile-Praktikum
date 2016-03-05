@@ -3,7 +3,7 @@ package Frontend;
 import Backend.FBS_MapController;
 import FBS_Interfaces.FBS_TowerInterface;
 import FBS_Maps.FBS_Safari_Map;
-import FBS_Tower.FBS_Laser_Tower;
+import FBS_Tower.FBS_LaserTower;
 import java.util.HashMap;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -131,12 +131,12 @@ public class ControllerSpieloberflaeche extends Pane {
     HashMap<String, FBS_TowerInterface> turmlist = new HashMap();
 
     public void initMap() {
-        turmlist.put("Lasertower", new FBS_Laser_Tower());
-        turmlist.put("Lasertower1", new FBS_Laser_Tower());
-        turmlist.put("Lasertower2", new FBS_Laser_Tower());
-        turmlist.put("Lasertower3", new FBS_Laser_Tower());
-        turmlist.put("Lasertower4", new FBS_Laser_Tower());
-        turmlist.put("Lasertower5", new FBS_Laser_Tower());
+        turmlist.put("Lasertower", new FBS_LaserTower());
+        turmlist.put("Lasertower1", new FBS_LaserTower());
+        turmlist.put("Lasertower2", new FBS_LaserTower());
+        turmlist.put("Lasertower3", new FBS_LaserTower());
+        turmlist.put("Lasertower4", new FBS_LaserTower());
+        turmlist.put("Lasertower5", new FBS_LaserTower());
 
     }
 

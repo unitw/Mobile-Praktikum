@@ -56,8 +56,8 @@ public interface FBS_TowerInterface {
     
     public int getLvl();
     
+    public void setPicture(Image pic);
     
-     public void setPicture(Image pic);
     public Image getPicture();
 
 }

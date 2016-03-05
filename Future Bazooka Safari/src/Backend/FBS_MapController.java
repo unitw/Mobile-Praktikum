@@ -14,7 +14,7 @@ import FBS_Interfaces.FBS_TowerInterface;
 import FBS_Interfaces.FBS_HindernisInterface;
 import FBS_Monster.FBS_Monster_Ratte;
 import FBS_Projektile.FBS_LaserProjektil;
-import FBS_Tower.FBS_Laser_Tower;
+import FBS_Tower.FBS_LaserTower;
 import Frontend.FBS_Canvas;
 
 import java.util.ArrayList;
@@ -27,6 +27,7 @@ import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TouchEvent;
+import static java.lang.Math.abs;
 
 /**
  *
@@ -110,7 +111,7 @@ public class FBS_MapController {
     }
 
     public void getMouseclicks(double x, double y) {
-        FBS_TowerInterface tower = new FBS_Laser_Tower((int) x, (int) y);
+        FBS_TowerInterface tower = new FBS_LaserTower((int) x, (int) y);
 
         if (buildTower(tower)) {
             turmlist.add(tower);
@@ -140,7 +141,9 @@ public class FBS_MapController {
         canvas.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                FBS_TowerInterface tower = new FBS_Laser_Tower((int) event.getSceneX(), (int) event.getSceneY());
+                FBS_TowerInterface tower = new FBS_LaserTower((int) event.getSceneX(), (int) event.getSceneY());
+                //TODO
+                //FBS_TowerInterface tower2 = new FBS_PlasmaTower((int) event.getSceneX(), (int) event.getSceneY());
 
                 if (buildTower(tower)) {
                     turmlist.add(tower);

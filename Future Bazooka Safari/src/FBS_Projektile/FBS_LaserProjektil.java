@@ -21,7 +21,7 @@ public class FBS_LaserProjektil extends FBS_AbstractProjektil {
         this.setDamage(damage);
         this.setAOE(AOE);
         this.setGroesse(16);
-        this.setPicture(new Image("/resources/laserkugel.png"));
+        this.setPicture(new Image("/resources/laserbeam.png"));
     }
 
 }

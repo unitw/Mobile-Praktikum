@@ -8,7 +8,7 @@ package Frontend;
 import Backend.FBS_MapController;
 import FBS_Interfaces.FBS_TowerInterface;
 import FBS_Maps.FBS_Safari_Map;
-import FBS_Tower.FBS_Laser_Tower;
+import FBS_Tower.FBS_LaserTower;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
