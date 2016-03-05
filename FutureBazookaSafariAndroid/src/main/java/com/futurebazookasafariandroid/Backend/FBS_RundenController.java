@@ -8,6 +8,7 @@ package com.futurebazookasafariandroid.Backend;
 import com.futurebazookasafariandroid.FBS_Interfaces.FBS_LevelInterface;
 import com.futurebazookasafariandroid.FBS_Interfaces.FBS_MapInterface;
 import com.futurebazookasafariandroid.FBS_Interfaces.FBS_MonsterInterface;
+import com.futurebazookasafariandroid.FBS_Interfaces.FBS_SpielerInterface;
 import com.futurebazookasafariandroid.FBS_Level.FBS_LevelOne;
 import java.util.ArrayList;
 
@@ -23,10 +24,11 @@ public class FBS_RundenController {
     private FBS_MapInterface map;
     
 
-    public FBS_RundenController(FBS_MapController control) {
+    public FBS_RundenController(FBS_MapController control, FBS_SpielerInterface spieler) {
         this.mapcon = control; 
         this.map = mapcon.getMap();
-        this.starteRunde(new FBS_LevelOne(map.getStartpunkt().getX(), map.getStartpunkt().getY()));
+        mapcon.setSpieler(spieler);
+        starteRunde(new FBS_LevelOne(map.getStartpunkt().getX(), map.getStartpunkt().getY()));
     }
     public void starteRunde(FBS_LevelInterface Runde) {
         FBS_LevelInterface Level = Runde;
