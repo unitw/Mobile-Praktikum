@@ -2,6 +2,7 @@ package com.futurebazookasafariandroid.Frontend;
 
 import com.futurebazookasafariandroid.Backend.FBS_MapController;
 import com.futurebazookasafariandroid.Backend.FBS_RundenController;
+import com.futurebazookasafariandroid.FBS_Interfaces.FBS_Spieler;
 import com.futurebazookasafariandroid.FBS_Interfaces.FBS_TowerInterface;
 import com.futurebazookasafariandroid.FBS_Maps.FBS_Safari_Map;
 import com.futurebazookasafariandroid.FBS_Tower.FBS_Laser_Tower;
@@ -98,7 +99,9 @@ public class ControllerSpieloberflaeche {
 
         con = new FBS_MapController(map, canvas);
         
-        FBS_RundenController roundcon = new FBS_RundenController(con);
+        FBS_Spieler spieler = new FBS_Spieler(8,8000,700,100);
+        
+        FBS_RundenController roundcon = new FBS_RundenController(con, spieler);
         
         initMap();
         zeichneTowerList();

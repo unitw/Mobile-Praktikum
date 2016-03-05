@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import javafx.animation.AnimationTimer;
 import static java.lang.Math.abs;
 import java.util.HashMap;
+import java.util.Map;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
@@ -60,9 +61,9 @@ public class FBS_MapController {
         this.is_in_round = false;
 
         this.canvas = canvas;
-        spieler = new FBS_Spieler(0, 1000, 600, 100);
-        spielerleben = spieler.getmaxLife();
-        spielergold = spieler.getstartGold();
+        //spieler = new FBS_Spieler(0, 1000, 600, 100);
+        //spielerleben = spieler.getmaxLife();
+        //spielergold = spieler.getstartGold();
         canvas.drawMap(monsterlist, turmlist, projektillist, hindernislist);
         mouseactions();
 
@@ -130,6 +131,9 @@ public class FBS_MapController {
 
         if (buildTower(tower)) {
             turmlist.add(tower);
+            spielergold -= tower.getBaukosten();
+            canvas.drawMap(monsterlist, turmlist, projektillist, hindernislist);
+
         }
         monsterlist.add(new FBS_Monster_Ratte((int) map.getStartpunkt().getX(), (int) map.getStartpunkt().getY()));
 
@@ -153,24 +157,28 @@ public class FBS_MapController {
 //            }
 //        });
 
-        canvas.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                FBS_TowerInterface tower = new FBS_Laser_Tower((int) event.getSceneX(), (int) event.getSceneY());
-
-                if (buildTower(tower)) {
-                    turmlist.add(tower);
-                    canvas.drawMap(monsterlist, turmlist, projektillist, hindernislist);
-                }
-
-            }
-        });
+        //     canvas.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
+        //       @Override
+        //     public void handle(MouseEvent event) {
+        //       FBS_TowerInterface tower = new FBS_Laser_Tower((int) event.getSceneX(), (int) event.getSceneY());
+//        if (buildTower(tower)) {
+//            turmlist.add(tower);
+//
+//        }
+//    }
+//}
+//);
     }
 
     public boolean buildTower(FBS_TowerInterface tower) {
 
         Rectangle2D rect = new Rectangle2D(tower.getPositionx(), tower.getPositiony(), tower.getGroesse(), tower.getGroesse());
-
+        if (spielergold < tower.getBaukosten()) {
+            return false;
+        }
+        if (is_in_round) {
+            return false;
+        }
         for (FBS_TowerInterface tw : turmlist) {
             Rectangle2D rect1 = new Rectangle2D(tw.getPositionx(), tw.getPositiony(), tw.getGroesse(), tw.getGroesse());
 
@@ -274,6 +282,7 @@ public class FBS_MapController {
                 if (mon.getPositionx() == this.map.getEndpunkt().getX()
                         && mon.getPositiony() == this.map.getEndpunkt().getY()) {
                     this.setSpielerleben(spielerleben - 1);
+
                     loeschliste.add(mon);
 
                 }
@@ -294,6 +303,8 @@ public class FBS_MapController {
 
     public void setSpieler(FBS_SpielerInterface spieler) {
         this.spieler = spieler;
+        this.setSpielergold(spieler.getstartGold());
+        this.setSpielerleben(spieler.getmaxLife());
     }
 
     public int getSpielerleben() {
@@ -310,6 +321,84 @@ public class FBS_MapController {
 
     public void setSpielergold(int spielergold) {
         this.spielergold = spielergold;
+    }
+
+    public void getSchnellsterWeg() {
+        Point2D start = map.getStartpunkt();
+        Point2D end = map.getEndpunkt();
+        FBS_MonsterInterface moveMon = new FBS_Monster_Ratte(start.getX(), start.getY());
+        //Key = point value = vorgänger;
+        ArrayList<FBS_Knoten> open = new ArrayList();
+        ArrayList<FBS_Knoten> closed = new ArrayList();
+        open.add(new FBS_Knoten(0, null, start.getX(), start.getY()));
+        while (true) {
+            FBS_Knoten current = getBestPoint(open);
+            open.remove(current);
+            closed.add(current);
+            if (current.getKnoten().equals(end)) {
+                ArrayList<Point2D> path = new ArrayList();
+                while(current.getVorgaenger()!= null){
+                    path.add(current.getKnoten());
+                    current = current.getVorgaenger();
+                }
+                return;
+            }
+            ArrayList<FBS_Knoten> neighbours = getNachbarKnoten(current);
+            for (FBS_Knoten n : neighbours) {
+                if (zugmoeglich(n.getKnoten(), moveMon) && (getNodeinList(closed, n) != null)) {
+                    FBS_Knoten oldNode = getNodeinList(open, n);
+                    if (oldNode == null) {
+                        open.add(n);
+                    } else if (oldNode.getPfadlaenge() > n.getPfadlaenge()) {
+                        open.remove(oldNode);
+                        open.add(n);
+                    }
+                }
+            }
+
+        }
+    }
+
+    public FBS_Knoten getNodeinList(ArrayList<FBS_Knoten> list, FBS_Knoten n) {
+        for (FBS_Knoten a : list) {
+            if (a.getKnoten().equals(n.getKnoten())) {
+                return a;
+            }
+        }
+        return null;
+    }
+
+    public FBS_Knoten getBestPoint(ArrayList<FBS_Knoten> list) {
+        int min = Integer.MAX_VALUE;
+        FBS_Knoten returnKnoten = null;
+        for (FBS_Knoten node : list) {
+            if (node.getPfadlaenge() < min) {
+                returnKnoten = node;
+            }
+        }
+        return returnKnoten;
+    }
+
+    public ArrayList<FBS_Knoten> getNachbarKnoten(FBS_Knoten c) {
+        FBS_Knoten k1 = new FBS_Knoten(c.getPfadlaenge() + 1, c, c.getKnoten().getX(), c.getKnoten().getY() - 1);
+        FBS_Knoten k2 = new FBS_Knoten(c.getPfadlaenge() + 1, c, c.getKnoten().getX() + 1, c.getKnoten().getY() - 1);
+        FBS_Knoten k3 = new FBS_Knoten(c.getPfadlaenge() + 1, c, c.getKnoten().getX() + 1, c.getKnoten().getY());
+        FBS_Knoten k4 = new FBS_Knoten(c.getPfadlaenge() + 1, c, c.getKnoten().getX() + 1, c.getKnoten().getY() + 1);
+        FBS_Knoten k5 = new FBS_Knoten(c.getPfadlaenge() + 1, c, c.getKnoten().getX(), c.getKnoten().getY() + 1);
+        FBS_Knoten k6 = new FBS_Knoten(c.getPfadlaenge() + 1, c, c.getKnoten().getX() - 1, c.getKnoten().getY() + 1);
+        FBS_Knoten k7 = new FBS_Knoten(c.getPfadlaenge() + 1, c, c.getKnoten().getX() - 1, c.getKnoten().getY());
+        FBS_Knoten k8 = new FBS_Knoten(c.getPfadlaenge() + 1, c, c.getKnoten().getX() - 1, c.getKnoten().getY() - 1);
+        ArrayList<FBS_Knoten> erg = new ArrayList();
+        erg.add(k1);
+        erg.add(k2);
+        erg.add(k3);
+        erg.add(k4);
+        erg.add(k5);
+        erg.add(k6);
+        erg.add(k7);
+        erg.add(k8);
+        return erg;
+
     }
 
     public void bewege(Object object) {
