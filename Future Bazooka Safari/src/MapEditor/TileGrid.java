@@ -1,34 +1,34 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package MapEditor;
-
-import FBS_Interfaces.FBS_MapInterface;
-import Frontend.FBS_Canvas;
-
-
-/**
- * Zukünftiges Raster für den Level-Editor.
- * Zur Zeit ist nur das Setzen von Erde und Gras geplant.
- * Ressourcen sind im 'ressources'-Ordner zu finden.
- * @author Nico
- */
-public class TileGrid extends FBS_Canvas {
+///*
+// * To change this license header, choose License Headers in Project Properties.
+// * To change this template file, choose Tools | Templates
+// * and open the template in the editor.
+// */
+//package MapEditor;
+//
+//import FBS_Interfaces.FBS_MapInterface;
+//import Frontend.FBS_Canvas;
+//
+//
+///**
+// * Zukünftiges Raster für den Level-Editor.
+// * Zur Zeit ist nur das Setzen von Erde und Gras geplant.
+// * Ressourcen sind im 'ressources'-Ordner zu finden.
+// * @author Nico
+// */
+//public class TileGrid extends FBS_Canvas {
 //    
 //static int[][] tilemap;
 //static int rows, columns;
 //
-    public TileGrid(FBS_MapInterface map) {
-        super(map);
-    }
+//    public TileGrid(FBS_MapInterface map) {
+//        super(map);
+//    }
 //   
 //    public void init() {
 //        
 //    }
 //    
-//    //Raster aufbauen.
+//    Raster aufbauen.
 //    public void createTilemap() {
 //        tilemap = new int[100][100];
 //        rows = tilemap.length;
@@ -59,5 +59,5 @@ public class TileGrid extends FBS_Canvas {
 //            }
 //        }
 //    }
-    
-}
+//    
+//}
