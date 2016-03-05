@@ -1,63 +1,43 @@
-///*
-// * To change this license header, choose License Headers in Project Properties.
-// * To change this template file, choose Tools | Templates
-// * and open the template in the editor.
-// */
-//package MapEditor;
-//
-//import FBS_Interfaces.FBS_MapInterface;
-//import Frontend.FBS_Canvas;
-//
-//
-///**
-// * Zukünftiges Raster für den Level-Editor.
-// * Zur Zeit ist nur das Setzen von Erde und Gras geplant.
-// * Ressourcen sind im 'ressources'-Ordner zu finden.
-// * @author Nico
-// */
-//public class TileGrid extends FBS_Canvas {
-//    
-//static int[][] tilemap;
-//static int rows, columns;
-//
-//    public TileGrid(FBS_MapInterface map) {
-//        super(map);
-//    }
-//   
-//    public void init() {
-//        
-//    }
-//    
-//    Raster aufbauen.
-//    public void createTilemap() {
-//        tilemap = new int[100][100];
-//        rows = tilemap.length;
-//        columns = tilemap[1].length;
-//        
-//        for(int i=0;i<=tilemap.length;i++) {
-//            for(int j=0;j<=tilemap.length;j++) {
-//                
-//            }
-//        }
-//    }
-//    
-//    public void drawTilemap(Graphics g) {
-//        for(int i=0;i<=tilemap.length;i++) {
-//            for(int j=0;j<=tilemap.length;j++) {
-//                
-//                
-//                switch (tilemap[i][j]) {
-//                    case 0:
-//                        g.setColor(Color.WHITE);
-//                        g.fillRect(i, j, 1, 1);
-//                        break;
-//                    case 1:
-//                        g.setColor(Color.BLACK);
-//                        g.fillRect(i, j, i, i);
-//                        break;
-//                }
-//            }
-//        }
-//    }
-//    
-//}
+package MapEditor;
+
+import static MapEditor.Controller.*;
+
+public class TileGrid {
+
+    /**
+     *
+     */
+    public Tile[][] map;
+	
+	public TileGrid() {
+		map = new Tile[15][15];
+		for(int i=0;i<map.length;i++) {
+			for(int j=0;j<map.length;j++) {
+				map[i][j] = new Tile(i*64, j*64, 64, 64, NewEnum.gras);
+			}
+		}
+	}
+	
+	public TileGrid(int[][] newMap) {
+		map = new Tile[15][15];
+		for(int i=0;i<map.length;i++) {
+			for(int j=0;j<map.length;j++) {
+				if (newMap[j][i] == 0) {
+					map[i][j] = new Tile( i*64, j*64, 64, 64, NewEnum.gras);
+				} else {
+					map[i][j] = new Tile( i*64, j*64, 64, 64, NewEnum.erde);
+				}
+			}
+		}
+		
+	}
+	
+	public void Draw() {
+            for (Tile[] map1 : map) {
+                for (int j = 0; j<map.length; j++) {
+                    Tile tile = map1[j];
+                    DrawQuadTexture(tile.getPosx(), tile.getPosy(), tile.getWidth(), tile.getHeight(), tile.getTexture());
+                }
+            }
+	}
+}
