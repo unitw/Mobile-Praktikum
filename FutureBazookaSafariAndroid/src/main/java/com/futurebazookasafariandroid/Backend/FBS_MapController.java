@@ -64,7 +64,6 @@ public class FBS_MapController {
         pathHashMap.put(monsterratte, 0);
         this.hindernislist = map.getHindernislist();
         this.is_in_round = false;
-        
 
         this.canvas = canvas;
         //spieler = new FBS_Spieler(0, 1000, 600, 100);
@@ -99,7 +98,7 @@ public class FBS_MapController {
                         monsterspawnlist.remove(0);
                     }
                 }
-                if (monsterlist.isEmpty() && monsterspawnlist.isEmpty()) {
+                if (monsterlist.isEmpty() && monsterspawnlist.isEmpty() && projektillist.isEmpty()) {
                     stopTimer();
                 }
                 MonsterMovement(iteration);
@@ -116,8 +115,11 @@ public class FBS_MapController {
 
                 for (FBS_Projektil_Interface projektil : FBS_MapController.this.getProjektillist()) {
                     bewege(projektil);
+                    Rectangle2D projectile = new Rectangle2D(projektil.getPositionx(), projektil.getPositiony(), projektil.getGroesse(), projektil.getGroesse());
+                    Rectangle2D target = new Rectangle2D(projektil.getTarget().getPositionx(), projektil.getTarget().getPositiony(),
+                                                         projektil.getTarget().getGroesse(), projektil.getTarget().getGroesse());
 
-                    if (projektil.getPositionx() == projektil.getTarget().getPositionx() && projektil.getPositiony() == projektil.getTarget().getPositiony()) {
+                    if (projectile.intersects(target)) {
                         loeschliste.add(projektil);
 
                         Schadensberechnung(projektil);
@@ -144,8 +146,8 @@ public class FBS_MapController {
             canvas.drawMap(monsterlist, turmlist, projektillist, hindernislist);
 
         }
-      //  monsterlist.add(new FBS_Monster_Ratte((int) map.getStartpunkt().getX(), (int) map.getStartpunkt().getY()));
-        
+        //TODO : Show tower Range/stats;
+        //  monsterlist.add(new FBS_Monster_Ratte((int) map.getStartpunkt().getX(), (int) map.getStartpunkt().getY()));
 
     }
 
@@ -250,6 +252,7 @@ public class FBS_MapController {
             int lifemon = mon.getLife() - project.getDamage();
             if (lifemon <= 0) {
                 this.getMonsterlist().remove(mon);
+                spielergold+=mon.getLoot();
             } else {
                 mon.setLife(lifemon);
             }
@@ -343,7 +346,7 @@ public class FBS_MapController {
         open.add(new FBS_Knoten(0, null, start.getX(), start.getY()));
         while (true) {
             FBS_Knoten current = getBestPoint(open);
-           
+
             open.remove(current);
             closed.add(current);
             if (current.getKnoten().equals(end)) {
@@ -365,7 +368,7 @@ public class FBS_MapController {
                         open.remove(oldNode);
                         open.add(n);
                     }
-                
+
                 }
             }
 
@@ -385,8 +388,8 @@ public class FBS_MapController {
         double min = Double.MAX_VALUE;
         FBS_Knoten returnKnoten = null;
         for (FBS_Knoten node : list) {
-            double newmin = getCost(node.getKnoten().getX(), node.getKnoten().getY(),50, 50);
-            if  (newmin < min) {
+            double newmin = getCost(node.getKnoten().getX(), node.getKnoten().getY(), 50, 50);
+            if (newmin < min) {
                 returnKnoten = node;
                 min = newmin;
             }
@@ -416,6 +419,14 @@ public class FBS_MapController {
 
     }
 
+    public void bewege2(FBS_MonsterInterface moveMon) {
+        Point2D newZug = path.get(pathHashMap.get(moveMon));
+        double difx = newZug.getX() - moveMon.getPositionx();
+        double dify = newZug.getY() - moveMon.getPositiony();
+        moveMon.setPosition(newZug.getX(), newZug.getY());
+        pathHashMap.replace(moveMon, pathHashMap.get(moveMon) + 1);
+    }
+
     public void bewege(Object object) {
 
         double posx = 0;
@@ -423,26 +434,20 @@ public class FBS_MapController {
         if (object instanceof FBS_MonsterInterface) {
 
             FBS_MonsterInterface moveMon = (FBS_MonsterInterface) object;
- //           Point2D newZug = path.get(pathHashMap.get(moveMon));
- //           double difx = newZug.getX() - moveMon.getPositionx();
- //           double dify = newZug.getY() - moveMon.getPositiony();
- //           moveMon.setPosition(newZug.getX(), newZug.getY());
- //           pathHashMap.replace(moveMon, pathHashMap.get(moveMon) + 1);
-           
 
-           posx = moveMon.getPositionx();
-           posy = moveMon.getPositiony();
+            posx = moveMon.getPositionx();
+            posy = moveMon.getPositiony();
 
             HashMap<Point2D, Integer> zuegemap = new HashMap<>();
             ArrayList<Point2D> zuege = new ArrayList();
-            Point2D p1 = new Point2D(posx, posy - 1);
-            Point2D p2 = new Point2D(posx + 1, posy - 1);
-            Point2D p3 = new Point2D(posx + 1, posy);
-            Point2D p4 = new Point2D(posx + 1, posy + 1);
-            Point2D p5 = new Point2D(posx, posy + 1);
-            Point2D p6 = new Point2D(posx - 1, posy + 1);
-            Point2D p7 = new Point2D(posx - 1, posy);
-            Point2D p8 = new Point2D(posx - 1, posy - 1);
+            Point2D p1 = new Point2D(posx, posy - 5);
+            Point2D p2 = new Point2D(posx + 5, posy - 5);
+            Point2D p3 = new Point2D(posx + 5, posy);
+            Point2D p4 = new Point2D(posx + 5, posy + 5);
+            Point2D p5 = new Point2D(posx, posy + 5);
+            Point2D p6 = new Point2D(posx - 5, posy + 5);
+            Point2D p7 = new Point2D(posx - 5, posy);
+            Point2D p8 = new Point2D(posx - 5, posy - 5);
 
             zuegemap.put(p1, 180);
             zuegemap.put(p2, 225);
@@ -491,14 +496,14 @@ public class FBS_MapController {
 
             HashMap<Point2D, Integer> zuegemap = new HashMap<>();
             ArrayList<Point2D> zuege = new ArrayList();
-            Point2D p1 = new Point2D(posx, posy - 1);
-            Point2D p2 = new Point2D(posx + 1, posy - 1);
-            Point2D p3 = new Point2D(posx + 1, posy);
-            Point2D p4 = new Point2D(posx + 1, posy + 1);
-            Point2D p5 = new Point2D(posx, posy + 1);
-            Point2D p6 = new Point2D(posx - 1, posy + 1);
-            Point2D p7 = new Point2D(posx - 1, posy);
-            Point2D p8 = new Point2D(posx - 1, posy - 1);
+            Point2D p1 = new Point2D(posx, posy - 10);
+            Point2D p2 = new Point2D(posx + 10, posy - 10);
+            Point2D p3 = new Point2D(posx + 10, posy);
+            Point2D p4 = new Point2D(posx + 10, posy + 10);
+            Point2D p5 = new Point2D(posx, posy + 10);
+            Point2D p6 = new Point2D(posx - 10, posy + 10);
+            Point2D p7 = new Point2D(posx - 10, posy);
+            Point2D p8 = new Point2D(posx - 10, posy - 10);
 
             zuegemap.put(p1, 180);
             zuegemap.put(p2, 225);
@@ -535,11 +540,11 @@ public class FBS_MapController {
     public boolean zugmoeglich(Point2D Zielzug, FBS_MonsterInterface mon) {
 
         Rectangle2D rect1 = new Rectangle2D((int) Zielzug.getX(), (int) Zielzug.getY(), mon.getGroesse(), mon.getGroesse());
-        
-        if(Zielzug.getX() < 0 || Zielzug.getY() < 0){
+
+        if (Zielzug.getX() < 0 || Zielzug.getY() < 0) {
             return false;
         }
-        if(Zielzug.getX() > this.map.getMapsizex() || Zielzug.getY() > this.map.getMapsizey()){
+        if (Zielzug.getX() > this.map.getMapsizex() || Zielzug.getY() > this.map.getMapsizey()) {
             return false;
         }
 
@@ -584,8 +589,8 @@ public class FBS_MapController {
             double posiy = zug.getY();
             if (o instanceof FBS_Projektil_Interface) {
                 FBS_Projektil_Interface project = (FBS_Projektil_Interface) o;
-                posixtarget = project.getTarget().getPositionx();
-                posiytarget = project.getTarget().getPositiony();
+                posixtarget = project.getTarget().getPositionx() + (project.getTarget().getGroesse() / 2);
+                posiytarget = project.getTarget().getPositiony() + (project.getTarget().getGroesse() / 2);
             } else if (o instanceof FBS_MonsterInterface) {
                 posixtarget = this.map.getEndpunkt().getX();
                 posiytarget = this.map.getEndpunkt().getY();
@@ -684,6 +689,10 @@ public class FBS_MapController {
 
     public void setSpawntimelist(ArrayList<Integer> spawntimelist) {
         this.spawntimelist = spawntimelist;
+    }
+
+    public boolean getRundenstatus() {
+        return is_in_round;
     }
 
 }

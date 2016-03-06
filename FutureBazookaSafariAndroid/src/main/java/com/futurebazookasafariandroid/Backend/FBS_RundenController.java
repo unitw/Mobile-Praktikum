@@ -23,7 +23,7 @@ public class FBS_RundenController {
     private ArrayList<FBS_MonsterInterface> monsterlist;
     private FBS_MapController mapcon;
     private FBS_MapInterface map;
-    private boolean is_in_round = false;
+    
 
     public FBS_RundenController(FBS_MapController control, FBS_SpielerInterface spieler) {
         this.mapcon = control;
@@ -32,7 +32,7 @@ public class FBS_RundenController {
     }
 
     public void starteRunde(FBS_LevelInterface Runde) {
-        is_in_round = true;
+        
         FBS_LevelInterface Level = Runde;
         this.monsterlist = Level.getMonster();
         this.spawntimelist = Level.getSpawntimes();
@@ -42,7 +42,7 @@ public class FBS_RundenController {
     }
 
     public void mouseAction() {
-        if (!is_in_round) {
+        if (!mapcon.getRundenstatus()) {
             starteRunde(new FBS_LevelOne(map.getStartpunkt().getX(), map.getStartpunkt().getY()));
         }
     }
