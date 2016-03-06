@@ -49,4 +49,9 @@ public class FBS_Knoten {
         this.pfadlaenge = pfadlaenge;
     }
 
+    @Override
+    public String toString() {
+        return "FBS_Knoten{" + "Knoten=" + Knoten + ", pfadlaenge=" + pfadlaenge + ", vorgaenger=" + vorgaenger + '}';
+    }
+
 }

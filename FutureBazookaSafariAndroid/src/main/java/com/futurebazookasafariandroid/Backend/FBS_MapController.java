@@ -19,6 +19,7 @@ import com.futurebazookasafariandroid.Frontend.FBS_Canvas;
 import java.util.ArrayList;
 import javafx.animation.AnimationTimer;
 import static java.lang.Math.abs;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import javafx.event.EventHandler;
@@ -44,6 +45,8 @@ public class FBS_MapController {
     private AnimationTimer timer;
     private boolean is_in_round;
     private FBS_MonsterInterface monsterratte;
+    private ArrayList<Point2D> path;
+    private HashMap<FBS_MonsterInterface, Integer> pathHashMap;
 
     private FBS_SpielerInterface spieler;
     private int spielerleben;
@@ -54,11 +57,14 @@ public class FBS_MapController {
     public FBS_MapController(FBS_MapInterface map, FBS_Canvas canvas) {
 
         this.map = map;
+        pathHashMap = new HashMap();
 
         monsterratte = new FBS_Monster_Ratte((int) map.getStartpunkt().getX(), (int) map.getStartpunkt().getY());
         monsterlist.add(monsterratte);
+        pathHashMap.put(monsterratte, 0);
         this.hindernislist = map.getHindernislist();
         this.is_in_round = false;
+        
 
         this.canvas = canvas;
         //spieler = new FBS_Spieler(0, 1000, 600, 100);
@@ -78,6 +84,7 @@ public class FBS_MapController {
     public void initTimer() {
 
         this.is_in_round = true;
+        //path = getSchnellsterWeg();
         timer = new AnimationTimer() {
 
             @Override
@@ -85,7 +92,9 @@ public class FBS_MapController {
 
                 if (!spawntimelist.isEmpty()) {
                     if (iteration == spawntimelist.get(0)) {
-                        monsterlist.add(monsterspawnlist.get(0));
+                        FBS_MonsterInterface mon = monsterspawnlist.get(0);
+                        monsterlist.add(mon);
+                        pathHashMap.put(mon, 0);
                         spawntimelist.remove(0);
                         monsterspawnlist.remove(0);
                     }
@@ -135,7 +144,8 @@ public class FBS_MapController {
             canvas.drawMap(monsterlist, turmlist, projektillist, hindernislist);
 
         }
-        monsterlist.add(new FBS_Monster_Ratte((int) map.getStartpunkt().getX(), (int) map.getStartpunkt().getY()));
+      //  monsterlist.add(new FBS_Monster_Ratte((int) map.getStartpunkt().getX(), (int) map.getStartpunkt().getY()));
+        
 
     }
 
@@ -323,7 +333,7 @@ public class FBS_MapController {
         this.spielergold = spielergold;
     }
 
-    public void getSchnellsterWeg() {
+    public ArrayList<Point2D> getSchnellsterWeg() {
         Point2D start = map.getStartpunkt();
         Point2D end = map.getEndpunkt();
         FBS_MonsterInterface moveMon = new FBS_Monster_Ratte(start.getX(), start.getY());
@@ -333,19 +343,21 @@ public class FBS_MapController {
         open.add(new FBS_Knoten(0, null, start.getX(), start.getY()));
         while (true) {
             FBS_Knoten current = getBestPoint(open);
+           
             open.remove(current);
             closed.add(current);
             if (current.getKnoten().equals(end)) {
-                ArrayList<Point2D> path = new ArrayList();
-                while(current.getVorgaenger()!= null){
-                    path.add(current.getKnoten());
+                ArrayList<Point2D> weg = new ArrayList();
+                while (current.getVorgaenger() != null) {
+                    weg.add(current.getKnoten());
                     current = current.getVorgaenger();
                 }
-                return;
+                Collections.reverse(weg);
+                return weg;
             }
             ArrayList<FBS_Knoten> neighbours = getNachbarKnoten(current);
             for (FBS_Knoten n : neighbours) {
-                if (zugmoeglich(n.getKnoten(), moveMon) && (getNodeinList(closed, n) != null)) {
+                if (zugmoeglich(n.getKnoten(), moveMon) && (getNodeinList(closed, n) == null)) {
                     FBS_Knoten oldNode = getNodeinList(open, n);
                     if (oldNode == null) {
                         open.add(n);
@@ -353,6 +365,7 @@ public class FBS_MapController {
                         open.remove(oldNode);
                         open.add(n);
                     }
+                
                 }
             }
 
@@ -369,11 +382,13 @@ public class FBS_MapController {
     }
 
     public FBS_Knoten getBestPoint(ArrayList<FBS_Knoten> list) {
-        int min = Integer.MAX_VALUE;
+        double min = Double.MAX_VALUE;
         FBS_Knoten returnKnoten = null;
         for (FBS_Knoten node : list) {
-            if (node.getPfadlaenge() < min) {
+            double newmin = getCost(node.getKnoten().getX(), node.getKnoten().getY(),50, 50);
+            if  (newmin < min) {
                 returnKnoten = node;
+                min = newmin;
             }
         }
         return returnKnoten;
@@ -408,8 +423,15 @@ public class FBS_MapController {
         if (object instanceof FBS_MonsterInterface) {
 
             FBS_MonsterInterface moveMon = (FBS_MonsterInterface) object;
-            posx = moveMon.getPositionx();
-            posy = moveMon.getPositiony();
+ //           Point2D newZug = path.get(pathHashMap.get(moveMon));
+ //           double difx = newZug.getX() - moveMon.getPositionx();
+ //           double dify = newZug.getY() - moveMon.getPositiony();
+ //           moveMon.setPosition(newZug.getX(), newZug.getY());
+ //           pathHashMap.replace(moveMon, pathHashMap.get(moveMon) + 1);
+           
+
+           posx = moveMon.getPositionx();
+           posy = moveMon.getPositiony();
 
             HashMap<Point2D, Integer> zuegemap = new HashMap<>();
             ArrayList<Point2D> zuege = new ArrayList();
@@ -461,7 +483,6 @@ public class FBS_MapController {
 
             moveMon.setPosition((int) neuerZug.getX(), (int) neuerZug.getY());
             moveMon.setangle(zuegemap.get(neuerZug));
-
         } else if (object instanceof FBS_Projektil_Interface) {
 
             FBS_Projektil_Interface project = (FBS_Projektil_Interface) object;
@@ -514,6 +535,13 @@ public class FBS_MapController {
     public boolean zugmoeglich(Point2D Zielzug, FBS_MonsterInterface mon) {
 
         Rectangle2D rect1 = new Rectangle2D((int) Zielzug.getX(), (int) Zielzug.getY(), mon.getGroesse(), mon.getGroesse());
+        
+        if(Zielzug.getX() < 0 || Zielzug.getY() < 0){
+            return false;
+        }
+        if(Zielzug.getX() > this.map.getMapsizex() || Zielzug.getY() > this.map.getMapsizey()){
+            return false;
+        }
 
         for (FBS_TowerInterface tower : turmlist) {
 
