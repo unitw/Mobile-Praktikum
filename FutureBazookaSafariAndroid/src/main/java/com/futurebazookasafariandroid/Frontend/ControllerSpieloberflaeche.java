@@ -32,7 +32,7 @@ public class ControllerSpieloberflaeche {
 
     private boolean menuexists = false;
     FBS_MapController con;
-    
+    FBS_RundenController roundcon;
 
     @FXML
     private SplitPane sp_pane;
@@ -85,6 +85,11 @@ public class ControllerSpieloberflaeche {
         con.getMouseclicks(event.getSceneX(), event.getSceneY());
 
     }
+    
+    @FXML 
+    void settingsclicked(MouseEvent event) {
+        roundcon.mouseAction();
+    }
 
     SplitPane pane = new SplitPane();
 
@@ -98,14 +103,15 @@ public class ControllerSpieloberflaeche {
         FBS_Canvas canvas = new FBS_Canvas(map);
 
         con = new FBS_MapController(map, canvas);
-        
-        FBS_Spieler spieler = new FBS_Spieler(8,8000,700,100);
-        
-        FBS_RundenController roundcon = new FBS_RundenController(con, spieler);
-        
+
+        FBS_Spieler spieler = new FBS_Spieler(8, 8000, 700, 100);
+
+        roundcon = new FBS_RundenController(con, spieler);
+
         initMap();
         zeichneTowerList();
 
+        
 //       canvas.setLayoutX(0);
 //       canvas.setLayoutY(0);
 //       canvas.setTranslateX(200);

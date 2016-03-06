@@ -18,27 +18,33 @@ import javafx.geometry.Point2D;
  * @author Marvin
  */
 public class FBS_RundenController {
-    
-    private ArrayList<Integer> spawntimelist;    
+
+    private ArrayList<Integer> spawntimelist;
     private ArrayList<FBS_MonsterInterface> monsterlist;
     private FBS_MapController mapcon;
     private FBS_MapInterface map;
-    
+    private boolean is_in_round = false;
 
     public FBS_RundenController(FBS_MapController control, FBS_SpielerInterface spieler) {
-        this.mapcon = control; 
+        this.mapcon = control;
         this.map = mapcon.getMap();
         mapcon.setSpieler(spieler);
-        starteRunde(new FBS_LevelOne(map.getStartpunkt().getX(), map.getStartpunkt().getY()));
     }
+
     public void starteRunde(FBS_LevelInterface Runde) {
+        is_in_round = true;
         FBS_LevelInterface Level = Runde;
         this.monsterlist = Level.getMonster();
         this.spawntimelist = Level.getSpawntimes();
         mapcon.setMonsterspawnlist(this.monsterlist);
-        mapcon.setSpawntimelist(spawntimelist);      
+        mapcon.setSpawntimelist(spawntimelist);
         mapcon.initTimer();
     }
-    
-    
+
+    public void mouseAction() {
+        if (!is_in_round) {
+            starteRunde(new FBS_LevelOne(map.getStartpunkt().getX(), map.getStartpunkt().getY()));
+        }
+    }
+
 }
