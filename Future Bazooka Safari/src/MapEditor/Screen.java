@@ -15,6 +15,7 @@ public class Screen {
 		
 		startController("Game");
 
+                //Texturen könne hier gesetzt werden (0 = Gras, 1 = Dreck).
 		int[][] map = {
 				{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 				{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
