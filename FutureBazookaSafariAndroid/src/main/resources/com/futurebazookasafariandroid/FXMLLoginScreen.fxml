@@ -21,6 +21,7 @@
             styleClass="logoLabel"
         />
         <TextField 
+            fx:id="fbs_username" 
             prefHeight="27"
             prefWidth="150"
             layoutX="75"
@@ -28,6 +29,7 @@
             promptText="Username"
         />
         <PasswordField 
+            fx:id="fbs_passwort"
             prefHeight="27"
             prefWidth="150"
             layoutX="75"
