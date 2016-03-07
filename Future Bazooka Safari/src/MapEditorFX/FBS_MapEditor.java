@@ -8,7 +8,6 @@ package MapEditorFX;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -38,7 +37,7 @@ public class FBS_MapEditor extends Application implements MouseListener {
         grid.setGridLinesVisible(true);
         
         Image imageWiese = new Image("resources/grassbackground.png", width, height, false, false);
-        Image imageGras = new Image("resources/gras.png", 64, 64, false, false);
+        Image imageGras = new Image("resources/gras_1.png", 64, 64, false, false);
         
 //        grid.add(new ImageView(imageWiese), 0, 0);
         
