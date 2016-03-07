@@ -86,17 +86,7 @@ public class ControllerSpieloberflaeche {
 
     private FBS_Canvas canvas1;
 
-    @FXML
-    void anchorplaneClicked(MouseEvent event) {
-
-        con.getMouseclicks(event.getX(), event.getY());
-        event.consume();
-    }
-
-    @FXML
-    void settingsclicked(MouseEvent event) {
-        roundcon.mouseAction();
-    }
+   
 
     @FXML
     protected void initialize() {
