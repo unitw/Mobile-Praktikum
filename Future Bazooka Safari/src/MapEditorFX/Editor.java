@@ -24,7 +24,7 @@ public class Editor extends Application {
     final int width = 640, height = 640;
     final int columns = 10, rows = 10;
     
-    final Image imageWiese = new Image("resources/grassbackground.png", width, height, false, false);
+//    final Image imageWiese = new Image("resources/grassbackground.png", width, height, false, false);
     final Image imageGras = new Image("resources/gras.png", 64, 64, false, false);
     
     @Override
