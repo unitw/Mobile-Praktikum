@@ -74,10 +74,6 @@ public class ControllerSpieloberflaeche {
 
     @FXML
     private AnchorPane anchorpane;
-<<<<<<< HEAD
-
-   
-=======
     
     @FXML
     private ScrollPane scrollpane;
@@ -98,7 +94,6 @@ public class ControllerSpieloberflaeche {
     void settingsclicked(MouseEvent event) {
         roundcon.mouseAction();
     }
->>>>>>> b491ce48781cde4193e7f52e415d4fe851dab00a
 
     @FXML
     protected void initialize() {
