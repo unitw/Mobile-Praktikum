@@ -85,11 +85,15 @@ public class ControllerSpieloberflaeche {
     
     @FXML
     void anchorplaneClicked(MouseEvent event) {
-
+        
         con.getMouseclicks(event.getX(), event.getY());
         event.consume();
     }
-
+    
+    @FXML
+    void settingsclicked(MouseEvent event) {
+        roundcon.mouseAction();
+    }
 
     @FXML
     protected void initialize() {
