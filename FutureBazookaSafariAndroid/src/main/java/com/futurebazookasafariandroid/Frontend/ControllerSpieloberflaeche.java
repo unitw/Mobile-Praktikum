@@ -86,6 +86,7 @@ public class ControllerSpieloberflaeche {
     @FXML
     void anchorplaneClicked(MouseEvent event) {
         
+        System.out.println("X: " + event.getX() + "\nY: " + event.getY());
         con.getMouseclicks(event.getX(), event.getY());
         event.consume();
     }

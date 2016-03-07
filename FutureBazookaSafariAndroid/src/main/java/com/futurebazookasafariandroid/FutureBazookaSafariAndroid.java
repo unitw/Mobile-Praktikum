@@ -22,12 +22,12 @@ import javafx.stage.Stage;
  */
 public class FutureBazookaSafariAndroid extends Application {
 
-    static public FBS_DatenBank datenbank;
+//    static public FBS_DatenBank datenbank;
     
     @Override
     public void start(Stage stage) throws Exception {
         
-        datenbank= new FBS_DatenBank();
+//        datenbank= new FBS_DatenBank();
         
         Parent root = FXMLLoader.load(getClass().getResource("FXMLLoginScreen.fxml"));
 
