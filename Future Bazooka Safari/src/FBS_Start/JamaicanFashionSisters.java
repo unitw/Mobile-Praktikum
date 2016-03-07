@@ -5,6 +5,7 @@
  */
 package FBS_Start;
 
+import FBS_DatenBank.FBS_DatenBank;
 import Frontend.FBS_Spieloberflaeche;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -21,8 +22,13 @@ import javafx.stage.Stage;
  */
 public class JamaicanFashionSisters extends Application {
 
+    static public FBS_DatenBank datenbank;
+    
     @Override
     public void start(Stage stage) throws Exception {
+        
+        datenbank= new FBS_DatenBank();
+        
         
         Parent root = FXMLLoader.load(getClass().getResource("/FBS_LoginScreen/FXMLLoginScreen.fxml")); 
         Scene scene = new Scene(root, 288, 512);
