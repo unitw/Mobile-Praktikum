@@ -5,6 +5,7 @@
  */
 package com.futurebazookasafariandroid.FBS_DatenBank;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -26,6 +27,14 @@ public class FBS_DatenBank {
     //  Connection con = DriverManager.getConnection("jdbc:sqlserver://127.0.0.1;databaseName=aysha", "user=sa", "password=admin");
     Connection conn = null;
     Statement stmt = null;
+
+    public FBS_DatenBank() {
+   
+        
+
+    }
+    
+    
 
     public void connect() {
 
