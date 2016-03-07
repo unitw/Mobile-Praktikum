@@ -8,6 +8,8 @@ package MapEditorFX;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javafx.application.Application;
+import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -21,7 +23,9 @@ import javafx.stage.Stage;
  */
 public class FBS_MapEditor extends Application implements MouseListener {
     
-    private final int columns = 10;
+    public final GridPane grid = new GridPane();
+    private final int width = 640, height = 640;
+    private final int columns = 10, rows = 10;
     
     @Override
     public void start(Stage stage) {
@@ -30,15 +34,17 @@ public class FBS_MapEditor extends Application implements MouseListener {
     
     private void initUI(Stage stage) {
 
-        final GridPane grid = new GridPane();
-        grid.setPrefSize(640, 640);
+        grid.setPrefSize(width, height);
         grid.setGridLinesVisible(true);
         
-        Image image = new Image("resources/gras.png");
+        Image imageWiese = new Image("resources/grassbackground.png", width, height, false, false);
+        Image imageGras = new Image("resources/gras.png", 64, 64, false, false);
         
-        for(int i = 0; i < 10; i++) {
-            for(int j = 0; j < 10; j++) {
-                   grid.add(new ImageView(image), j, i);
+//        grid.add(new ImageView(imageWiese), 0, 0);
+        
+        for(int i = 0; i < columns; i++) {
+            for(int j = 0; j < rows; j++) {
+                grid.add(new ImageView(imageGras), j, i);
             }
         }
         
@@ -46,8 +52,10 @@ public class FBS_MapEditor extends Application implements MouseListener {
         stage.setTitle("Editor");
         stage.setScene(scene);
         stage.show();
-    }
 
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -57,7 +65,7 @@ public class FBS_MapEditor extends Application implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        
+        System.out.println("assafa");
     }
 
     @Override
@@ -72,8 +80,10 @@ public class FBS_MapEditor extends Application implements MouseListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        Node source = (Node)e.getSource() ;
+        Integer colIndex = GridPane.getColumnIndex(source);
+        Integer rowIndex = GridPane.getRowIndex(source);
+        System.out.println(colIndex + rowIndex);    }
 
     @Override
     public void mouseExited(MouseEvent e) {
