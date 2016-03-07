@@ -24,12 +24,13 @@ dependencies {
     iosRuntime 'com.gluonhq:charm-ios:2.0.0'
     desktopRuntime 'com.gluonhq:charm-desktop:2.0.0'
     compile files ('src/main/resources/com/futurebazookasafariandroid/lib/sqljdbc4-2.0.jar')
+    compile 'net.sourceforge.jtds:jtds:1.2.8'
 }
 
 jfxmobile {
     android {
         manifest = 'src/android/AndroidManifest.xml'
-	androidSdk = '/Users/user/Documents/develoment/android-sdk-macosx'
+	androidSdk = '/Users/user/Documents/development/android-sdk-macosx/'
     }
     ios {
         infoPList = file('src/ios/Default-Info.plist')
