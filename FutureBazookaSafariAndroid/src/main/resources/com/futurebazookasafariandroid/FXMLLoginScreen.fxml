@@ -8,8 +8,8 @@
 <?import javafx.scene.layout.*?>
 
 
-
-<AnchorPane id="AnchorPane" styleClass="loginScreen" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.futurebazookasafariandroid.FXMLLoginScreenController">
+<GridPane styleClass="loginScreen" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.futurebazookasafariandroid.FXMLLoginScreenController" alignment="center">
+    <AnchorPane id="AnchorPane">
     <stylesheets>
         <URL value="@fxmlloginscreen.css"/>
     </stylesheets>
@@ -19,25 +19,24 @@
             prefHeight="20"
             prefWidth="288"
             styleClass="logoLabel"
-            layoutY="75" 
         />
         <TextField 
             prefHeight="27"
             prefWidth="150"
             layoutX="75"
-            layoutY="190"
+            layoutY="115"
             promptText="Username"
         />
         <PasswordField 
             prefHeight="27"
             prefWidth="150"
             layoutX="75"
-            layoutY="225"
+            layoutY="150"
             promptText="Password" 
         />
         <CheckBox 
             layoutX="75"
-            layoutY="260"
+            layoutY="185"
             text="automatischer Login"
             styleClass="loginScreenCheckBox"
         />
@@ -48,7 +47,7 @@
             prefWidth="150"
             styleClass="loginScreenButton"
             layoutX="75" 
-            layoutY="290" 
+            layoutY="215" 
             onAction="#LoginPressed" 
         />
         <Button 
@@ -57,8 +56,11 @@
             prefWidth="150"
             styleClass="loginScreenButton"
             layoutX="75" 
-            layoutY="340" 
+            layoutY="265" 
             onAction="#SignUpPressed" 
         />
     </children>
 </AnchorPane>
+</GridPane>
+
+

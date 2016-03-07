@@ -7,7 +7,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="512" prefWidth="288" styleClass="mainMenu" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.futurebazookasafariandroid.FBS_MainMenu.FXMLMainMenuController">
+<GridPane styleClass="mainMenu" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.futurebazookasafariandroid.FBS_MainMenu.FXMLMainMenuController" alignment="center">
+
+<AnchorPane id="AnchorPane">
     <stylesheets>
         <URL value="@fxmlmainmenu.css"/>
     </stylesheets>
@@ -16,8 +18,7 @@
             text="Future Bazooka Safari"
             prefHeight="20"
             prefWidth="288"
-            styleClass="logoLabel"
-            layoutY="75" 
+            styleClass="logoLabel" 
         />
         <Button 
             text="Neues Spiel"
@@ -25,7 +26,7 @@
             prefWidth="150"
             styleClass="mainMenuButton"
             layoutX="75" 
-            layoutY="190" 
+            layoutY="115" 
             onAction="#newGamePressed" 
         />
         <Button 
@@ -34,7 +35,7 @@
             prefWidth="150"
             styleClass="mainMenuButton"
             layoutX="75" 
-            layoutY="240" 
+            layoutY="165" 
             onAction="#loadGamePressed" 
         />
         <Button 
@@ -43,9 +44,10 @@
             prefWidth="150"
             styleClass="mainMenuButton"
             layoutX="75" 
-            layoutY="290" 
+            layoutY="215" 
             onAction="#shopPressed" 
         />
     </children>
 </AnchorPane>
+</GridPane>
         

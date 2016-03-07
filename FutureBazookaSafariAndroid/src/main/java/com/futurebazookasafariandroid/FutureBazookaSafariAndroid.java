@@ -24,11 +24,11 @@ public class FutureBazookaSafariAndroid extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLLoginScreen.fxml")); 
-        
+        Parent root = FXMLLoader.load(getClass().getResource("FXMLLoginScreen.fxml"));
+
         Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
         Scene scene = new Scene(root, primScreenBounds.getWidth(), primScreenBounds.getHeight());
-        
+
         stage.setTitle("Future Bazooka Safari");
         stage.setScene(scene);
         stage.setX(0);

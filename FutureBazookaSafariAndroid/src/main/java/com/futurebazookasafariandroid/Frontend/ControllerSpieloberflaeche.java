@@ -22,6 +22,7 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TouchEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -49,11 +50,6 @@ public class ControllerSpieloberflaeche {
     @FXML
     private Label l_gold;
 
-    @FXML
-    private Canvas canvas1;
-
-    @FXML
-    private AnchorPane anchorpansplit;
 
     @FXML
     private AnchorPane anchorpansplitunten;
@@ -78,15 +74,18 @@ public class ControllerSpieloberflaeche {
 
     @FXML
     private AnchorPane anchorpane;
-
+    
     @FXML
-    void stackpaneclicked(MouseEvent event) {
+    private ScrollPane scrollpane;
+    
+    @FXML
+    void anchorplaneClicked(MouseEvent event) {
 
-        con.getMouseclicks(event.getSceneX(), event.getSceneY());
-
+        con.getMouseclicks(event.getX(), event.getY());
+        event.consume();
     }
     
-    @FXML 
+    @FXML
     void settingsclicked(MouseEvent event) {
         roundcon.mouseAction();
     }
@@ -97,8 +96,13 @@ public class ControllerSpieloberflaeche {
     protected void initialize() {
 
         Rectangle2D scr = Screen.getPrimary().getVisualBounds();
-
-        FBS_Safari_Map map = new FBS_Safari_Map(scr.getWidth(), scr.getHeight());
+        
+        FBS_Safari_Map map = new FBS_Safari_Map(2000, 1500);
+                 
+        scrollpane.setPrefHeight(scr.getHeight());
+        scrollpane.setPrefWidth(scr.getWidth());
+        anchorpane.setPrefHeight(map.getMapsizex());
+        anchorpane.setPrefWidth(map.getMapsizey());
 
         FBS_Canvas canvas = new FBS_Canvas(map);
 
@@ -134,6 +138,14 @@ public class ControllerSpieloberflaeche {
 
         pane.getItems().add(zeichneTowerList());
         sc_pane.setContent(pane);
+        
+//        anchorpane.setOnTouchPressed(new EventHandler<TouchEvent>() {
+//            @Override 
+//            public void handle(TouchEvent event) {
+//                con.getMouseclicks(event.getTouchPoint().getSceneX(), event.getTouchPoint().getSceneY());
+//                event.consume();
+//            }
+//        });
 
     }
 
