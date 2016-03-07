@@ -63,8 +63,19 @@ public class FBS_MapController {
     private FBS_Canvas canvas;
     private int iteration = 0;
 
+    public FBS_Canvas getCanvas() {
+        return canvas;
+    }
+
+    public void setCanvas(FBS_Canvas canvas) {
+        this.canvas = canvas;
+    }
+
     public FBS_MapController(FBS_MapInterface map, ActionEvent e) throws IOException {
 
+        
+        
+        
         this.canvas = new FBS_Canvas(map);
         this.map = map;
         pathHashMap = new HashMap();
@@ -73,22 +84,7 @@ public class FBS_MapController {
         pathHashMap.put(monsterratte, 0);
         this.hindernislist = map.getHindernislist();
         this.is_in_round = false;
-        
-        
-        
-        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        StackPane root = new StackPane();
 
-        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
-        FBS_Spieloberflaeche flaeche = new FBS_Spieloberflaeche(this.canvas);
-        root.getChildren().add(flaeche);
-        Scene scene = new Scene(root, primScreenBounds.getWidth(), primScreenBounds.getHeight());
-        
-        
-        //set Stage boundaries to visible bounds of the main screen
-        stage.setScene(scene);
-        stage.show();
-        
         //spieler = new FBS_Spieler(0, 1000, 600, 100);
         //spielerleben = spieler.getmaxLife();
         //spielergold = spieler.getstartGold();
@@ -203,6 +199,13 @@ public class FBS_MapController {
 //    }
 //}
 //);
+    }
+    
+    public void addTower(FBS_TowerInterface tw){
+        if (buildTower(tw)){
+            turmlist.add(tw);
+            canvas.drawMap(monsterlist, turmlist, projektillist, hindernislist);
+        }
     }
 
     public boolean buildTower(FBS_TowerInterface tower) {

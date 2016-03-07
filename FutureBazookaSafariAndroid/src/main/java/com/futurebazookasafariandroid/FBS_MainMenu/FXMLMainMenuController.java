@@ -32,7 +32,17 @@ public class FXMLMainMenuController implements Initializable {
     @FXML
     private void newGamePressed(ActionEvent event) throws IOException {
         System.out.println("pressed \"Neues Spiel\"");
+          
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        StackPane root = new StackPane();
+
+        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
         FBS_RundenController roundcon = new FBS_RundenController(event);
+        root.getChildren().add(roundcon);
+        Scene scene = new Scene(root, primScreenBounds.getWidth(), primScreenBounds.getHeight());
+        //set Stage boundaries to visible bounds of the main screen
+        stage.setScene(scene);
+        stage.show();
 //
 //        
 //        

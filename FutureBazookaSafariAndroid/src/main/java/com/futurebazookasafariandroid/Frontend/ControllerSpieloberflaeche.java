@@ -79,17 +79,7 @@ public class ControllerSpieloberflaeche {
     @FXML
     private AnchorPane anchorpane;
 
-    @FXML
-    void stackpaneclicked(MouseEvent event) {
-
-        con.getMouseclicks(event.getSceneX(), event.getSceneY());
-
-    }
-
-    @FXML
-    void settingsclicked(MouseEvent event) {
-        roundcon.mouseAction();
-    }
+   
 
     SplitPane pane = new SplitPane();
 
@@ -213,6 +203,14 @@ public class ControllerSpieloberflaeche {
         gridpane.add(new Label("Baukosten: " + tower.getBaukosten()), 0, 4);
 
         return gridpane;
+    }
+
+    public Button getB_settings() {
+        return b_settings;
+    }
+
+    public StackPane getStackpane() {
+        return stackpane;
     }
 
     public void setCanvas(FBS_Canvas canvas) {

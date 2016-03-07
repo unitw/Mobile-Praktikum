@@ -47,14 +47,7 @@ public class FBS_Spieloberflaeche extends AnchorPane {
         // } catch (IOException ex) {
         //    Logger.getLogger(FBS_Spieloberflaeche.class.getName()).log(Level.SEVERE, null, ex);
         // }
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Spieloberflaeche.fxml"));
-
-        Parent root = (Parent) fxmlLoader.load();
-        ControllerSpieloberflaeche controller = fxmlLoader.<ControllerSpieloberflaeche>getController();
-        controller.setCanvas(cv);
-        controller.initStuff();
-
-        this.getChildren().add(root);
+        
 
         //Scene scene = new Scene(root, width, height);
         //Stage stage = new Stage();
