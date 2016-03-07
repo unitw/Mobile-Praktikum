@@ -30,7 +30,7 @@ public class FXMLLoginScreenController {
             if (FutureBazookaSafariAndroid.datenbank.login(fbs_username.getText(), fbs_passwort.getText())) {
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-                Parent root = FXMLLoader.load(getClass().getResource("/FBS_MainMenu/FXMLMainMenu.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("FXMLMainMenu.fxml"));
 
                 Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
                 stage.setScene(new Scene(root, primScreenBounds.getWidth(), primScreenBounds.getHeight()));
@@ -51,7 +51,7 @@ public class FXMLLoginScreenController {
             if(FutureBazookaSafariAndroid.datenbank.register(fbs_username.getText(), fbs_passwort.getText())){
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 
-                Parent root = FXMLLoader.load(getClass().getResource("/FBS_MainMenu/FXMLMainMenu.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("FXMLMainMenu.fxml"));
                 
                 Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
                 stage.setScene(new Scene(root, primScreenBounds.getWidth(), primScreenBounds.getHeight()));
