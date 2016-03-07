@@ -38,6 +38,10 @@ public class FBS_Canvas extends Canvas {
 
     }
 
+    public FBS_MapInterface getMap() {
+        return map;
+    }
+
     public void drawMap(ArrayList<FBS_MonsterInterface> monsterlist, ArrayList<FBS_TowerInterface> towerlist, ArrayList<FBS_Projektil_Interface> projektillist, ArrayList<FBS_HindernisInterface> hindernislist) {
 
 

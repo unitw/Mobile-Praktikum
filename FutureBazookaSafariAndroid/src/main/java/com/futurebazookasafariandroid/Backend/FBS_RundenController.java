@@ -42,7 +42,7 @@ public class FBS_RundenController extends AnchorPane {
 
     public FBS_RundenController(ActionEvent e) throws IOException {
         Rectangle2D scr = Screen.getPrimary().getVisualBounds();
-        this.map = new FBS_Safari_Map(scr.getWidth(), scr.getHeight());
+        this.map = new FBS_Safari_Map(1500, 1500);
         this.mapcon = new FBS_MapController(map, e);
         FBS_Spieler justus_jonas = new FBS_Spieler(700, 80000, 1000, 1);
         mapcon.setSpieler(justus_jonas);

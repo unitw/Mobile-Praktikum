@@ -50,7 +50,6 @@ public class ControllerSpieloberflaeche {
     @FXML
     private Label l_gold;
 
-
     @FXML
     private AnchorPane anchorpansplitunten;
 
@@ -74,46 +73,39 @@ public class ControllerSpieloberflaeche {
 
     @FXML
     private AnchorPane anchorpane;
-    
+
     @FXML
     private ScrollPane scrollpane;
-      
+
+    public ScrollPane getScrollpane() {
+        return scrollpane;
+    }
+
     @FXML
     SplitPane pane = new SplitPane();
-    
+
     private FBS_Canvas canvas1;
-    
-    @FXML
-    void anchorplaneClicked(MouseEvent event) {
-        
-        System.out.println("X: " + event.getX() + "\nY: " + event.getY());
-        con.getMouseclicks(event.getX(), event.getY());
-        event.consume();
-    }
-    
-    @FXML
-    void settingsclicked(MouseEvent event) {
-        roundcon.mouseAction();
-    }
+
+   
 
     @FXML
     protected void initialize() {
 
-        Rectangle2D scr = Screen.getPrimary().getVisualBounds();
         
-        FBS_Safari_Map map = new FBS_Safari_Map(2000, 1500);
-                 
-        scrollpane.setPrefHeight(scr.getHeight());
-        scrollpane.setPrefWidth(scr.getWidth());
-        anchorpane.setPrefHeight(map.getMapsizex());
-        anchorpane.setPrefWidth(map.getMapsizey());
-
     }
-    
-    public void initStuff(){
-        
-        Rectangle2D scr = Screen.getPrimary().getVisualBounds();
 
+    public void initStuff() {
+
+        Rectangle2D scr = Screen.getPrimary().getVisualBounds();
+        anchorpane.setPrefHeight(scr.getHeight());
+        anchorpane.setPrefWidth(scr.getWidth());
+        canvas1.prefWidth(this.getCanvas().getMap().getMapsizex());
+        canvas1.prefHeight(this.getCanvas().getMap().getMapsizey());
+      //  stackpane.setMaxHeight(canvas1.getMap().getMapsizey());
+      //  stackpane.setMaxWidth(canvas1.getMap().getMapsizex());
+     //   scrollpane.setPrefWidth(canvas1.getMap().getMapsizex());
+    //    scrollpane.setPrefHeight(canvas1.getMap().getMapsizey());
+      
         initMap();
         zeichneTowerList();
 
@@ -121,24 +113,28 @@ public class ControllerSpieloberflaeche {
 //       canvas.setLayoutY(0);
 //       canvas.setTranslateX(200);
         //anchorpane.getChildren().add(canvas);
-        stackpane.getChildren().add(canvas1);
-        stackpane.setAlignment(canvas1, Pos.TOP_LEFT);
+        scrollpane.setContent(canvas1);
+        scrollpane.setPannable(true);
+       // stackpane.getChildren().add(scrollpane);
+       // stackpane.setAlignment(scrollpane, Pos.TOP_LEFT);
         anchorpansplitoben.getChildren().add(zeichneTowerList());
 
         gp_overlay.setAlignment(Pos.TOP_RIGHT);
 
+        
         stackpane.getChildren().remove(gp_overlay);
         ColumnConstraints column1 = new ColumnConstraints();
         column1.setPercentWidth(10);
         gp_overlay.getColumnConstraints().add(column1);
         stackpane.getChildren().add(gp_overlay);
         stackpane.setAlignment(gp_overlay, Pos.TOP_LEFT);
+        stackpane.setAlignment(scrollpane,Pos.TOP_LEFT);
 
         pane.setOrientation(Orientation.VERTICAL);
 
         pane.getItems().add(zeichneTowerList());
         sc_pane.setContent(pane);
-        
+
 //        anchorpane.setOnTouchPressed(new EventHandler<TouchEvent>() {
 //            @Override 
 //            public void handle(TouchEvent event) {
@@ -160,6 +156,10 @@ public class ControllerSpieloberflaeche {
 //        setCanvas();
 //        
 //    }
+
+    public FBS_Canvas getCanvas() {
+        return canvas1;
+    }
 
     HashMap<String, FBS_TowerInterface> turmlist = new HashMap();
 
@@ -242,7 +242,7 @@ public class ControllerSpieloberflaeche {
     }
 
     public void setCanvas(FBS_Canvas canvas) {
-       this.canvas1 = canvas;
+        this.canvas1 = canvas;
     }
 
 }

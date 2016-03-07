@@ -26,42 +26,42 @@ public class FXMLLoginScreenController {
     @FXML
     private void LoginPressed(ActionEvent event) throws IOException {
 
-//        try {
-//            if (FutureBazookaSafariAndroid.datenbank.login(fbs_username.getText(), fbs_passwort.getText())) {
+        try {
+            if (FutureBazookaSafariAndroid.datenbank.login(fbs_username.getText(), fbs_passwort.getText())) {
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-                Parent root = FXMLLoader.load(getClass().getResource("/FBS_MainMenu/FXMLMainMenu.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("FXMLMainMenu.fxml"));
 
                 Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
                 stage.setScene(new Scene(root, primScreenBounds.getWidth(), primScreenBounds.getHeight()));
                 stage.setX(0);
                 stage.setY(0);
                 stage.show();
-//            }
-//        } catch (ClassNotFoundException | SQLException ex) {
-//            Logger.getLogger(FXMLLoginScreenController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(FXMLLoginScreenController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
     
     @FXML
     private void SignUpPressed(ActionEvent event) throws IOException {
         
-//        try {
-//            if(FutureBazookaSafariAndroid.datenbank.register(fbs_username.getText(), fbs_passwort.getText())){
+        try {
+            if(FutureBazookaSafariAndroid.datenbank.register(fbs_username.getText(), fbs_passwort.getText())){
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 
-                Parent root = FXMLLoader.load(getClass().getResource("/FBS_MainMenu/FXMLMainMenu.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("FXMLMainMenu.fxml"));
                 
                 Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
                 stage.setScene(new Scene(root, primScreenBounds.getWidth(), primScreenBounds.getHeight()));
                 stage.setX(0);
                 stage.setY(0);
                 stage.show();
-//            }
-//        } catch (ClassNotFoundException | SQLException ex) {
-//            Logger.getLogger(FXMLLoginScreenController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(FXMLLoginScreenController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         
     }

@@ -5,12 +5,15 @@
  */
 package com.futurebazookasafariandroid.FBS_DatenBank;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -24,16 +27,35 @@ public class FBS_DatenBank {
 
     String url = "jdbc:sqlserver://176.9.147.155;databaseName=FBS_Datenbank";
     //  Connection con = DriverManager.getConnection("jdbc:sqlserver://127.0.0.1;databaseName=aysha", "user=sa", "password=admin");
+
+    String url1 = "jdbc:jtds:sqlserver://176.9.147.155;instance=SQLEXPRESS;DatabaseName=FBS_Datenbank";
+    String driver1 = "net.sourceforge.jtds.jdbc.Driver";
+    String userName1 = "sa";
+    String password1 = "EN5_20I6";
+
     Connection conn = null;
     Statement stmt = null;
+
+    public FBS_DatenBank() {
+
+        try {
+            Class.forName(driver1);
+            conn = DriverManager.getConnection(url1, userName, password);
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(FBS_DatenBank.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
 
     public void connect() {
 
         try {
 
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-
-            conn = DriverManager.getConnection(url, userName, password);
+//            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+//
+//            conn = DriverManager.getConnection(url, userName, password);
+            Class.forName(driver1);
+            conn = DriverManager.getConnection(url1, userName, password);
 
             System.out.println("Creating statement...");
             stmt = conn.createStatement();
@@ -49,10 +71,6 @@ public class FBS_DatenBank {
                 int b_lvl = rs.getInt("b_lvl");
 
                 //Display values
-                System.out.print("ID: " + b_name);
-                System.out.print(", Age: " + b_kennungwort);
-                System.out.print(", First: " + b_lvl);
-
             }
 
             rs.close();
@@ -86,9 +104,9 @@ public class FBS_DatenBank {
 
     public boolean login(String user, String pw) throws ClassNotFoundException, SQLException {
 
-        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-
-        conn = DriverManager.getConnection(url, userName, password);
+      //  Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        Class.forName(driver1);
+        conn = DriverManager.getConnection(url1, userName, password);
 
         System.out.println("Creating statement...");
         stmt = conn.createStatement();
@@ -119,37 +137,35 @@ public class FBS_DatenBank {
     }
 
     public boolean register(String user, String pw) throws ClassNotFoundException, SQLException {
-        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        // Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        //conn = DriverManager.getConnection(url, userName, password);
 
-        conn = DriverManager.getConnection(url, userName, password);
-      
+        Class.forName(driver1);
+        conn = DriverManager.getConnection(url1, userName, password);
+
         PreparedStatement prepstmt = null;
 //        if (!login(user, pw)) {
-           
 
-            int runde=0;
-            int lvl=0;
-            int gold=0;
-            int edelsteine=0;
-            
-            prepstmt = conn.prepareStatement("insert into benutzer(b_name,b_kennwort,b_lvl,b_edelsteine,b_runde,b_gold) values (?,?,?,?,?,?)");
-            prepstmt.setString(1, user);
-            prepstmt.setString(2, pw);
-            prepstmt.setInt(3, runde);
-            prepstmt.setInt(4, lvl);
-            prepstmt.setInt(5, gold);
-            prepstmt.setInt(6, edelsteine);
-            prepstmt.executeUpdate();
+        int runde = 0;
+        int lvl = 0;
+        int gold = 0;
+        int edelsteine = 0;
+
+        prepstmt = conn.prepareStatement("insert into benutzer(b_name,b_kennwort,b_lvl,b_edelsteine,b_runde,b_gold) values (?,?,?,?,?,?)");
+        prepstmt.setString(1, user);
+        prepstmt.setString(2, pw);
+        prepstmt.setInt(3, runde);
+        prepstmt.setInt(4, lvl);
+        prepstmt.setInt(5, gold);
+        prepstmt.setInt(6, edelsteine);
+        prepstmt.executeUpdate();
 
 //            (deptnum, deptname, deptloc)
 //            
 //           INSERT INTO Benutzer VALUES (' user','  pw ', 1,0,0,0 );
 //            stmt = conn.createStatement();
 //            stmt.executeUpdate(sql);
-           
-
 //        }
-
         prepstmt.close();
         conn.close();
         return false;
