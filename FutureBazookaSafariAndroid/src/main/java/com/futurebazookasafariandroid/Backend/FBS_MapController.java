@@ -16,16 +16,24 @@ import com.futurebazookasafariandroid.FBS_Monster.FBS_Monster_Ratte;
 import com.futurebazookasafariandroid.FBS_Projektile.FBS_LaserProjektil;
 import com.futurebazookasafariandroid.FBS_Tower.FBS_Laser_Tower;
 import com.futurebazookasafariandroid.Frontend.FBS_Canvas;
+import com.futurebazookasafariandroid.Frontend.FBS_Spieloberflaeche;
+import java.io.IOException;
 import java.util.ArrayList;
 import javafx.animation.AnimationTimer;
 import static java.lang.Math.abs;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
 
 /**
  *
@@ -42,6 +50,7 @@ public class FBS_MapController {
     private ArrayList<FBS_HindernisInterface> hindernislist = new ArrayList();
     private ArrayList<Integer> spawntimelist = new ArrayList();
 
+    private FBS_Spieloberflaeche flaeche;
     private AnimationTimer timer;
     private boolean is_in_round;
     private FBS_MonsterInterface monsterratte;
@@ -54,18 +63,32 @@ public class FBS_MapController {
     private FBS_Canvas canvas;
     private int iteration = 0;
 
-    public FBS_MapController(FBS_MapInterface map, FBS_Canvas canvas) {
+    public FBS_MapController(FBS_MapInterface map, ActionEvent e) throws IOException {
 
+        this.canvas = new FBS_Canvas(map);
         this.map = map;
         pathHashMap = new HashMap();
-
         monsterratte = new FBS_Monster_Ratte((int) map.getStartpunkt().getX(), (int) map.getStartpunkt().getY());
         monsterlist.add(monsterratte);
         pathHashMap.put(monsterratte, 0);
         this.hindernislist = map.getHindernislist();
         this.is_in_round = false;
+        
+        
+        
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        StackPane root = new StackPane();
 
-        this.canvas = canvas;
+        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+        FBS_Spieloberflaeche flaeche = new FBS_Spieloberflaeche(this.canvas);
+        root.getChildren().add(flaeche);
+        Scene scene = new Scene(root, primScreenBounds.getWidth(), primScreenBounds.getHeight());
+        
+        
+        //set Stage boundaries to visible bounds of the main screen
+        stage.setScene(scene);
+        stage.show();
+        
         //spieler = new FBS_Spieler(0, 1000, 600, 100);
         //spielerleben = spieler.getmaxLife();
         //spielergold = spieler.getstartGold();

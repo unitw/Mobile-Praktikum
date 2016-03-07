@@ -25,42 +25,40 @@ import javafx.scene.layout.GridPane;
  */
 public class FBS_Spieloberflaeche extends AnchorPane {
 
-    private Label l_leben = new Label("Leben:");
-    private Label l_gold = new Label("Gold:");
-    private Label l_runde = new Label("Runde:");
-    private TitledPane towermenu = new TitledPane();
-    private Button b_settings = new Button("Einstellungen");
-    private SplitPane sp_pane = new SplitPane();
-    private ScrollPane sc_pane = new ScrollPane();
-    private boolean menuexists = false;
-    private GridPane gp_overlay = new GridPane();
-    private GridPane gp_infos = new GridPane();
-    private double width;
-    private double height;
-
-    public FBS_Spieloberflaeche() {
+//    private Label l_leben = new Label("Leben:");
+//    private Label l_gold = new Label("Gold:");
+//    private Label l_runde = new Label("Runde:");
+//    private TitledPane towermenu = new TitledPane();
+//    private Button b_settings = new Button("Einstellungen");
+//    private SplitPane sp_pane = new SplitPane();
+//    private ScrollPane sc_pane = new ScrollPane();
+//    private boolean menuexists = false;
+//    private GridPane gp_overlay = new GridPane();
+//    private GridPane gp_infos = new GridPane();
+//    private double width;
+//    private double height;
+    public FBS_Spieloberflaeche(FBS_Canvas cv) throws IOException {
         //this.width = width;
         //this.height = height;
 
-        Parent root = null;
-        try {
-            root = FXMLLoader.load(getClass().getResource("Spieloberflaeche.fxml"));
-        } catch (IOException ex) {
-            Logger.getLogger(FBS_Spieloberflaeche.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
+        //Parent root = null;
+        //  try {
+        //    root = FXMLLoader.load(getClass().getResource("Spieloberflaeche.fxml"));
+        // } catch (IOException ex) {
+        //    Logger.getLogger(FBS_Spieloberflaeche.class.getName()).log(Level.SEVERE, null, ex);
+        // }
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Spieloberflaeche.fxml"));
 
-       
-        //Scene scene = new Scene(root, width, height);
-        //Stage stage = new Stage();
-        
-        //set Stage boundaries to visible bounds of the main screen
-        
-        
+        Parent root = (Parent) fxmlLoader.load();
+        ControllerSpieloberflaeche controller = fxmlLoader.<ControllerSpieloberflaeche>getController();
+        controller.setCanvas(cv);
+        controller.initStuff();
 
         this.getChildren().add(root);
 
+        //Scene scene = new Scene(root, width, height);
+        //Stage stage = new Stage();
+        //set Stage boundaries to visible bounds of the main screen
 //        initMap();
 //        initUI();
     }
