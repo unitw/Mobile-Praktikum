@@ -77,6 +77,11 @@ public class ControllerSpieloberflaeche {
     
     @FXML
     private ScrollPane scrollpane;
+      
+    @FXML
+    SplitPane pane = new SplitPane();
+    
+    private FBS_Canvas canvas1;
     
     @FXML
     void anchorplaneClicked(MouseEvent event) {
@@ -84,13 +89,7 @@ public class ControllerSpieloberflaeche {
         con.getMouseclicks(event.getX(), event.getY());
         event.consume();
     }
-    
-    @FXML
-    void settingsclicked(MouseEvent event) {
-        roundcon.mouseAction();
-    }
 
-    SplitPane pane = new SplitPane();
 
     @FXML
     protected void initialize() {
@@ -104,25 +103,21 @@ public class ControllerSpieloberflaeche {
         anchorpane.setPrefHeight(map.getMapsizex());
         anchorpane.setPrefWidth(map.getMapsizey());
 
-        FBS_Canvas canvas = new FBS_Canvas(map);
-
-        con = new FBS_MapController(map, canvas);
-
-        FBS_Spieler spieler = new FBS_Spieler(8, 8000, 700, 100);
-
-        roundcon = new FBS_RundenController(con, spieler);
+    }
+    
+    public void initStuff(){
+        
+        Rectangle2D scr = Screen.getPrimary().getVisualBounds();
 
         initMap();
         zeichneTowerList();
 
-        
 //       canvas.setLayoutX(0);
 //       canvas.setLayoutY(0);
 //       canvas.setTranslateX(200);
         //anchorpane.getChildren().add(canvas);
-        stackpane.getChildren().add(canvas);
-        stackpane.setAlignment(canvas, Pos.TOP_LEFT);
-
+        stackpane.getChildren().add(canvas1);
+        stackpane.setAlignment(canvas1, Pos.TOP_LEFT);
         anchorpansplitoben.getChildren().add(zeichneTowerList());
 
         gp_overlay.setAlignment(Pos.TOP_RIGHT);
@@ -148,6 +143,18 @@ public class ControllerSpieloberflaeche {
 //        });
 
     }
+//
+//    public ControllerSpieloberflaeche(FBS_Canvas canvas) {
+//        super();
+//        
+//        setRealCanvas(canvas);
+//    }
+//    
+//    public void setRealCanvas(FBS_Canvas canvas){
+//        canvas1 = canvas;
+//        setCanvas();
+//        
+//    }
 
     HashMap<String, FBS_TowerInterface> turmlist = new HashMap();
 
@@ -219,6 +226,10 @@ public class ControllerSpieloberflaeche {
         gridpane.add(new Label("Baukosten: " + tower.getBaukosten()), 0, 4);
 
         return gridpane;
+    }
+
+    public void setCanvas(FBS_Canvas canvas) {
+       this.canvas1 = canvas;
     }
 
 }

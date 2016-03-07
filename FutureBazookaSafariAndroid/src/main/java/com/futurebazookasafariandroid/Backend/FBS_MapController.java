@@ -16,17 +16,25 @@ import com.futurebazookasafariandroid.FBS_Monster.FBS_Monster_Ratte;
 import com.futurebazookasafariandroid.FBS_Projektile.FBS_LaserProjektil;
 import com.futurebazookasafariandroid.FBS_Tower.FBS_Laser_Tower;
 import com.futurebazookasafariandroid.Frontend.FBS_Canvas;
+import com.futurebazookasafariandroid.Frontend.FBS_Spieloberflaeche;
+import java.io.IOException;
 import java.util.ArrayList;
 import javafx.animation.AnimationTimer;
 import static java.lang.Math.abs;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TouchPoint;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
 
 /**
  *
@@ -43,6 +51,7 @@ public class FBS_MapController {
     private ArrayList<FBS_HindernisInterface> hindernislist = new ArrayList();
     private ArrayList<Integer> spawntimelist = new ArrayList();
 
+    private FBS_Spieloberflaeche flaeche;
     private AnimationTimer timer;
     private boolean is_in_round;
     private FBS_MonsterInterface monsterratte;
@@ -55,18 +64,32 @@ public class FBS_MapController {
     private FBS_Canvas canvas;
     private int iteration = 0;
 
-    public FBS_MapController(FBS_MapInterface map, FBS_Canvas canvas) {
+    public FBS_MapController(FBS_MapInterface map, ActionEvent e) throws IOException {
 
+        this.canvas = new FBS_Canvas(map);
         this.map = map;
         pathHashMap = new HashMap();
-
         monsterratte = new FBS_Monster_Ratte((int) map.getStartpunkt().getX(), (int) map.getStartpunkt().getY());
         monsterlist.add(monsterratte);
         pathHashMap.put(monsterratte, 0);
         this.hindernislist = map.getHindernislist();
         this.is_in_round = false;
+        
+        
+        
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        StackPane root = new StackPane();
 
-        this.canvas = canvas;
+        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+        FBS_Spieloberflaeche flaeche = new FBS_Spieloberflaeche(this.canvas);
+        root.getChildren().add(flaeche);
+        Scene scene = new Scene(root, primScreenBounds.getWidth(), primScreenBounds.getHeight());
+        
+        
+        //set Stage boundaries to visible bounds of the main screen
+        stage.setScene(scene);
+        stage.show();
+        
         //spieler = new FBS_Spieler(0, 1000, 600, 100);
         //spielerleben = spieler.getmaxLife();
         //spielergold = spieler.getstartGold();
@@ -84,7 +107,7 @@ public class FBS_MapController {
     public void initTimer() {
 
         this.is_in_round = true;
-        //path = getSchnellsterWeg();
+        path = getSchnellsterWeg();
         timer = new AnimationTimer() {
 
             @Override
@@ -118,7 +141,7 @@ public class FBS_MapController {
                     bewege(projektil);
                     Rectangle2D projectile = new Rectangle2D(projektil.getPositionx(), projektil.getPositiony(), projektil.getGroesse(), projektil.getGroesse());
                     Rectangle2D target = new Rectangle2D(projektil.getTarget().getPositionx(), projektil.getTarget().getPositiony(),
-                                                         projektil.getTarget().getGroesse(), projektil.getTarget().getGroesse());
+                            projektil.getTarget().getGroesse(), projektil.getTarget().getGroesse());
 
                     if (projectile.intersects(target)) {
                         loeschliste.add(projektil);
@@ -253,7 +276,7 @@ public class FBS_MapController {
             int lifemon = mon.getLife() - project.getDamage();
             if (lifemon <= 0) {
                 this.getMonsterlist().remove(mon);
-                spielergold+=mon.getLoot();
+                spielergold += mon.getLoot();
             } else {
                 mon.setLife(lifemon);
             }
@@ -292,9 +315,10 @@ public class FBS_MapController {
         for (FBS_MonsterInterface mon : this.getMonsterlist()) {
 
             if (i % mon.getSpeed() == 0) {
-                bewege(mon);
-                if (mon.getPositionx() == this.map.getEndpunkt().getX()
-                        && mon.getPositiony() == this.map.getEndpunkt().getY()) {
+                bewege2(mon);
+
+                if (mon.getPositionx() >= this.map.getEndpunkt().getX()
+                        && mon.getPositiony() >= this.map.getEndpunkt().getY()) {
                     this.setSpielerleben(spielerleben - 1);
 
                     loeschliste.add(mon);
@@ -340,6 +364,7 @@ public class FBS_MapController {
     public ArrayList<Point2D> getSchnellsterWeg() {
         Point2D start = map.getStartpunkt();
         Point2D end = map.getEndpunkt();
+        System.out.println(end.toString());
         FBS_MonsterInterface moveMon = new FBS_Monster_Ratte(start.getX(), start.getY());
         //Key = point value = vorgänger;
         ArrayList<FBS_Knoten> open = new ArrayList();
@@ -350,7 +375,8 @@ public class FBS_MapController {
 
             open.remove(current);
             closed.add(current);
-            if (current.getKnoten().equals(end)) {
+            if (current.getKnoten().getX() >= end.getX()
+                    && current.getKnoten().getY() >= end.getY()) {
                 ArrayList<Point2D> weg = new ArrayList();
                 while (current.getVorgaenger() != null) {
                     weg.add(current.getKnoten());
@@ -365,9 +391,11 @@ public class FBS_MapController {
                     FBS_Knoten oldNode = getNodeinList(open, n);
                     if (oldNode == null) {
                         open.add(n);
+                        System.out.println(n.toString());
                     } else if (oldNode.getPfadlaenge() > n.getPfadlaenge()) {
                         open.remove(oldNode);
                         open.add(n);
+                        System.out.println(n.toString());
                     }
 
                 }
@@ -389,7 +417,7 @@ public class FBS_MapController {
         double min = Double.MAX_VALUE;
         FBS_Knoten returnKnoten = null;
         for (FBS_Knoten node : list) {
-            double newmin = getCost(node.getKnoten().getX(), node.getKnoten().getY(), 50, 50);
+            double newmin = getCost(node.getKnoten().getX(), node.getKnoten().getY(), this.getMap().getEndpunkt().getX(), this.getMap().getEndpunkt().getY());
             if (newmin < min) {
                 returnKnoten = node;
                 min = newmin;
@@ -399,14 +427,14 @@ public class FBS_MapController {
     }
 
     public ArrayList<FBS_Knoten> getNachbarKnoten(FBS_Knoten c) {
-        FBS_Knoten k1 = new FBS_Knoten(c.getPfadlaenge() + 1, c, c.getKnoten().getX(), c.getKnoten().getY() - 1);
-        FBS_Knoten k2 = new FBS_Knoten(c.getPfadlaenge() + 1, c, c.getKnoten().getX() + 1, c.getKnoten().getY() - 1);
-        FBS_Knoten k3 = new FBS_Knoten(c.getPfadlaenge() + 1, c, c.getKnoten().getX() + 1, c.getKnoten().getY());
-        FBS_Knoten k4 = new FBS_Knoten(c.getPfadlaenge() + 1, c, c.getKnoten().getX() + 1, c.getKnoten().getY() + 1);
-        FBS_Knoten k5 = new FBS_Knoten(c.getPfadlaenge() + 1, c, c.getKnoten().getX(), c.getKnoten().getY() + 1);
-        FBS_Knoten k6 = new FBS_Knoten(c.getPfadlaenge() + 1, c, c.getKnoten().getX() - 1, c.getKnoten().getY() + 1);
-        FBS_Knoten k7 = new FBS_Knoten(c.getPfadlaenge() + 1, c, c.getKnoten().getX() - 1, c.getKnoten().getY());
-        FBS_Knoten k8 = new FBS_Knoten(c.getPfadlaenge() + 1, c, c.getKnoten().getX() - 1, c.getKnoten().getY() - 1);
+        FBS_Knoten k1 = new FBS_Knoten(c.getPfadlaenge() + 1, c, c.getKnoten().getX(), c.getKnoten().getY() - 10);
+        FBS_Knoten k2 = new FBS_Knoten(c.getPfadlaenge() + 1, c, c.getKnoten().getX() + 10, c.getKnoten().getY() - 10);
+        FBS_Knoten k3 = new FBS_Knoten(c.getPfadlaenge() + 1, c, c.getKnoten().getX() + 10, c.getKnoten().getY());
+        FBS_Knoten k4 = new FBS_Knoten(c.getPfadlaenge() + 1, c, c.getKnoten().getX() + 10, c.getKnoten().getY() + 10);
+        FBS_Knoten k5 = new FBS_Knoten(c.getPfadlaenge() + 1, c, c.getKnoten().getX(), c.getKnoten().getY() + 10);
+        FBS_Knoten k6 = new FBS_Knoten(c.getPfadlaenge() + 1, c, c.getKnoten().getX() - 10, c.getKnoten().getY() + 10);
+        FBS_Knoten k7 = new FBS_Knoten(c.getPfadlaenge() + 1, c, c.getKnoten().getX() - 10, c.getKnoten().getY());
+        FBS_Knoten k8 = new FBS_Knoten(c.getPfadlaenge() + 1, c, c.getKnoten().getX() - 10, c.getKnoten().getY() - 10);
         ArrayList<FBS_Knoten> erg = new ArrayList();
         erg.add(k1);
         erg.add(k2);
@@ -424,6 +452,7 @@ public class FBS_MapController {
         Point2D newZug = path.get(pathHashMap.get(moveMon));
         double difx = newZug.getX() - moveMon.getPositionx();
         double dify = newZug.getY() - moveMon.getPositiony();
+        moveMon.setangle(getMoveAngle(difx, dify));
         moveMon.setPosition(newZug.getX(), newZug.getY());
         pathHashMap.replace(moveMon, pathHashMap.get(moveMon) + 1);
     }
@@ -545,9 +574,9 @@ public class FBS_MapController {
         if (Zielzug.getX() < 0 || Zielzug.getY() < 0) {
             return false;
         }
-        if (Zielzug.getX() > this.map.getMapsizex() || Zielzug.getY() > this.map.getMapsizey()) {
-            return false;
-        }
+        // if (Zielzug.getX() > this.map.getMapsizex() || Zielzug.getY() > this.map.getMapsizey()) {
+        //    return false;
+        //}
 
         for (FBS_TowerInterface tower : turmlist) {
 
@@ -696,8 +725,41 @@ public class FBS_MapController {
         return is_in_round;
     }
 
+
     public void getMouseclicks(TouchPoint touchPoint) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private int getMoveAngle(double difx, double dify) {
+        switch ((int) difx) {
+            case -10:
+                switch ((int) dify) {
+                    case 10:
+                        return 45;
+                    case 0:
+                        return 90;
+                    case -10:
+                        return 135;
+                }
+            case 0:
+                switch ((int) dify) {
+                    case 10:
+                        return 0;
+                    case -10:
+                        return 180;
+                }
+            case 10:
+                switch ((int) dify) {
+                    case 10:
+                        return 315;
+                    case 0:
+                        return 270;
+                    case -10:
+                        return 225;
+                }
+            default:
+                return 0;
+        }
     }
 
 }

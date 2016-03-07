@@ -5,6 +5,7 @@
  */
 package com.futurebazookasafariandroid.FBS_MainMenu;
 
+import com.futurebazookasafariandroid.Backend.FBS_RundenController;
 import com.futurebazookasafariandroid.Frontend.FBS_Spieloberflaeche;
 import java.io.IOException;
 import java.net.URL;
@@ -29,21 +30,24 @@ import javafx.stage.Stage;
 public class FXMLMainMenuController implements Initializable {
 
     @FXML
-    private void newGamePressed(ActionEvent event) {
+    private void newGamePressed(ActionEvent event) throws IOException {
         System.out.println("pressed \"Neues Spiel\"");
-
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        StackPane root = new StackPane();
-
-        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
-        FBS_Spieloberflaeche flaeche = new FBS_Spieloberflaeche();
-        root.getChildren().add(flaeche);
-        Scene scene = new Scene(root, primScreenBounds.getWidth(), primScreenBounds.getHeight());
-
-        
-        //set Stage boundaries to visible bounds of the main screen
-        stage.setScene(scene);
-        stage.show();
+        FBS_RundenController roundcon = new FBS_RundenController(event);
+//
+//        
+//        
+ //      Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//        StackPane root = new StackPane();
+//
+ //       Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+ //       FBS_Spieloberflaeche flaeche = new FBS_Spieloberflaeche();
+ //       root.getChildren().add(flaeche);
+  //      Scene scene = new Scene(root, primScreenBounds.getWidth(), primScreenBounds.getHeight());
+//        
+//        
+//        //set Stage boundaries to visible bounds of the main screen
+ //       stage.setScene(scene);
+  //      stage.show();
 
     }
 
