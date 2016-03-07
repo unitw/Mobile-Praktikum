@@ -31,6 +31,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TouchPoint;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -725,6 +726,11 @@ public class FBS_MapController {
 
     public boolean getRundenstatus() {
         return is_in_round;
+    }
+
+
+    public void getMouseclicks(TouchPoint touchPoint) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     private int getMoveAngle(double difx, double dify) {
