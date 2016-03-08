@@ -16,6 +16,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
 
 /**
@@ -24,7 +25,7 @@ import javafx.scene.transform.Rotate;
  */
 public class FBS_Canvas extends Canvas {
 
-    GraphicsContext gc= this.getGraphicsContext2D();
+    GraphicsContext gc = this.getGraphicsContext2D();
     FBS_MapInterface map;
     Image img = new Image("gras.png");
     ArrayList<FBS_TowerInterface> towerlist = new ArrayList();
@@ -36,41 +37,24 @@ public class FBS_Canvas extends Canvas {
         super(map.getMapsizex(), map.getMapsizey());
         this.map = map;
         this.ratio = (int) (map.getMapsizex() / this.ZELLEN);
-         
 
+        drawBackground();
     }
 
     public FBS_MapInterface getMap() {
         return map;
     }
 
-    public GraphicsContext drawBackground() {
-        Canvas can = new Canvas();
-        can.setWidth(map.getMapsizex());
-        can.setHeight(map.getMapsizey());
+    public void drawBackground() {
 
-        GraphicsContext gc1 = can.getGraphicsContext2D();
+         
 
-        for (int i = 0; i < ZELLEN; i++) {
-            for (int j = 0; j < ZELLEN; j++) {
-
-                gc1.drawImage(img, i * ratio, j * ratio, ratio, ratio);
-
-            }
-        }
-        return gc1;
     }
 
     public void drawMap(ArrayList<FBS_MonsterInterface> monsterlist, ArrayList<FBS_TowerInterface> towerlist, ArrayList<FBS_Projektil_Interface> projektillist, ArrayList<FBS_HindernisInterface> hindernislist) {
 
-      for (int i = 0; i < ZELLEN; i++) {
-            for (int j = 0; j < ZELLEN; j++) {
-
-                gc.drawImage(img, i * ratio, j * ratio, ratio, ratio);
-
-            }
-        }
-        
+        gc.setFill(Color.GREEN);
+         gc.fillRect(0, 0, this.getWidth(), this.getHeight());
 
 //        gc.setFill(Color.CADETBLUE);
 //        gc.fillRect(0, 0, map.getMapsizex(), map.getMapsizey());
