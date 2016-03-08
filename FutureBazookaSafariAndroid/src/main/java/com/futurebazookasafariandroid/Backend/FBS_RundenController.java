@@ -75,7 +75,10 @@ public class FBS_RundenController extends AnchorPane {
                 controloverlay.setLebenLabel(mapcon.getSpielerleben());
             }
         });
-
+        
+        controloverlay.setGoldLabel(mapcon.getSpielergold());
+        controloverlay.setLebenLabel(mapcon.getSpielerleben());
+        
         this.getChildren().add(root);
 
     }
