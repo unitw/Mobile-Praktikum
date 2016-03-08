@@ -26,16 +26,16 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Button fx:id="b_settings" mnemonicParsing="false" prefHeight="27.0" prefWidth="224.0" text="Button" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
-                        <TitledPane fx:id="towermenu" expanded="false" prefHeight="231.0" prefWidth="220.0" text="Tower Menu" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.hgrow="NEVER" GridPane.rowSpan="3" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+                        <Button fx:id="b_settings" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Button" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
+                        <TitledPane fx:id="towermenu" expanded="false" maxWidth="1.7976931348623157E308" text="Tower Menu" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.hgrow="NEVER" GridPane.rowSpan="3" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="72.0" prefWidth="73.0">
                                  <children>
                                     <ScrollPane fx:id="sc_pane" prefHeight="372.0" prefWidth="148.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                       <content>
-                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="331.0" prefWidth="126.0">
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="331.0" prefWidth="198.0">
                                              <children>
-                                                <SplitPane fx:id="sp_pane" dividerPositions="0.5" orientation="VERTICAL" prefHeight="331.0" prefWidth="126.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <SplitPane fx:id="sp_pane" dividerPositions="0.49848024316109424" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" orientation="VERTICAL" prefHeight="331.0" prefWidth="198.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                   <items>
                                                     <AnchorPane fx:id="anchorpansplitoben" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
                                                     <AnchorPane fx:id="anchorpansplitunten" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
