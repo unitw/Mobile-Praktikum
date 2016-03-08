@@ -19,8 +19,8 @@ public class FBS_JustusJonas_Tower extends FBS_AbstractTower {
     public FBS_JustusJonas_Tower() {
         this.setisAOE(false);
         this.setAttackspeed(20);
-        this.setDamage(9);
-        this.setGroesse(96);
+        this.setDamage(50);
+        this.setGroesse(24);
         this.setUpgradestufe(0);
         this.setRange(250);
         this.setBaukosten(100);
@@ -34,8 +34,8 @@ public class FBS_JustusJonas_Tower extends FBS_AbstractTower {
         this.setPosition(posx, posy);
         this.setisAOE(false);
         this.setAttackspeed(20);
-        this.setDamage(9);
-        this.setGroesse(96);
+        this.setDamage(50);
+        this.setGroesse(24);
         this.setUpgradestufe(0);
         this.setRange(250);
         this.setBaukosten(100);

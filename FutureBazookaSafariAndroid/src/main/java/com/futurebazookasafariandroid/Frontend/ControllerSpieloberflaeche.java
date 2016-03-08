@@ -5,6 +5,7 @@ import com.futurebazookasafariandroid.Backend.FBS_RundenController;
 import com.futurebazookasafariandroid.FBS_Interfaces.FBS_Spieler;
 import com.futurebazookasafariandroid.FBS_Interfaces.FBS_TowerInterface;
 import com.futurebazookasafariandroid.FBS_Maps.FBS_Safari_Map;
+import com.futurebazookasafariandroid.FBS_Tower.FBS_JustusJonas_Tower;
 import com.futurebazookasafariandroid.FBS_Tower.FBS_Laser_Tower;
 import java.util.HashMap;
 import javafx.event.ActionEvent;
@@ -171,12 +172,8 @@ public class ControllerSpieloberflaeche {
 
     public void initMap() {
         turmlist.put("Lasertower", new FBS_Laser_Tower());
-        turmlist.put("Lasertower1", new FBS_Laser_Tower());
-        turmlist.put("Lasertower2", new FBS_Laser_Tower());
-        turmlist.put("Lasertower3", new FBS_Laser_Tower());
-        turmlist.put("Lasertower4", new FBS_Laser_Tower());
-        turmlist.put("Lasertower5", new FBS_Laser_Tower());
-
+        turmlist.put("JustusJonas", new FBS_JustusJonas_Tower());
+       
     }
 
     public GridPane zeichneTowerList() {

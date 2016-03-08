@@ -20,7 +20,7 @@ public class FBS_Monster_Ratte extends FBS_AbstractMonster {
         this.setSpeed(3);
         this.setLoot(100);
         this.setPicture(new Image("monsterrat.png"));
-        this.setGroesse(64);
+        this.setGroesse(16);
         this.setWaypoint(0);
        
     }
