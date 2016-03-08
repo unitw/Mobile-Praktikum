@@ -16,7 +16,7 @@ import com.futurebazookasafariandroid.FBS_Monster.FBS_Monster_Ratte;
 import com.futurebazookasafariandroid.FBS_Projektile.FBS_LaserProjektil;
 import com.futurebazookasafariandroid.FBS_Tower.FBS_Laser_Tower;
 import com.futurebazookasafariandroid.Frontend.FBS_Canvas;
-import com.futurebazookasafariandroid.Frontend.FBS_Spieloberflaeche;
+
 import com.sun.javafx.collections.ObservableIntegerArrayImpl;
 import com.sun.javafx.collections.ObservableListWrapper;
 import com.sun.javafx.scene.shape.ObservableFaceArrayImpl;
@@ -59,7 +59,7 @@ public class FBS_MapController {
     private ArrayList<FBS_HindernisInterface> hindernislist = new ArrayList();
     private ArrayList<Integer> spawntimelist = new ArrayList();
 
-    private FBS_Spieloberflaeche flaeche;
+   
     private AnimationTimer timer;
     private boolean is_in_round;
     private FBS_MonsterInterface monsterratte;

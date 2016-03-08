@@ -24,7 +24,7 @@ import javafx.scene.transform.Rotate;
  */
 public class FBS_Canvas extends Canvas {
 
-    GraphicsContext gc;
+    GraphicsContext gc= this.getGraphicsContext2D();
     FBS_MapInterface map;
     Image img = new Image("grassbackground.png");
     ArrayList<FBS_TowerInterface> towerlist = new ArrayList();
@@ -46,8 +46,8 @@ public class FBS_Canvas extends Canvas {
 
     public GraphicsContext drawBackground() {
         Canvas can = new Canvas();
-        can.setWidth(this.getWidth());
-        can.setHeight(this.getHeight());
+        can.setWidth(map.getMapsizex());
+        can.setHeight(map.getMapsizey());
 
         GraphicsContext gc1 = can.getGraphicsContext2D();
 
@@ -63,7 +63,13 @@ public class FBS_Canvas extends Canvas {
 
     public void drawMap(ArrayList<FBS_MonsterInterface> monsterlist, ArrayList<FBS_TowerInterface> towerlist, ArrayList<FBS_Projektil_Interface> projektillist, ArrayList<FBS_HindernisInterface> hindernislist) {
 
-       
+      for (int i = 0; i < ZELLEN; i++) {
+            for (int j = 0; j < ZELLEN; j++) {
+
+                gc.drawImage(img, i * ratio, j * ratio, ratio, ratio);
+
+            }
+        }
         
 
 //        gc.setFill(Color.CADETBLUE);
