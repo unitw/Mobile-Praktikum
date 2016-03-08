@@ -42,7 +42,7 @@ public class ControllerSpieloberflaeche {
     private Label l_leben;
 
     @FXML
-    private Label l_runde;
+    private  Label l_runde;
 
     @FXML
     private GridPane gp_infos;
@@ -101,10 +101,11 @@ public class ControllerSpieloberflaeche {
         anchorpane.setPrefWidth(scr.getWidth());
         canvas1.prefWidth(this.getCanvas().getMap().getMapsizex());
         canvas1.prefHeight(this.getCanvas().getMap().getMapsizey());
+        
       //  stackpane.setMaxHeight(canvas1.getMap().getMapsizey());
       //  stackpane.setMaxWidth(canvas1.getMap().getMapsizex());
-     //   scrollpane.setPrefWidth(canvas1.getMap().getMapsizex());
-    //    scrollpane.setPrefHeight(canvas1.getMap().getMapsizey());
+        scrollpane.setPrefWidth(canvas1.getMap().getMapsizex());
+       scrollpane.setPrefHeight(canvas1.getMap().getMapsizey());
       
         initMap();
         zeichneTowerList();
@@ -219,6 +220,17 @@ public class ControllerSpieloberflaeche {
         }
 
         return gridpane;
+    }
+    
+    public void setGoldLabel(int gold){
+        this.l_gold.setText("Gold: " + gold);
+    }
+    
+    public void setLebenLabel(int leben){
+        this.l_leben.setText("Leben: " + leben);
+    }
+    public void setRundenLabel(int runde){
+        this.l_runde.setText("Runde: " + runde);
     }
 
     public GridPane setContextPanetower(FBS_TowerInterface tower) {

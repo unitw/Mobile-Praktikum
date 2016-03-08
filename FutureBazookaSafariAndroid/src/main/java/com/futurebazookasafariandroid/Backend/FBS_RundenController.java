@@ -18,6 +18,9 @@ import com.futurebazookasafariandroid.Frontend.ControllerSpieloberflaeche;
 import com.futurebazookasafariandroid.Frontend.FBS_Spieloberflaeche;
 import java.io.IOException;
 import java.util.ArrayList;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -39,6 +42,7 @@ public class FBS_RundenController extends AnchorPane {
     private FBS_MapController mapcon;
     private FBS_MapInterface map;
     private ControllerSpieloberflaeche controloverlay;
+    private int runde = 0;
 
     public FBS_RundenController(ActionEvent e) throws IOException {
         Rectangle2D scr = Screen.getPrimary().getVisualBounds();
@@ -64,6 +68,13 @@ public class FBS_RundenController extends AnchorPane {
                 mouseAction();
             }
         });
+        mapcon.getObserver().addListener(new ListChangeListener() {
+            @Override
+            public void onChanged(ListChangeListener.Change c) {
+                controloverlay.setGoldLabel(mapcon.getSpielergold());
+                controloverlay.setLebenLabel(mapcon.getSpielerleben());
+            }
+        });
 
         this.getChildren().add(root);
 
@@ -71,6 +82,8 @@ public class FBS_RundenController extends AnchorPane {
 
     public void starteRunde(FBS_LevelInterface Runde) {
 
+        runde++;
+        controloverlay.setRundenLabel(runde);
         FBS_LevelInterface Level = Runde;
         this.monsterlist = Level.getMonster();
         this.spawntimelist = Level.getSpawntimes();

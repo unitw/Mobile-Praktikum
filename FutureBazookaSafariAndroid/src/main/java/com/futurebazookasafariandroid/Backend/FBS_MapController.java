@@ -24,6 +24,7 @@ import static java.lang.Math.abs;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
@@ -59,24 +60,16 @@ public class FBS_MapController {
     private HashMap<FBS_MonsterInterface, Integer> pathHashMap;
 
     private FBS_SpielerInterface spieler;
-    private int spielerleben;
-    private int spielergold;
+    private Integer spielerleben;
+    private Integer spielergold;
+    private ObservableList<Integer> observer;
+    
+    
     private FBS_Canvas canvas;
     private int iteration = 0;
 
-    public FBS_Canvas getCanvas() {
-        return canvas;
-    }
-
-    public void setCanvas(FBS_Canvas canvas) {
-        this.canvas = canvas;
-    }
-
     public FBS_MapController(FBS_MapInterface map, ActionEvent e) throws IOException {
 
-        
-        
-        
         this.canvas = new FBS_Canvas(map);
         this.map = map;
         pathHashMap = new HashMap();
@@ -85,6 +78,8 @@ public class FBS_MapController {
         pathHashMap.put(monsterratte, 0);
         this.hindernislist = map.getHindernislist();
         this.is_in_round = false;
+        observer.add(spielergold);
+        observer.add(spielerleben);
 
         //spieler = new FBS_Spieler(0, 1000, 600, 100);
         //spielerleben = spieler.getmaxLife();
@@ -201,9 +196,9 @@ public class FBS_MapController {
 //}
 //);
     }
-    
-    public void addTower(FBS_TowerInterface tw){
-        if (buildTower(tw)){
+
+    public void addTower(FBS_TowerInterface tw) {
+        if (buildTower(tw)) {
             turmlist.add(tw);
             canvas.drawMap(monsterlist, turmlist, projektillist, hindernislist);
         }
@@ -728,7 +723,6 @@ public class FBS_MapController {
         return is_in_round;
     }
 
-
     public void getMouseclicks(TouchPoint touchPoint) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -764,5 +758,22 @@ public class FBS_MapController {
                 return 0;
         }
     }
+
+    public FBS_Canvas getCanvas() {
+        return canvas;
+    }
+
+    public void setCanvas(FBS_Canvas canvas) {
+        this.canvas = canvas;
+    }
+    public ObservableList<Integer> getObserver() {
+        return observer;
+    }
+
+    public void setObserver(ObservableList<Integer> observer) {
+        this.observer = observer;
+    }
+    
+   
 
 }
