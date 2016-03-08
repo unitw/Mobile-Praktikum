@@ -17,7 +17,9 @@ import com.futurebazookasafariandroid.FBS_Projektile.FBS_LaserProjektil;
 import com.futurebazookasafariandroid.FBS_Tower.FBS_Laser_Tower;
 import com.futurebazookasafariandroid.Frontend.FBS_Canvas;
 import com.futurebazookasafariandroid.Frontend.FBS_Spieloberflaeche;
+import com.sun.javafx.collections.ObservableIntegerArrayImpl;
 import com.sun.javafx.collections.ObservableListWrapper;
+import com.sun.javafx.scene.shape.ObservableFaceArrayImpl;
 import java.io.IOException;
 import java.util.ArrayList;
 import javafx.animation.AnimationTimer;
@@ -27,6 +29,7 @@ import java.util.HashMap;
 import java.util.Map;
 import javafx.beans.value.ObservableListValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableIntegerArray;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -37,6 +40,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TouchPoint;
 import javafx.scene.layout.StackPane;
+import javafx.scene.shape.ObservableFaceArray;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -63,9 +67,9 @@ public class FBS_MapController {
     private HashMap<FBS_MonsterInterface, Integer> pathHashMap;
 
     private FBS_SpielerInterface spieler;
-    private Integer spielerleben;
-    private Integer spielergold;
-    private ObservableList<Integer> observer;
+    private int spielerleben=0;
+    private int spielergold=0;
+    private ObservableIntegerArray observer = new ObservableIntegerArrayImpl();
     
     
     private FBS_Canvas canvas;
@@ -81,9 +85,10 @@ public class FBS_MapController {
         pathHashMap.put(monsterratte, 0);
         this.hindernislist = map.getHindernislist();
         this.is_in_round = false;
-        observer = FXCollections.observableArrayList();
-        observer.add(spielergold);
-        observer.add(spielerleben);
+        observer.addAll(spielergold,spielerleben);
+  
+        
+        
 
         //spieler = new FBS_Spieler(0, 1000, 600, 100);
         //spielerleben = spieler.getmaxLife();
@@ -770,11 +775,11 @@ public class FBS_MapController {
     public void setCanvas(FBS_Canvas canvas) {
         this.canvas = canvas;
     }
-    public ObservableList<Integer> getObserver() {
+    public ObservableIntegerArray getObserver() {
         return observer;
     }
 
-    public void setObserver(ObservableList<Integer> observer) {
+    public void setObserver(ObservableIntegerArray observer) {
         this.observer = observer;
     }
     

@@ -20,7 +20,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ArrayChangeListener;
 import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableIntegerArray;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -58,8 +60,7 @@ public class FBS_RundenController extends AnchorPane {
         controloverlay.getStackpane().addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                mapcon.addTower(new FBS_Laser_Tower((int) event.getSceneX(), (int) event.getSceneY()));
-
+                mapcon.getMouseclicks(event.getSceneX(), event.getSceneY());
             }
         });
         controloverlay.getB_settings().addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -68,17 +69,18 @@ public class FBS_RundenController extends AnchorPane {
                 mouseAction();
             }
         });
-        mapcon.getObserver().addListener(new ListChangeListener() {
+        mapcon.getObserver().addListener(new ArrayChangeListener<ObservableIntegerArray>() {
             @Override
-            public void onChanged(ListChangeListener.Change c) {
+            public void onChanged(ObservableIntegerArray observableArray, boolean sizeChanged, int from, int to) {
+
                 controloverlay.setGoldLabel(mapcon.getSpielergold());
                 controloverlay.setLebenLabel(mapcon.getSpielerleben());
             }
         });
-        
+
         controloverlay.setGoldLabel(mapcon.getSpielergold());
         controloverlay.setLebenLabel(mapcon.getSpielerleben());
-        
+
         this.getChildren().add(root);
 
     }
