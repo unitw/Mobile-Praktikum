@@ -26,7 +26,7 @@ public class FBS_Canvas extends Canvas {
 
     GraphicsContext gc= this.getGraphicsContext2D();
     FBS_MapInterface map;
-    Image img = new Image("grassbackground.png");
+    Image img = new Image("gras.png");
     ArrayList<FBS_TowerInterface> towerlist = new ArrayList();
     ArrayList<FBS_HindernisInterface> hindernislist = new ArrayList();
     int ratio;
