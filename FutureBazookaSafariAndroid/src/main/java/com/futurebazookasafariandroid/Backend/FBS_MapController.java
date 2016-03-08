@@ -67,11 +67,10 @@ public class FBS_MapController {
     private HashMap<FBS_MonsterInterface, Integer> pathHashMap;
 
     private FBS_SpielerInterface spieler;
-    private int spielerleben=0;
-    private int spielergold=0;
-    private ObservableIntegerArray observer = new ObservableIntegerArrayImpl();
-    
-    
+    private int spielerleben = 0;
+    private int spielergold = 0;
+    private ObservableIntegerArray observer = new ObservableIntegerArrayImpl(0,1);
+
     private FBS_Canvas canvas;
     private int iteration = 0;
 
@@ -85,11 +84,7 @@ public class FBS_MapController {
         pathHashMap.put(monsterratte, 0);
         this.hindernislist = map.getHindernislist();
         this.is_in_round = false;
-        observer.addAll(spielergold,spielerleben);
-  
-        
-        
-
+        aktualisiereObserver();
         //spieler = new FBS_Spieler(0, 1000, 600, 100);
         //spielerleben = spieler.getmaxLife();
         //spielergold = spieler.getstartGold();
@@ -167,6 +162,7 @@ public class FBS_MapController {
         if (buildTower(tower)) {
             turmlist.add(tower);
             spielergold -= tower.getBaukosten();
+            aktualisiereObserver();
             canvas.drawMap(monsterlist, turmlist, projektillist, hindernislist);
 
         }
@@ -284,6 +280,8 @@ public class FBS_MapController {
             if (lifemon <= 0) {
                 this.getMonsterlist().remove(mon);
                 spielergold += mon.getLoot();
+                aktualisiereObserver();
+
             } else {
                 mon.setLife(lifemon);
             }
@@ -327,7 +325,7 @@ public class FBS_MapController {
                 if (mon.getPositionx() >= this.map.getEndpunkt().getX()
                         && mon.getPositiony() >= this.map.getEndpunkt().getY()) {
                     this.setSpielerleben(spielerleben - 1);
-
+                    aktualisiereObserver();
                     loeschliste.add(mon);
 
                 }
@@ -775,6 +773,7 @@ public class FBS_MapController {
     public void setCanvas(FBS_Canvas canvas) {
         this.canvas = canvas;
     }
+
     public ObservableIntegerArray getObserver() {
         return observer;
     }
@@ -782,7 +781,10 @@ public class FBS_MapController {
     public void setObserver(ObservableIntegerArray observer) {
         this.observer = observer;
     }
-    
-   
+
+    private void aktualisiereObserver() {
+        observer.set(0, spielergold);
+        observer.set(1, spielerleben);
+    }
 
 }
