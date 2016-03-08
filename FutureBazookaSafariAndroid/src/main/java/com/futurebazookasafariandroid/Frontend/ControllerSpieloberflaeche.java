@@ -101,16 +101,24 @@ public class ControllerSpieloberflaeche {
 
         Rectangle2D scr = Screen.getPrimary().getVisualBounds();
         
-        scrollpane.setPrefHeight(scr.getHeight() * 0.8);
-        scrollpane.setPrefWidth(scr.getWidth());
+        anchorpane.setPrefHeight(scr.getHeight());
+        anchorpane.setPrefWidth(scr.getWidth());
+//        scrollpane.setPrefHeight(scr.getHeight());
+//        scrollpane.setPrefWidth(scr.getWidth() * 0.7);
+//        gp_infos.setPrefHeight(scr.getHeight());
+//        gp_infos.setPrefWidth(scr.getWidth() * 0.3);
         anchorpane1.setPrefHeight(canvas1.getMap().getMapsizex());
         anchorpane1.setPrefWidth(canvas1.getMap().getMapsizey());
         canvas1.prefWidth(this.getCanvas().getMap().getMapsizex());
         canvas1.prefHeight(this.getCanvas().getMap().getMapsizey());
         
-        stackpane.setMaxHeight(scr.getHeight() * 0.2);
+        stackpane.setMaxHeight(scr.getHeight());
         stackpane.setMaxWidth(scr.getWidth());
         anchorpane1.getChildren().add(canvas1);
+        
+        System.out.println(scrollpane.getPrefWidth());
+        System.out.println(anchorpane1.getPrefWidth());
+        System.out.println(canvas1.getWidth());
       
         initMap();
         zeichneTowerList();
