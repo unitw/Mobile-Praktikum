@@ -30,6 +30,7 @@ import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TouchEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Screen;
 
@@ -45,8 +46,10 @@ public class FBS_RundenController extends AnchorPane {
     private FBS_MapInterface map;
     private ControllerSpieloberflaeche controloverlay;
     private int runde = 0;
+    private boolean touchMovedFlag = false;
 
-    public FBS_RundenController(ActionEvent e) throws IOException {
+
+    public FBS_RundenController(ActionEvent e) throws IOException {        
         Rectangle2D scr = Screen.getPrimary().getVisualBounds();
         this.map = new FBS_Safari_Map(1500, 1500);
         this.mapcon = new FBS_MapController(map, e);
@@ -57,12 +60,33 @@ public class FBS_RundenController extends AnchorPane {
         controloverlay = fxmlLoader.<ControllerSpieloberflaeche>getController();
         controloverlay.setCanvas(mapcon.getCanvas());
         controloverlay.initStuff();
-        controloverlay.getStackpane().addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+        controloverlay.getCanvas().addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                mapcon.getMouseclicks(event.getSceneX(), event.getSceneY());
+                mapcon.getMouseclicks(event.getX(), event.getY());
+                System.out.println("Mousepoints" + event.getX() + ", " + event.getY());
+
             }
         });
+        
+        controloverlay.getCanvas().addEventFilter(TouchEvent.TOUCH_MOVED, new EventHandler<TouchEvent>() {
+            @Override
+            public void handle(TouchEvent event) {
+                touchMovedFlag = true;
+            }
+        });
+        controloverlay.getCanvas().addEventFilter(TouchEvent.TOUCH_RELEASED, new EventHandler<TouchEvent>() {
+            @Override
+            public void handle(TouchEvent event) {
+                if(touchMovedFlag) {
+                    System.out.println("sorry, you moved");
+                } else {
+                    System.out.println("Touchpoints" + event.getTouchPoint().getX() + ", " + event.getTouchPoint().getY());
+                }
+                touchMovedFlag = false;
+            }
+        });
+        
         controloverlay.getB_settings().addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {

@@ -104,10 +104,6 @@ public class ControllerSpieloberflaeche {
         
         anchorpane.setPrefHeight(scr.getHeight());
         anchorpane.setPrefWidth(scr.getWidth());
-//        scrollpane.setPrefHeight(scr.getHeight());
-//        scrollpane.setPrefWidth(scr.getWidth() * 0.7);
-//        gp_infos.setPrefHeight(scr.getHeight());
-//        gp_infos.setPrefWidth(scr.getWidth() * 0.3);
         anchorpane1.setPrefHeight(canvas1.getMap().getMapsizex());
         anchorpane1.setPrefWidth(canvas1.getMap().getMapsizey());
         canvas1.prefWidth(this.getCanvas().getMap().getMapsizex());
@@ -116,10 +112,6 @@ public class ControllerSpieloberflaeche {
         stackpane.setMaxHeight(scr.getHeight());
         stackpane.setMaxWidth(scr.getWidth());
         anchorpane1.getChildren().add(canvas1);
-        
-        System.out.println(scrollpane.getPrefWidth());
-        System.out.println(anchorpane1.getPrefWidth());
-        System.out.println(canvas1.getWidth());
       
         initMap();
         zeichneTowerList();
@@ -141,14 +133,6 @@ public class ControllerSpieloberflaeche {
 
         pane.getItems().add(zeichneTowerList());
         sc_pane.setContent(pane);
-
-//        anchorpane.setOnTouchPressed(new EventHandler<TouchEvent>() {
-//            @Override 
-//            public void handle(TouchEvent event) {
-//                con.getMouseclicks(event.getTouchPoint().getSceneX(), event.getTouchPoint().getSceneY());
-//                event.consume();
-//            }
-//        });
 
     }
 //
