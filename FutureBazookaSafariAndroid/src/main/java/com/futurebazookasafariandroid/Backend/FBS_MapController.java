@@ -17,6 +17,7 @@ import com.futurebazookasafariandroid.FBS_Projektile.FBS_LaserProjektil;
 import com.futurebazookasafariandroid.FBS_Tower.FBS_Laser_Tower;
 import com.futurebazookasafariandroid.Frontend.FBS_Canvas;
 import com.futurebazookasafariandroid.Frontend.FBS_Spieloberflaeche;
+import com.sun.javafx.collections.ObservableListWrapper;
 import java.io.IOException;
 import java.util.ArrayList;
 import javafx.animation.AnimationTimer;
@@ -24,6 +25,8 @@ import static java.lang.Math.abs;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import javafx.beans.value.ObservableListValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -78,6 +81,7 @@ public class FBS_MapController {
         pathHashMap.put(monsterratte, 0);
         this.hindernislist = map.getHindernislist();
         this.is_in_round = false;
+        observer = FXCollections.observableArrayList();
         observer.add(spielergold);
         observer.add(spielerleben);
 
