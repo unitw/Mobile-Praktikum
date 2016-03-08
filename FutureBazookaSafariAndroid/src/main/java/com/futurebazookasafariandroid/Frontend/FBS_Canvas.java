@@ -36,7 +36,7 @@ public class FBS_Canvas extends Canvas {
         super(map.getMapsizex(), map.getMapsizey());
         this.map = map;
         this.ratio = (int) (map.getMapsizex() / this.ZELLEN);
-         gc = drawBackground();
+         
 
     }
 
