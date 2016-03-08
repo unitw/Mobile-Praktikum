@@ -53,5 +53,9 @@ public interface FBS_MonsterInterface {
     public void insertzug(Point2D p);
 
     public boolean testZug(Point2D p);
+    
+    public int getWaypoint();
+    
+    public void setWaypoint(int wp);
 
 }

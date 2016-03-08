@@ -59,17 +59,14 @@ public class FBS_MapController {
     private ArrayList<FBS_HindernisInterface> hindernislist = new ArrayList();
     private ArrayList<Integer> spawntimelist = new ArrayList();
 
-   
     private AnimationTimer timer;
     private boolean is_in_round;
     private FBS_MonsterInterface monsterratte;
     private ArrayList<Point2D> path;
-    private HashMap<FBS_MonsterInterface, Integer> pathHashMap;
-
     private FBS_SpielerInterface spieler;
     private int spielerleben = 0;
     private int spielergold = 0;
-    private ObservableIntegerArray observer = new ObservableIntegerArrayImpl(0,1);
+    private ObservableIntegerArray observer = new ObservableIntegerArrayImpl(0, 1);
 
     private FBS_Canvas canvas;
     private int iteration = 0;
@@ -78,10 +75,6 @@ public class FBS_MapController {
 
         this.canvas = new FBS_Canvas(map);
         this.map = map;
-        pathHashMap = new HashMap();
-        monsterratte = new FBS_Monster_Ratte((int) map.getStartpunkt().getX(), (int) map.getStartpunkt().getY());
-        monsterlist.add(monsterratte);
-        pathHashMap.put(monsterratte, 0);
         this.hindernislist = map.getHindernislist();
         this.is_in_round = false;
         aktualisiereObserver();
@@ -112,7 +105,6 @@ public class FBS_MapController {
                     if (iteration == spawntimelist.get(0)) {
                         FBS_MonsterInterface mon = monsterspawnlist.get(0);
                         monsterlist.add(mon);
-                        pathHashMap.put(mon, 0);
                         spawntimelist.remove(0);
                         monsterspawnlist.remove(0);
                     }
@@ -454,12 +446,12 @@ public class FBS_MapController {
     }
 
     public void bewege2(FBS_MonsterInterface moveMon) {
-        Point2D newZug = path.get(pathHashMap.get(moveMon));
+        Point2D newZug = path.get(moveMon.getWaypoint());
         double difx = newZug.getX() - moveMon.getPositionx();
         double dify = newZug.getY() - moveMon.getPositiony();
         moveMon.setangle(getMoveAngle(difx, dify));
         moveMon.setPosition(newZug.getX(), newZug.getY());
-        pathHashMap.replace(moveMon, pathHashMap.get(moveMon) + 1);
+        moveMon.setWaypoint(moveMon.getWaypoint() + 1);
     }
 
     public void bewege(Object object) {

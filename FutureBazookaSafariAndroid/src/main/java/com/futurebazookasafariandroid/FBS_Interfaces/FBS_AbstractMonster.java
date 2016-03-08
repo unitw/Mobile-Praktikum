@@ -5,7 +5,6 @@
  */
 package com.futurebazookasafariandroid.FBS_Interfaces;
 
-
 import java.util.ArrayList;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
@@ -27,6 +26,8 @@ public class FBS_AbstractMonster implements FBS_MonsterInterface {
     private int loot;
 
     private int exp;
+    
+    private int wp;
 
     private Image pic;
 
@@ -37,7 +38,7 @@ public class FBS_AbstractMonster implements FBS_MonsterInterface {
     ArrayList<Point2D> letztenachtzuege = new ArrayList();
 
     public void insertzug(Point2D p) {
-        
+
         letztenachtzuege.add(p);
 
     }
@@ -144,6 +145,16 @@ public class FBS_AbstractMonster implements FBS_MonsterInterface {
     @Override
     public void setGroesse(int Groesse) {
         this.groesse = Groesse;
+    }
+
+    @Override
+    public int getWaypoint() {
+        return wp;
+    }
+
+    @Override
+    public void setWaypoint(int wp) {
+        this.wp = wp;
     }
 
 }
