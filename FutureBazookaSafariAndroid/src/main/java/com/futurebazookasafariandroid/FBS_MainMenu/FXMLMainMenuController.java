@@ -6,7 +6,7 @@
 package com.futurebazookasafariandroid.FBS_MainMenu;
 
 import com.futurebazookasafariandroid.Backend.FBS_RundenController;
-import com.futurebazookasafariandroid.Frontend.FBS_Spieloberflaeche;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
