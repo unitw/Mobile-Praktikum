@@ -46,8 +46,8 @@ public class FBS_Canvas extends Canvas {
 
     public GraphicsContext drawBackground() {
         Canvas can = new Canvas();
-        can.setWidth(this.getWidth());
-        can.setHeight(this.getHeight());
+        can.setWidth(map.getMapsizex());
+        can.setHeight(map.getMapsizey());
 
         GraphicsContext gc1 = can.getGraphicsContext2D();
 
@@ -63,7 +63,7 @@ public class FBS_Canvas extends Canvas {
 
     public void drawMap(ArrayList<FBS_MonsterInterface> monsterlist, ArrayList<FBS_TowerInterface> towerlist, ArrayList<FBS_Projektil_Interface> projektillist, ArrayList<FBS_HindernisInterface> hindernislist) {
 
-       
+       gc=drawBackground();
         
 
 //        gc.setFill(Color.CADETBLUE);
