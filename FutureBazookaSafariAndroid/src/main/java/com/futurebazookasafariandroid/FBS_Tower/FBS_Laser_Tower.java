@@ -19,13 +19,13 @@ public class FBS_Laser_Tower extends FBS_AbstractTower {
     public FBS_Laser_Tower() {
         this.setisAOE(false);
         this.setAttackspeed(20);
-        this.setDamage(8);
+        this.setDamage(30);
         this.setGroesse(64);
         this.setUpgradestufe(0);
         this.setRange(100);
         this.setBaukosten(100);
         this.setLvl(1);
-        this.setPicture(new Image("JustusJonasTower.png"));
+        this.setPicture(new Image("LazerTower.png"));
 
     }
     
@@ -34,13 +34,13 @@ public class FBS_Laser_Tower extends FBS_AbstractTower {
         this.setPosition(posx, posy);
         this.setisAOE(false);
         this.setAttackspeed(20);
-        this.setDamage(8);
+        this.setDamage(30);
         this.setGroesse(64);
         this.setUpgradestufe(0);
         this.setRange(100);
         this.setBaukosten(100);
         this.setLvl(1);
-        this.setPicture(new Image("JustusJonasTower.png"));
+        this.setPicture(new Image("LazerTower.png"));
 
     }
 
