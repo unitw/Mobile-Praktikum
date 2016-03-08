@@ -96,6 +96,7 @@ public class FBS_MapController {
 
         this.is_in_round = true;
         path = getSchnellsterWeg();
+        iteration = 0;
         timer = new AnimationTimer() {
 
             @Override
@@ -388,11 +389,9 @@ public class FBS_MapController {
                     FBS_Knoten oldNode = getNodeinList(open, n);
                     if (oldNode == null) {
                         open.add(n);
-                        System.out.println(n.toString());
                     } else if (oldNode.getPfadlaenge() > n.getPfadlaenge()) {
                         open.remove(oldNode);
                         open.add(n);
-                        System.out.println(n.toString());
                     }
 
                 }
