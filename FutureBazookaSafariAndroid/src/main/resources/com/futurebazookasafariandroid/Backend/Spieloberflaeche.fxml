@@ -13,10 +13,10 @@
          <children>
             <ScrollPane fx:id="scrollpane" prefHeight="200.0" prefWidth="200.0">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="625.0" prefWidth="882.0" />
+                <AnchorPane fx:id="anchorpane1" minHeight="0.0" minWidth="0.0" prefHeight="625.0" prefWidth="882.0" />
               </content>
             </ScrollPane>
-            <AnchorPane fx:id="anchorpane1">
+            <AnchorPane>
                <children>
                   <GridPane fx:id="gp_overlay" prefHeight="Infinity" prefWidth="Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columnConstraints>
@@ -69,8 +69,8 @@
                                              <children>
                                                 <SplitPane fx:id="sp_pane" dividerPositions="0.5" orientation="VERTICAL" prefHeight="331.0" prefWidth="126.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                   <items>
-                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
-                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+                                                    <AnchorPane fx:id="anchorpansplitoben" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+                                                    <AnchorPane fx:id="anchorpansplitunten" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
                                                   </items>
                                                 </SplitPane>
                                              </children>
