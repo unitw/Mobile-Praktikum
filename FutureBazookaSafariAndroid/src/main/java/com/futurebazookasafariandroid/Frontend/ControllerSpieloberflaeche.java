@@ -73,6 +73,9 @@ public class ControllerSpieloberflaeche {
 
     @FXML
     private AnchorPane anchorpane;
+    
+    @FXML
+    private AnchorPane anchorpane1;
 
     @FXML
     private ScrollPane scrollpane;
@@ -97,15 +100,16 @@ public class ControllerSpieloberflaeche {
     public void initStuff() {
 
         Rectangle2D scr = Screen.getPrimary().getVisualBounds();
-        anchorpane.setPrefHeight(scr.getHeight());
-        anchorpane.setPrefWidth(scr.getWidth());
+        scrollpane.setPrefHeight(scr.getHeight());
+        scrollpane.setPrefWidth(scr.getWidth());
         canvas1.prefWidth(this.getCanvas().getMap().getMapsizex());
         canvas1.prefHeight(this.getCanvas().getMap().getMapsizey());
         
       //  stackpane.setMaxHeight(canvas1.getMap().getMapsizey());
       //  stackpane.setMaxWidth(canvas1.getMap().getMapsizex());
-        scrollpane.setPrefWidth(canvas1.getMap().getMapsizex());
-       scrollpane.setPrefHeight(canvas1.getMap().getMapsizey());
+       anchorpane1.getChildren().add(canvas1);
+       anchorpane1.setPrefWidth(canvas1.getMap().getMapsizex());
+       anchorpane1.setPrefHeight(canvas1.getMap().getMapsizey());
       
         initMap();
         zeichneTowerList();
@@ -113,9 +117,6 @@ public class ControllerSpieloberflaeche {
 //       canvas.setLayoutX(0);
 //       canvas.setLayoutY(0);
 //       canvas.setTranslateX(200);
-        //anchorpane.getChildren().add(canvas);
-        scrollpane.setContent(canvas1);
-        scrollpane.setPannable(true);
        // stackpane.getChildren().add(scrollpane);
        // stackpane.setAlignment(scrollpane, Pos.TOP_LEFT);
         anchorpansplitoben.getChildren().add(zeichneTowerList());

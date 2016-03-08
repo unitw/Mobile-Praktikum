@@ -12,7 +12,7 @@
     <children>
         <StackPane fx:id="stackpane" prefHeight="-Infinity" prefWidth="-Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-                <AnchorPane fx:id="anchorpane1">
+                <AnchorPane>
                     <children>
                         <GridPane fx:id="gp_overlay" prefHeight="Infinity" prefWidth="Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <columnConstraints>
@@ -88,7 +88,7 @@
                 </AnchorPane>
                 <ScrollPane fx:id="scrollpane" prefHeight="200.0" prefWidth="200.0">
                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+                        <AnchorPane fx:id="anchorpane1" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
                     </content>
                 </ScrollPane>
             </children>
