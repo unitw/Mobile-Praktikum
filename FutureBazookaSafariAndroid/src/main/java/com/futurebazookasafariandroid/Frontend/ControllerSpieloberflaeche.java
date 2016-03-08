@@ -114,12 +114,7 @@ public class ControllerSpieloberflaeche {
       
         initMap();
         zeichneTowerList();
-
-//       canvas.setLayoutX(0);
-//       canvas.setLayoutY(0);
-//       canvas.setTranslateX(200);
-       // stackpane.getChildren().add(scrollpane);
-       // stackpane.setAlignment(scrollpane, Pos.TOP_LEFT);
+        
         anchorpansplitoben.getChildren().add(zeichneTowerList());
 
         gp_overlay.setAlignment(Pos.TOP_RIGHT);
