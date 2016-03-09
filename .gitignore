@@ -21,3 +21,5 @@ FutureBazookaSafariAndroid/build.gradle
 /FutureBazookaSafariAndroid/build.gradle
 
 FutureBazookaSafariAndroid/build.gradle
+
+*.gradle
