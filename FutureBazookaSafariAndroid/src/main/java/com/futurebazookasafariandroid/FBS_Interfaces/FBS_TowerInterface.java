@@ -56,13 +56,22 @@ public interface FBS_TowerInterface {
     public void setLvl(int lvl);
 
     public int getLvl();
+    
+    public Image getPositionImage();
+    
+    public void setPositionImage(Image Image);
+    
+    public void setPicture(Image pic);
+    
+    public Image getPicture();
+
 
     public ArrayList<Integer> getIntegerList();
 
     public void addInteger(int i);
-
-    public void setPicture(Image pic);
-
-    public Image getPicture();
+        
+    public void setName(String Name);
+    
+    public String getName();
 
 }

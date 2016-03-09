@@ -15,6 +15,7 @@ import javafx.scene.image.ImageView;
  */
 public class FBS_AbstractTower implements FBS_TowerInterface {
 
+    private String name;
     private int posx;
     private int posy;
     private boolean isAOE = false;
@@ -27,6 +28,10 @@ public class FBS_AbstractTower implements FBS_TowerInterface {
     private int baukosten;
     private int lvl;
     private Image pic;
+    private Image posPic;
+    private Image projektil;
+    
+    
 
     private ArrayList<Integer> IntegerList = new ArrayList();
 
@@ -151,6 +156,24 @@ public class FBS_AbstractTower implements FBS_TowerInterface {
     }
 
     @Override
+    public void setPositionImage(Image Image) {
+        this.posPic = Image;
+    }
+
+    @Override
+    public Image getPositionImage() {
+        return this.pic;
+    }
+    @Override 
+    public void setName(String Name) {
+        this.name = Name;
+    }
+    
+    @Override
+    public String getName() {
+        return this.name;
+    }
+        
     public ArrayList<Integer> getIntegerList() {
 
         return IntegerList;

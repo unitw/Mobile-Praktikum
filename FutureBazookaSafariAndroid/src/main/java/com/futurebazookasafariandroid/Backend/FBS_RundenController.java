@@ -30,10 +30,13 @@ import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TouchEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Screen;
 
@@ -48,10 +51,9 @@ public class FBS_RundenController extends AnchorPane {
     private FBS_MapController mapcon;
     private FBS_MapInterface map;
     private ControllerSpieloberflaeche controloverlay;
-    private FBS_TowerInterface tower;
-    private boolean dragstarted = false;
+    private String tower;
     private int runde = 0;
-    private boolean touchMovedFlag = false;
+    private Image img = new Image("Lazertower.png");
 
     public FBS_RundenController(ActionEvent e) throws IOException {
         Rectangle2D scr = Screen.getPrimary().getVisualBounds();
@@ -64,44 +66,41 @@ public class FBS_RundenController extends AnchorPane {
         controloverlay = fxmlLoader.<ControllerSpieloberflaeche>getController();
         controloverlay.setCanvas(mapcon.getCanvas());
         controloverlay.initStuff();
-
+        
+        
         for (Button b : controloverlay.getButtonlist()) {
-            b.addEventFilter(MouseEvent.MOUSE_DRAGGED, new EventHandler<MouseEvent>() {
-                @Override
+            b.setOnDragDetected(new EventHandler<MouseEvent>() {
                 public void handle(MouseEvent event) {
-                    touchMovedFlag = true;
-
-                    if (dragstarted) {
-                        event.consume();
-                    } else {
-                        tower = controloverlay.ButtonToTower(b);
-                        dragstarted = true;
-                    }
+                    
+                    tower = b.getText();
+                    System.out.println();
+                    
+                    Dragboard db = b.startDragAndDrop(TransferMode.ANY);
+                    /* Put a string on a dragboard */
+                    ClipboardContent content = new ClipboardContent();
+                    content.putImage(img);
+                    db.setContent(content);
+                    System.out.println("Drag started");
+                    event.consume();
                 }
-            });
-
+            });   
         }
-        controloverlay.getCanvas().addEventFilter(MouseEvent.MOUSE_RELEASED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                if (dragstarted) {
-                    tower.setPosition((int) event.getSceneX(), (int) event.getSceneY());
-                    mapcon.addTower(tower);
-                    dragstarted = false;
-                }
+        
+        controloverlay.getCanvas().setOnDragOver(new EventHandler<DragEvent>() {
+            public void handle(DragEvent event) {
+                event.acceptTransferModes(TransferMode.MOVE);
+                System.out.println("Drag Over");
+                event.consume();
             }
-
         });
-
-        controloverlay.getCanvas().addEventFilter(MouseEvent.MOUSE_RELEASED, new EventHandler<MouseEvent>() {
-            @Override
-
-            public void handle(MouseEvent event) {
-                if (!touchMovedFlag) {
-                    mapcon.getMouseclicks(event.getX(), event.getY());
-                }
-                touchMovedFlag = false;
-
+        controloverlay.getCanvas().setOnDragDropped(new EventHandler<DragEvent>() {
+            public void handle(DragEvent event) {
+                Dragboard db = event.getDragboard();
+                System.out.println(tower);
+                mapcon.getMouseclicks(event.getX(), event.getY(), tower);
+                System.out.println("X: " + event.getX() + "\nY: " + event.getY());
+                event.setDropCompleted(true);
+                event.consume();
             }
         });
 
@@ -145,5 +144,7 @@ public class FBS_RundenController extends AnchorPane {
         }
 
     }
+    
+    
 
 }
