@@ -24,6 +24,7 @@ import javafx.collections.ArrayChangeListener;
 import javafx.collections.ObservableIntegerArray;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -178,6 +179,8 @@ public class FBS_RundenController extends AnchorPane {
 
         Rectangle2D scr = Screen.getPrimary().getVisualBounds();
 
+        int pw = (int) scr.getWidth() / 4;
+        int ph = (int) scr.getHeight() / 4;
         Stage dialog = new Stage();
         dialog.initStyle(StageStyle.UNDECORATED);
 
@@ -208,9 +211,7 @@ public class FBS_RundenController extends AnchorPane {
         });
 
         Label t = new Label();
-        //  t.setTranslateY(160);
-        t.setTranslateX(75);
-        t.setTranslateY(10);
+        
         t.setCache(true);
         t.setText("You're not fancy");
         t.setId("GAMEOVER");
@@ -226,8 +227,9 @@ public class FBS_RundenController extends AnchorPane {
         // t.setTranslateY(400);
         GridPane pane = new GridPane();
         Scene scene = new Scene(pane);
+        
 
-        pane.setPrefSize(300, 300);
+        
         pane.getStyleClass().add("bordered-titled-border");
         pane.add(t, 0, 0);
         pane.add(reset, 0, 1);
