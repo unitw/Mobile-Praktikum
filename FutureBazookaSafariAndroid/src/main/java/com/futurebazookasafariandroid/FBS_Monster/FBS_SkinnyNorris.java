@@ -14,12 +14,11 @@ import javafx.scene.image.Image;
  */
 public class FBS_SkinnyNorris extends FBS_AbstractMonster {
 
-    private int speed=4;
     
     public FBS_SkinnyNorris(double posx, double posy) {
         this.setPosition(posx, posy);
         this.setLife(30);
-        this.setSpeed(speed);
+        this.setSpeed(3);
         this.setLoot(100);
         this.setPicture(new Image("skinnynorris.png"));
         this.setGroesse(64);

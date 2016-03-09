@@ -160,22 +160,22 @@ public class FBS_RundenController extends AnchorPane {
             starteRunde(new FBS_LevelOne(map.getStartpunkt().getX(), map.getStartpunkt().getY(), schwierigkeit));
         }
         if (!mapcon.getRundenstatus() && runde == 1) {
-            starteRunde(new FBS_LevelTwo(map.getStartpunkt().getX(), map.getStartpunkt().getY()));
+            starteRunde(new FBS_LevelTwo(map.getStartpunkt().getX(), map.getStartpunkt().getY(), schwierigkeit));
         }
         if (!mapcon.getRundenstatus() && runde == 2) {
-            starteRunde(new FBS_LevelThree(map.getStartpunkt().getX(), map.getStartpunkt().getY()));
+            starteRunde(new FBS_LevelThree(map.getStartpunkt().getX(), map.getStartpunkt().getY(), schwierigkeit));
         }
         if (!mapcon.getRundenstatus() && runde == 3) {
-            starteRunde(new FBS_LevelFour(map.getStartpunkt().getX(), map.getStartpunkt().getY()));
+            starteRunde(new FBS_LevelFour(map.getStartpunkt().getX(), map.getStartpunkt().getY(), schwierigkeit));
         }
         else if (runde == 4) {
             runde = 0;
-            schwierigkeit=1;
+            schwierigkeit++;
         }
 
     }
 
-    public static void roundFailed() throws IOException {
+    public static void roundFailed() {
 
         Rectangle2D scr = Screen.getPrimary().getVisualBounds();
 
@@ -192,6 +192,7 @@ public class FBS_RundenController extends AnchorPane {
 
             Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
             FBS_RundenController roundcon;
+            runde = 0;
             roundcon = new FBS_RundenController(stg);
 
             root.getChildren().add(roundcon);

@@ -29,6 +29,7 @@ public class FBS_Canvas extends Canvas {
     GraphicsContext gc = this.getGraphicsContext2D();
     FBS_MapInterface map;
     Image img = new Image("gras.png");
+    Image img2 = new Image("erde.png");
     ArrayList<FBS_TowerInterface> towerlist = new ArrayList();
     ArrayList<FBS_HindernisInterface> hindernislist = new ArrayList();
     int ratio;
@@ -46,19 +47,44 @@ public class FBS_Canvas extends Canvas {
         return map;
     }
 
-    public void drawBackground() {
+    public GraphicsContext drawBackground() {
+        Canvas can = new Canvas();
+        can.setWidth(map.getMapsizex());
+        can.setHeight(map.getMapsizey());
 
+<<<<<<< HEAD
           String image = FBS_Canvas.class.getResource("grass.png").toExternalForm();
                 this.setStyle("-fx-background-image: url('" + image + "'); "
                         + "-fx-background-position: center center; "
                         + "-fx-background-repeat: stretch;");
+=======
+        GraphicsContext gc1 = can.getGraphicsContext2D();
+>>>>>>> origin/master
 
+        for (int i = 0; i < ZELLEN; i++) {
+            for (int j = 0; j < ZELLEN; j++) {
+
+                gc1.drawImage(img, i * ratio, j * ratio, ratio, ratio);
+
+            }
+        }
+        return gc1;
     }
 
     public void drawMap(ArrayList<FBS_MonsterInterface> monsterlist, ArrayList<FBS_TowerInterface> towerlist, ArrayList<FBS_Projektil_Interface> projektillist, ArrayList<FBS_HindernisInterface> hindernislist) {
 
-        gc.setFill(Color.GREEN);
-        gc.fillRect(0, 0, this.getWidth(), this.getHeight());
+//        gc.setFill(Color.GREEN);
+//        gc.fillRect(0, 0, this.getWidth(), this.getHeight());
+        
+        for (int i = 0; i < ZELLEN; i++) {
+            for (int j = 0; j < ZELLEN; j++) {
+                if((i == j) || (i == j+1) || (i == j-1)) {
+                    gc.drawImage(img2, i * ratio, j * ratio, ratio, ratio);
+                } else {
+                    gc.drawImage(img, i * ratio, j * ratio, ratio, ratio);
+                }
+            }
+        }
 
 //        gc.setFill(Color.CADETBLUE);
 //        gc.fillRect(0, 0, map.getMapsizex(), map.getMapsizey());
