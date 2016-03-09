@@ -10,6 +10,7 @@ import com.futurebazookasafariandroid.FBS_Interfaces.FBS_MonsterInterface;
 import com.futurebazookasafariandroid.FBS_Interfaces.FBS_Projektil_Interface;
 import com.futurebazookasafariandroid.FBS_Interfaces.FBS_TowerInterface;
 import com.futurebazookasafariandroid.FBS_Interfaces.FBS_HindernisInterface;
+import com.futurebazookasafariandroid.FXMLLoginScreenController;
 
 import java.util.ArrayList;
 import javafx.scene.canvas.Canvas;
@@ -47,7 +48,10 @@ public class FBS_Canvas extends Canvas {
 
     public void drawBackground() {
 
-         
+          String image = FBS_Canvas.class.getResource("grass.png").toExternalForm();
+                this.setStyle("-fx-background-image: url('" + image + "'); "
+                        + "-fx-background-position: center center; "
+                        + "-fx-background-repeat: stretch;");
 
     }
 
