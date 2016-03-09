@@ -24,10 +24,7 @@ public class FXMLLoginScreenController {
     private GridPane gridlogin;
     
     
-   private void initialize(){
-       
-       
-   }
+  
     
 
     @FXML
