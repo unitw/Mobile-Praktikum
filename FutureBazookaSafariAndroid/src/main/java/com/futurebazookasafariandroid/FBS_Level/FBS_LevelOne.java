@@ -24,7 +24,7 @@ public class FBS_LevelOne extends FBS_AbstractLevel {
         ArrayList<Integer> spawnlist = new ArrayList();
         for (int i = 0; i < 10+(schwierigkeit*5); i++) {
             FBS_Monster_Ratte rat = new FBS_Monster_Ratte(StartX, StartY);
-            rat.setLife(rat.getLife()+(schwierigkeit*10));
+            rat.setLife(rat.getLife()+(schwierigkeit*rat.getLife()));
             int max = min(schwierigkeit,rat.getSpeed()-1);
             rat.setSpeed(rat.getSpeed()- max);
             rat.setLoot(rat.getLoot() + schwierigkeit*rat.getLoot());

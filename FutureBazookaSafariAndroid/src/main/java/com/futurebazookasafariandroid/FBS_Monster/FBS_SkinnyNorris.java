@@ -17,7 +17,7 @@ public class FBS_SkinnyNorris extends FBS_AbstractMonster {
     
     public FBS_SkinnyNorris(double posx, double posy) {
         this.setPosition(posx, posy);
-        this.setLife(30);
+        this.setLife(40);
         this.setSpeed(3);
         this.setLoot(100);
         this.setPicture(new Image("skinnynorris.png"));
