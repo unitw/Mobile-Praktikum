@@ -175,9 +175,9 @@ public class FBS_MapController {
         FBS_TowerInterface tower;
 
         if (Towername.equals("JustusJonas")) {
-            tower = new FBS_JustusJonas_Tower((int) x, (int) y);
+            tower = new FBS_JustusJonas_Tower(((int) x) - 48, ((int) y) - 48);
         } else {
-            tower = new FBS_Laser_Tower((int) x, (int) y);
+            tower = new FBS_Laser_Tower(((int) x) - 24 , ((int) y) - 24);
         }
 
         if (buildTower(tower)) {
