@@ -13,7 +13,9 @@ import com.futurebazookasafariandroid.FBS_Interfaces.FBS_SpielerInterface;
 import com.futurebazookasafariandroid.FBS_Interfaces.FBS_TowerInterface;
 import com.futurebazookasafariandroid.FBS_Interfaces.FBS_HindernisInterface;
 import com.futurebazookasafariandroid.FBS_Monster.FBS_Monster_Ratte;
+import com.futurebazookasafariandroid.FBS_Projektile.FBS_BobAndrewsProjektil;
 import com.futurebazookasafariandroid.FBS_Projektile.FBS_LaserProjektil;
+import com.futurebazookasafariandroid.FBS_Tower.FBS_JustusJonas_Tower;
 import com.futurebazookasafariandroid.FBS_Tower.FBS_Laser_Tower;
 import com.futurebazookasafariandroid.Frontend.FBS_Canvas;
 
@@ -149,8 +151,14 @@ public class FBS_MapController {
 
     }
 
-    public void getMouseclicks(double x, double y) {
-        FBS_TowerInterface tower = new FBS_Laser_Tower((int) x, (int) y);
+    public void getMouseclicks(double x, double y, String Towername) {
+        FBS_TowerInterface tower;
+        
+        if(Towername.equals("JustusJonas")) {
+            tower = new FBS_JustusJonas_Tower((int) x, (int) y);
+        } else {
+            tower = new FBS_Laser_Tower((int) x, (int) y);
+        }
 
         if (buildTower(tower)) {
             turmlist.add(tower);
@@ -291,8 +299,13 @@ public class FBS_MapController {
 
         }
         if (mon != null) {
+            FBS_Projektil_Interface projektil;
+            if(tower.getName().equals("JustusJonas")) {
+                projektil = new FBS_BobAndrewsProjektil(mon, tower.getPositionx(), tower.getPositiony(), tower.getDamage(), tower.getAOE());
+            } else {
+                projektil = new FBS_LaserProjektil(mon, tower.getPositionx(), tower.getPositiony(), tower.getDamage(), tower.getAOE());
+            }
 
-            FBS_Projektil_Interface projektil = new FBS_LaserProjektil(mon, tower.getPositionx(), tower.getPositiony(), tower.getDamage(), tower.getAOE());
             this.getProjektillist().add(projektil);
         }
 
@@ -719,10 +732,6 @@ public class FBS_MapController {
 
     public boolean getRundenstatus() {
         return is_in_round;
-    }
-
-    public void getMouseclicks(TouchPoint touchPoint) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     private int getMoveAngle(double difx, double dify) {

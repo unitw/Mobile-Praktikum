@@ -247,8 +247,8 @@ public class ControllerSpieloberflaeche {
         return stackpane;
     }
 
-    public FBS_TowerInterface ButtonToTower(Button b) {
-        return turmlist.get(b);
+    public AnchorPane getContainer() {
+        return anchorpane;
     }
 
     public ArrayList<Button> getButtonlist() {
