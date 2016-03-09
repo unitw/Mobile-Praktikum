@@ -30,6 +30,8 @@ import static java.lang.Math.abs;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.value.ObservableListValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableIntegerArray;
@@ -77,7 +79,7 @@ public class FBS_MapController {
     private FBS_Canvas canvas;
     private int iteration = 0;
 
-    public FBS_MapController(FBS_MapInterface map, ActionEvent e) throws IOException {
+    public FBS_MapController(FBS_MapInterface map) {
 
         this.canvas = new FBS_Canvas(map);
         this.map = map;
@@ -123,7 +125,11 @@ public class FBS_MapController {
                     stopTimer();
 
                 }
-                MonsterMovement(iteration);
+                try {
+                    MonsterMovement(iteration);
+                } catch (IOException ex) {
+                    Logger.getLogger(FBS_MapController.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 canvas.drawMap(monsterlist, turmlist, projektillist, hindernislist);
                 TowerShoot(iteration);
                 canvas.drawMap(monsterlist, turmlist, projektillist, hindernislist);
@@ -157,6 +163,12 @@ public class FBS_MapController {
         };
         timer.start();
 
+    }
+
+    public void resetStuff() {
+   
+        
+        
     }
 
     public void getMouseclicks(double x, double y, String Towername) {
@@ -364,7 +376,7 @@ public class FBS_MapController {
         return heuristic;
     }
 
-    public void MonsterMovement(int i) {
+    public void MonsterMovement(int i) throws IOException {
         ArrayList<FBS_MonsterInterface> loeschliste = new ArrayList();
 
         for (FBS_MonsterInterface mon : this.getMonsterlist()) {
