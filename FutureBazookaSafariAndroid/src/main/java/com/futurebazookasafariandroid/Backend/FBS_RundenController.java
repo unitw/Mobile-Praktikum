@@ -55,7 +55,7 @@ public class FBS_RundenController extends AnchorPane {
 
     public FBS_RundenController(ActionEvent e) throws IOException {
         Rectangle2D scr = Screen.getPrimary().getVisualBounds();
-        this.map = new FBS_Safari_Map(1500, 1500);
+        this.map = new FBS_Safari_Map(500, 500);
         this.mapcon = new FBS_MapController(map, e);
         FBS_Spieler justus_jonas = new FBS_Spieler(700, 80000, 1000, 1);
         mapcon.setSpieler(justus_jonas);
@@ -64,10 +64,13 @@ public class FBS_RundenController extends AnchorPane {
         controloverlay = fxmlLoader.<ControllerSpieloberflaeche>getController();
         controloverlay.setCanvas(mapcon.getCanvas());
         controloverlay.initStuff();
+
         for (Button b : controloverlay.getButtonlist()) {
             b.addEventFilter(MouseEvent.MOUSE_DRAGGED, new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
+                    touchMovedFlag = true;
+
                     if (dragstarted) {
                         event.consume();
                     } else {
@@ -76,35 +79,29 @@ public class FBS_RundenController extends AnchorPane {
                     }
                 }
             });
-           
+
         }
-        controloverlay.getCanvas().addEventFilter(MouseEvent.MOUSE_RELEASED, new EventHandler<MouseEvent>(){
+        controloverlay.getCanvas().addEventFilter(MouseEvent.MOUSE_RELEASED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if(dragstarted){
-                    tower.setPosition((int)event.getSceneX(),(int)event.getSceneY());
+                if (dragstarted) {
+                    tower.setPosition((int) event.getSceneX(), (int) event.getSceneY());
                     mapcon.addTower(tower);
                     dragstarted = false;
                 }
             }
-            
+
         });
 
-        controloverlay.getCanvas().addEventFilter(TouchEvent.TOUCH_MOVED, new EventHandler<TouchEvent>() {
+        controloverlay.getCanvas().addEventFilter(MouseEvent.MOUSE_RELEASED, new EventHandler<MouseEvent>() {
             @Override
-            public void handle(TouchEvent event) {
-                touchMovedFlag = true;
-            }
-        });
-        controloverlay.getCanvas().addEventFilter(TouchEvent.TOUCH_RELEASED, new EventHandler<TouchEvent>() {
-            @Override
-            public void handle(TouchEvent event) {
-                if (touchMovedFlag) {
-                    System.out.println("sorry, you moved");
-                } else {
-                    System.out.println("Touchpoints" + event.getTouchPoint().getX() + ", " + event.getTouchPoint().getY());
+
+            public void handle(MouseEvent event) {
+                if (!touchMovedFlag) {
+                    mapcon.getMouseclicks(event.getX(), event.getY());
                 }
                 touchMovedFlag = false;
+
             }
         });
 

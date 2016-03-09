@@ -1,9 +1,6 @@
 package com.futurebazookasafariandroid;
 
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -22,6 +20,15 @@ public class FXMLLoginScreenController {
     private TextField fbs_username;
     @FXML
     private PasswordField fbs_passwort;
+    @FXML
+    private GridPane gridlogin;
+    
+    
+   private void initialize(){
+       
+       
+   }
+    
 
     @FXML
     private void LoginPressed(ActionEvent event) throws IOException {
