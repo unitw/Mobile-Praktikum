@@ -30,6 +30,8 @@ import static java.lang.Math.abs;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.value.ObservableListValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableIntegerArray;
@@ -123,7 +125,11 @@ public class FBS_MapController {
                     stopTimer();
 
                 }
-                MonsterMovement(iteration);
+                try {
+                    MonsterMovement(iteration);
+                } catch (IOException ex) {
+                    Logger.getLogger(FBS_MapController.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 canvas.drawMap(monsterlist, turmlist, projektillist, hindernislist);
                 TowerShoot(iteration);
                 canvas.drawMap(monsterlist, turmlist, projektillist, hindernislist);
@@ -370,7 +376,7 @@ public class FBS_MapController {
         return heuristic;
     }
 
-    public void MonsterMovement(int i) {
+    public void MonsterMovement(int i) throws IOException {
         ArrayList<FBS_MonsterInterface> loeschliste = new ArrayList();
 
         for (FBS_MonsterInterface mon : this.getMonsterlist()) {
@@ -431,7 +437,7 @@ public class FBS_MapController {
         Point2D start = map.getStartpunkt();
         Point2D end = map.getEndpunkt();
         System.out.println(end.toString());
-        FBS_MonsterInterface moveMon = new FBS_Monster_Ratte(start.getX(), start.getY());
+        FBS_MonsterInterface moveMon = new FBS_Monster_Ratte(start.getX(), start.getY(), 0);
         //Key = point value = vorgänger;
         ArrayList<FBS_Knoten> open = new ArrayList();
         ArrayList<FBS_Knoten> closed = new ArrayList();

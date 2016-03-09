@@ -9,35 +9,22 @@ import com.futurebazookasafariandroid.FBS_Interfaces.FBS_LevelInterface;
 import com.futurebazookasafariandroid.FBS_Interfaces.FBS_MapInterface;
 import com.futurebazookasafariandroid.FBS_Interfaces.FBS_MonsterInterface;
 import com.futurebazookasafariandroid.FBS_Interfaces.FBS_Spieler;
-import com.futurebazookasafariandroid.FBS_Interfaces.FBS_SpielerInterface;
-import com.futurebazookasafariandroid.FBS_Interfaces.FBS_TowerInterface;
+import com.futurebazookasafariandroid.FBS_Level.FBS_LevelFour;
 import com.futurebazookasafariandroid.FBS_Level.FBS_LevelOne;
+import com.futurebazookasafariandroid.FBS_Level.FBS_LevelThree;
+import com.futurebazookasafariandroid.FBS_Level.FBS_LevelTwo;
 import com.futurebazookasafariandroid.FBS_Maps.FBS_Safari_Map;
-import com.futurebazookasafariandroid.FBS_Tower.FBS_Laser_Tower;
 import com.futurebazookasafariandroid.Frontend.ControllerSpieloberflaeche;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.ArrayChangeListener;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableIntegerArray;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -49,19 +36,15 @@ import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TouchEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.scene.transform.Rotate;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.util.Duration;
 
 /**
  *
@@ -75,9 +58,12 @@ public class FBS_RundenController extends AnchorPane {
     private static FBS_MapInterface map;
     private ControllerSpieloberflaeche controloverlay;
     private String tower;
+
+    private static int runde = 0, schwierigkeit = 0;
+
     private static Parent root;
-    private static int runde = 0;
     private static Stage stg;
+
     private Image img = new Image("Lazertower.png");
 
     public FBS_RundenController(Stage s) {
@@ -169,8 +155,22 @@ public class FBS_RundenController extends AnchorPane {
     }
 
     public void mouseAction() {
-        if (!mapcon.getRundenstatus()) {
-            starteRunde(new FBS_LevelOne(map.getStartpunkt().getX(), map.getStartpunkt().getY()));
+        
+        if (!mapcon.getRundenstatus() && runde == 0) {
+            starteRunde(new FBS_LevelOne(map.getStartpunkt().getX(), map.getStartpunkt().getY(), schwierigkeit));
+        }
+        if (!mapcon.getRundenstatus() && runde == 1) {
+            starteRunde(new FBS_LevelTwo(map.getStartpunkt().getX(), map.getStartpunkt().getY()));
+        }
+        if (!mapcon.getRundenstatus() && runde == 2) {
+            starteRunde(new FBS_LevelThree(map.getStartpunkt().getX(), map.getStartpunkt().getY()));
+        }
+        if (!mapcon.getRundenstatus() && runde == 3) {
+            starteRunde(new FBS_LevelFour(map.getStartpunkt().getX(), map.getStartpunkt().getY()));
+        }
+        else if (runde == 4) {
+            runde = 0;
+            schwierigkeit=1;
         }
 
     }

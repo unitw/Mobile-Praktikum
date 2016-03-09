@@ -57,5 +57,8 @@ public interface FBS_MonsterInterface {
     public int getWaypoint();
     
     public void setWaypoint(int wp);
-
+    
+    public void setSchwierigkeit(int schwierigkeit);
+    
+    public int getSchwierigkeit();
 }

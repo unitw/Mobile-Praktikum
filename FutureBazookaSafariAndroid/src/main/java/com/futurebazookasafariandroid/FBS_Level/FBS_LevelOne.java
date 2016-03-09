@@ -16,11 +16,13 @@ import java.util.ArrayList;
  */
 public class FBS_LevelOne extends FBS_AbstractLevel {
 
-    public FBS_LevelOne(double StartX, double StartY) {
+    private int schwierigkeit;
+    
+    public FBS_LevelOne(double StartX, double StartY, int schwierigkeit) {
         this.initMonsterlist();
         ArrayList<Integer> spawnlist = new ArrayList();
         for (int i = 0; i < 10; i++) {
-            this.addMonster(new FBS_Monster_Ratte(StartX, StartY));
+            this.addMonster(new FBS_Monster_Ratte(StartX, StartY, schwierigkeit));
             spawnlist.add(i*20);
         }
         this.setSpawntimes(spawnlist);

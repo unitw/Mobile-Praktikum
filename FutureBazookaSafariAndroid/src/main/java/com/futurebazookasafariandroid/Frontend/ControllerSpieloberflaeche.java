@@ -28,6 +28,7 @@ import javafx.scene.input.TouchEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Screen;
 
@@ -57,9 +58,6 @@ public class ControllerSpieloberflaeche {
 
     @FXML
     private AnchorPane anchorpansplitoben;
-
-    @FXML
-    private TitledPane towermenu;
 
     @FXML
     private Button b_settings;
@@ -129,9 +127,6 @@ public class ControllerSpieloberflaeche {
 
         
         stackpane.getChildren().remove(gp_overlay);
-        ColumnConstraints column1 = new ColumnConstraints();
-        column1.setPercentWidth(10);
-        gp_overlay.getColumnConstraints().add(column1);
         stackpane.getChildren().add(gp_overlay);
         stackpane.setAlignment(gp_overlay, Pos.TOP_LEFT);
         stackpane.setAlignment(scrollpane,Pos.TOP_LEFT);

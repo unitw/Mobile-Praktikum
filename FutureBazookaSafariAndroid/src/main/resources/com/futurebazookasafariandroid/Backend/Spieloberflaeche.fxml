@@ -9,11 +9,11 @@
 
 <AnchorPane fx:id="anchorpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="628.0" prefWidth="881.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.futurebazookasafariandroid.Frontend.ControllerSpieloberflaeche">
    <children>
-      <StackPane fx:id="stackpane" prefHeight="-Infinity" prefWidth="-Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <StackPane fx:id="stackpane" prefHeight="628.0" prefWidth="881.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <AnchorPane>
                <children>
-                  <GridPane fx:id="gp_overlay" prefHeight="Infinity" prefWidth="Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <GridPane fx:id="gp_overlay" prefHeight="628.0" prefWidth="881.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -26,29 +26,21 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Button fx:id="b_settings" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Button" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
-                        <TitledPane fx:id="towermenu" expanded="false" maxWidth="1.7976931348623157E308" text="Tower Menu" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.hgrow="NEVER" GridPane.rowSpan="3" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+                        <Button fx:id="b_settings" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Button" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
+                        <ScrollPane fx:id="sc_pane" fitToHeight="true" fitToWidth="true" GridPane.columnIndex="3" GridPane.rowSpan="2">
                           <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="72.0" prefWidth="73.0">
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="331.0" prefWidth="198.0">
                                  <children>
-                                    <ScrollPane fx:id="sc_pane" prefHeight="372.0" prefWidth="148.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                      <content>
-                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="331.0" prefWidth="198.0">
-                                             <children>
-                                                <SplitPane fx:id="sp_pane" dividerPositions="0.49848024316109424" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" orientation="VERTICAL" prefHeight="331.0" prefWidth="198.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                  <items>
-                                                    <AnchorPane fx:id="anchorpansplitoben" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
-                                                    <AnchorPane fx:id="anchorpansplitunten" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
-                                                  </items>
-                                                </SplitPane>
-                                             </children>
-                                          </AnchorPane>
-                                      </content>
-                                    </ScrollPane>
-                                 </children>
+                                    <SplitPane fx:id="sp_pane" dividerPositions="0.49848024316109424" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" orientation="VERTICAL" prefHeight="331.0" prefWidth="220.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-22.0" AnchorPane.topAnchor="0.0">
+                    <items>
+                                        <AnchorPane fx:id="anchorpansplitoben" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+                      <AnchorPane fx:id="anchorpansplitunten" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+                    </items>
+                  </SplitPane>
+               </children>
                               </AnchorPane>
                           </content>
-                        </TitledPane>
+                        </ScrollPane>
                         <ScrollPane fx:id="scrollpane" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowSpan="3">
                           <content>
                             <AnchorPane fx:id="anchorpane1" minHeight="0.0" minWidth="0.0" prefHeight="625.0" prefWidth="882.0" />
