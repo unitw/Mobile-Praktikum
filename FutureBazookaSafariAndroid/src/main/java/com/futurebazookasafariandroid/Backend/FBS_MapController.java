@@ -236,24 +236,21 @@ public class FBS_MapController {
 
     private void TowerShoot(int iteration) {
         for (FBS_TowerInterface tower : turmlist) {
-       
+
             if (iteration % tower.getAttackspeed() == 0) {
-                
-                
-                ArrayList<FBS_MonsterInterface> aggrolist = null ;
-                
-                for(FBS_MonsterInterface mon: monsterlist){
-                    
-                    
-                  if(tower.getIntegerList().contains(mon.getWaypoint())){
-                      
-                    aggrolist.add(mon);
-                  }
-                    
-                    
-                    
+
+                ArrayList<FBS_MonsterInterface> aggrolist = new ArrayList();
+
+                for (FBS_MonsterInterface mon : monsterlist) {
+
+                    if (tower.getIntegerList().contains(mon.getWaypoint())) {
+
+                        aggrolist.add(mon);
+
+                    }
+
                 }
-                
+
                 FireAction(tower, aggrolist);
             }
         }
