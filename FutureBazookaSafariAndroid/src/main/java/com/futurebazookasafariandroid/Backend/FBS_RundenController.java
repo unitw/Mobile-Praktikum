@@ -175,7 +175,7 @@ public class FBS_RundenController extends AnchorPane {
 
     }
 
-    public static void roundFailed() throws IOException {
+    public static void roundFailed() {
 
         Rectangle2D scr = Screen.getPrimary().getVisualBounds();
 
