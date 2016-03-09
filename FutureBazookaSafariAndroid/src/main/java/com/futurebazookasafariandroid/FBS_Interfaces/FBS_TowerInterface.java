@@ -5,6 +5,7 @@
  */
 package com.futurebazookasafariandroid.FBS_Interfaces;
 
+import java.util.ArrayList;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -51,9 +52,9 @@ public interface FBS_TowerInterface {
     public void setBaukosten(int Baukosten);
 
     public int getBaukosten();
-    
+
     public void setLvl(int lvl);
-    
+
     public int getLvl();
     
     public Image getPositionImage();
@@ -63,7 +64,12 @@ public interface FBS_TowerInterface {
     public void setPicture(Image pic);
     
     public Image getPicture();
-    
+
+
+    public ArrayList<Integer> getIntegerList();
+
+    public void addInteger(int i);
+        
     public void setName(String Name);
     
     public String getName();

@@ -42,6 +42,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TouchPoint;
 import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.ObservableFaceArray;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -243,8 +244,21 @@ public class FBS_MapController {
 
     private void TowerShoot(int iteration) {
         for (FBS_TowerInterface tower : turmlist) {
+
             if (iteration % tower.getAttackspeed() == 0) {
-                ArrayList<FBS_MonsterInterface> aggrolist = inRange(tower);
+
+                ArrayList<FBS_MonsterInterface> aggrolist = new ArrayList();
+
+                for (FBS_MonsterInterface mon : monsterlist) {
+
+                    if (tower.getIntegerList().contains(mon.getWaypoint())) {
+
+                        aggrolist.add(mon);
+
+                    }
+
+                }
+
                 FireAction(tower, aggrolist);
             }
         }
@@ -307,6 +321,29 @@ public class FBS_MapController {
             }
 
             this.getProjektillist().add(projektil);
+        }
+
+    }
+
+    public void Points2Tower() {
+
+        int i = 0;
+        for (Point2D p : path) {
+
+            for (FBS_TowerInterface t : turmlist) {
+
+                Circle circ = new Circle();
+                circ.setCenterX(t.getPositionx() + t.getGroesse() / 2);
+                circ.setCenterY(t.getPositiony() + t.getGroesse() / 2);
+                circ.setRadius(t.getRange() + t.getGroesse() / 2);
+
+                if (circ.contains(p)) {
+
+                    t.addInteger(i);
+                }
+
+            }
+            i++;
         }
 
     }

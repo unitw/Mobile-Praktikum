@@ -5,6 +5,7 @@
  */
 package com.futurebazookasafariandroid.FBS_Interfaces;
 
+import java.util.ArrayList;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -31,6 +32,9 @@ public class FBS_AbstractTower implements FBS_TowerInterface {
     private Image projektil;
     
     
+
+    private ArrayList<Integer> IntegerList = new ArrayList();
+
     @Override
     public void setPosition(int posx, int posy) {
         this.posx = posx;
@@ -168,6 +172,17 @@ public class FBS_AbstractTower implements FBS_TowerInterface {
     @Override
     public String getName() {
         return this.name;
+    }
+        
+    public ArrayList<Integer> getIntegerList() {
+
+        return IntegerList;
+    }
+
+    @Override
+    public void addInteger(int i) {
+        IntegerList.add(i);
+
     }
 
 }
