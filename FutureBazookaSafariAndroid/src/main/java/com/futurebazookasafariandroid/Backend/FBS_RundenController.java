@@ -89,7 +89,6 @@ public class FBS_RundenController extends AnchorPane {
                 public void handle(MouseEvent event) {
 
                     tower = b.getText();
-                    System.out.println();
 
                     Dragboard db = b.startDragAndDrop(TransferMode.ANY);
                     /* Put a string on a dragboard */

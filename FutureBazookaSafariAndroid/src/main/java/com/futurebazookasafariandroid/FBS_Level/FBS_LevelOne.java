@@ -8,8 +8,7 @@ package com.futurebazookasafariandroid.FBS_Level;
 import com.futurebazookasafariandroid.FBS_Interfaces.FBS_AbstractLevel;
 import com.futurebazookasafariandroid.FBS_Interfaces.FBS_MonsterInterface;
 import com.futurebazookasafariandroid.FBS_Monster.FBS_Monster_Ratte;
-import static java.lang.Integer.max;
-import static java.lang.Integer.min;
+import static java.lang.Math.min;
 import java.util.ArrayList;
 
 /**
