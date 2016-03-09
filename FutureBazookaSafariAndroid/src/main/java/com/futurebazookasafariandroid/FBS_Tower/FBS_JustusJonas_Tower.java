@@ -17,6 +17,7 @@ public class FBS_JustusJonas_Tower extends FBS_AbstractTower {
 
     
     public FBS_JustusJonas_Tower() {
+        this.setName("JustusJonas");
         this.setisAOE(false);
         this.setAttackspeed(20);
         this.setDamage(50);
@@ -26,11 +27,13 @@ public class FBS_JustusJonas_Tower extends FBS_AbstractTower {
         this.setBaukosten(100);
         this.setLvl(1);
         this.setPicture(new Image("JustusJonasTower.png"));
+        this.setPositionImage(new Image("JustusJonasTower.png"));
 
     }
     
     
     public FBS_JustusJonas_Tower(int posx, int posy) {
+        this.setName("JustusJonas");
         this.setPosition(posx, posy);
         this.setisAOE(false);
         this.setAttackspeed(20);

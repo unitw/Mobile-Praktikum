@@ -17,6 +17,7 @@ public class FBS_Laser_Tower extends FBS_AbstractTower {
 
     
     public FBS_Laser_Tower() {
+        this.setName("LaserTower");
         this.setisAOE(false);
         this.setAttackspeed(30);
         this.setDamage(8);
@@ -26,11 +27,13 @@ public class FBS_Laser_Tower extends FBS_AbstractTower {
         this.setBaukosten(100);
         this.setLvl(1);
         this.setPicture(new Image("Lazertower.png"));
+        this.setPositionImage(new Image("Lazertower.png"));
 
     }
     
     
     public FBS_Laser_Tower(int posx, int posy) {
+        this.setName("LaserTower");
         this.setPosition(posx, posy);
         this.setisAOE(false);
         this.setAttackspeed(30);
