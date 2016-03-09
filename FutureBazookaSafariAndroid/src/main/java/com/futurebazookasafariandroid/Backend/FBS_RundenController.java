@@ -29,6 +29,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TouchEvent;
 import javafx.scene.layout.AnchorPane;
@@ -45,11 +48,12 @@ public class FBS_RundenController extends AnchorPane {
     private FBS_MapController mapcon;
     private FBS_MapInterface map;
     private ControllerSpieloberflaeche controloverlay;
+    private FBS_TowerInterface tower;
+    private boolean dragstarted = false;
     private int runde = 0;
     private boolean touchMovedFlag = false;
 
-
-    public FBS_RundenController(ActionEvent e) throws IOException {        
+    public FBS_RundenController(ActionEvent e) throws IOException {
         Rectangle2D scr = Screen.getPrimary().getVisualBounds();
         this.map = new FBS_Safari_Map(1500, 1500);
         this.mapcon = new FBS_MapController(map, e);
@@ -60,15 +64,32 @@ public class FBS_RundenController extends AnchorPane {
         controloverlay = fxmlLoader.<ControllerSpieloberflaeche>getController();
         controloverlay.setCanvas(mapcon.getCanvas());
         controloverlay.initStuff();
-        controloverlay.getCanvas().addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+        for (Button b : controloverlay.getButtonlist()) {
+            b.addEventFilter(MouseEvent.MOUSE_DRAGGED, new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    if (dragstarted) {
+                        event.consume();
+                    } else {
+                        tower = controloverlay.ButtonToTower(b);
+                        dragstarted = true;
+                    }
+                }
+            });
+           
+        }
+        controloverlay.getCanvas().addEventFilter(MouseEvent.MOUSE_RELEASED, new EventHandler<MouseEvent>(){
             @Override
             public void handle(MouseEvent event) {
-                mapcon.getMouseclicks(event.getX(), event.getY());
-                System.out.println("Mousepoints" + event.getX() + ", " + event.getY());
-
+                if(dragstarted){
+                    tower.setPosition((int)event.getSceneX(),(int)event.getSceneY());
+                    mapcon.addTower(tower);
+                    dragstarted = false;
+                }
             }
+            
         });
-        
+
         controloverlay.getCanvas().addEventFilter(TouchEvent.TOUCH_MOVED, new EventHandler<TouchEvent>() {
             @Override
             public void handle(TouchEvent event) {
@@ -78,7 +99,7 @@ public class FBS_RundenController extends AnchorPane {
         controloverlay.getCanvas().addEventFilter(TouchEvent.TOUCH_RELEASED, new EventHandler<TouchEvent>() {
             @Override
             public void handle(TouchEvent event) {
-                if(touchMovedFlag) {
+                if (touchMovedFlag) {
                     System.out.println("sorry, you moved");
                 } else {
                     System.out.println("Touchpoints" + event.getTouchPoint().getX() + ", " + event.getTouchPoint().getY());
@@ -86,7 +107,7 @@ public class FBS_RundenController extends AnchorPane {
                 touchMovedFlag = false;
             }
         });
-        
+
         controloverlay.getB_settings().addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {

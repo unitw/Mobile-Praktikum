@@ -7,6 +7,7 @@ import com.futurebazookasafariandroid.FBS_Interfaces.FBS_TowerInterface;
 import com.futurebazookasafariandroid.FBS_Maps.FBS_Safari_Map;
 import com.futurebazookasafariandroid.FBS_Tower.FBS_JustusJonas_Tower;
 import com.futurebazookasafariandroid.FBS_Tower.FBS_Laser_Tower;
+import java.util.ArrayList;
 import java.util.HashMap;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -75,6 +76,8 @@ public class ControllerSpieloberflaeche {
     @FXML
     private AnchorPane anchorpane;
     
+    private ArrayList<Button> buttonlist;
+    
     @FXML
     private AnchorPane anchorpane1;
 
@@ -88,6 +91,8 @@ public class ControllerSpieloberflaeche {
     @FXML
     SplitPane pane = new SplitPane();
 
+   
+
     private FBS_Canvas canvas1;
 
    
@@ -99,6 +104,8 @@ public class ControllerSpieloberflaeche {
     }
 
     public void initStuff() {
+        
+        buttonlist = new ArrayList();
 
         Rectangle2D scr = Screen.getPrimary().getVisualBounds();
         
@@ -179,6 +186,7 @@ public class ControllerSpieloberflaeche {
 
             Button b_tower = new Button(tower, imgview);
             b_tower.setId(tower);
+            buttonlist.add(b_tower);
             b_tower.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
@@ -237,6 +245,14 @@ public class ControllerSpieloberflaeche {
 
     public StackPane getStackpane() {
         return stackpane;
+    }
+
+    public FBS_TowerInterface ButtonToTower(Button b) {
+        return turmlist.get(b);
+    }
+
+    public ArrayList<Button> getButtonlist() {
+        return buttonlist;
     }
 
     public void setCanvas(FBS_Canvas canvas) {
