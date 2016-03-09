@@ -19,7 +19,7 @@ public class FBS_JustusJonas extends FBS_AbstractMonster {
         this.setLife(30);
         this.setSpeed(4);
         this.setLoot(100);
-        this.setPicture(new Image("JustusJonasTower.png"));
+        this.setPicture(new Image("stein.png"));
         this.setGroesse(32);
         this.setWaypoint(0);
        
