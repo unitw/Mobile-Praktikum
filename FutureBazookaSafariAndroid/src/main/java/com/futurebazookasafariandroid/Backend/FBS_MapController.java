@@ -155,8 +155,8 @@ public class FBS_MapController {
 
     public void getMouseclicks(double x, double y, String Towername) {
         FBS_TowerInterface tower;
-        
-        if(Towername.equals("JustusJonas")) {
+
+        if (Towername.equals("JustusJonas")) {
             tower = new FBS_JustusJonas_Tower((int) x, (int) y);
         } else {
             tower = new FBS_Laser_Tower((int) x, (int) y);
@@ -315,7 +315,7 @@ public class FBS_MapController {
         }
         if (mon != null) {
             FBS_Projektil_Interface projektil;
-            if(tower.getName().equals("JustusJonas")) {
+            if (tower.getName().equals("JustusJonas")) {
                 projektil = new FBS_BobAndrewsProjektil(mon, tower.getPositionx(), tower.getPositiony(), tower.getDamage(), tower.getAOE());
             } else {
                 projektil = new FBS_LaserProjektil(mon, tower.getPositionx(), tower.getPositiony(), tower.getDamage(), tower.getAOE());
@@ -368,6 +368,11 @@ public class FBS_MapController {
 
                 if (mon.getPositionx() >= this.map.getEndpunkt().getX()
                         && mon.getPositiony() >= this.map.getEndpunkt().getY()) {
+                    if (spielerleben == 0) {
+                        FBS_RundenController.roundFailed();
+                        stopTimer();
+                        return;
+                    }
                     this.setSpielerleben(spielerleben - 1);
                     aktualisiereObserver();
                     loeschliste.add(mon);

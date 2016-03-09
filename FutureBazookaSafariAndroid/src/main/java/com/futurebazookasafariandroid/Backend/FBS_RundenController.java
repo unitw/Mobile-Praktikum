@@ -18,6 +18,7 @@ import com.futurebazookasafariandroid.Frontend.ControllerSpieloberflaeche;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Optional;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ArrayChangeListener;
@@ -30,6 +31,7 @@ import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
@@ -52,7 +54,7 @@ public class FBS_RundenController extends AnchorPane {
     private FBS_MapInterface map;
     private ControllerSpieloberflaeche controloverlay;
     private String tower;
-    private int runde = 0;
+    private static int runde = 0;
     private Image img = new Image("Lazertower.png");
 
     public FBS_RundenController(ActionEvent e) throws IOException {
@@ -66,15 +68,14 @@ public class FBS_RundenController extends AnchorPane {
         controloverlay = fxmlLoader.<ControllerSpieloberflaeche>getController();
         controloverlay.setCanvas(mapcon.getCanvas());
         controloverlay.initStuff();
-        
-        
+
         for (Button b : controloverlay.getButtonlist()) {
             b.setOnDragDetected(new EventHandler<MouseEvent>() {
                 public void handle(MouseEvent event) {
-                    
+
                     tower = b.getText();
                     System.out.println();
-                    
+
                     Dragboard db = b.startDragAndDrop(TransferMode.ANY);
                     /* Put a string on a dragboard */
                     ClipboardContent content = new ClipboardContent();
@@ -83,9 +84,9 @@ public class FBS_RundenController extends AnchorPane {
                     System.out.println("Drag started");
                     event.consume();
                 }
-            });   
+            });
         }
-        
+
         controloverlay.getCanvas().setOnDragOver(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
                 event.acceptTransferModes(TransferMode.MOVE);
@@ -144,7 +145,11 @@ public class FBS_RundenController extends AnchorPane {
         }
 
     }
-    
-    
+
+    public static void roundFailed() {
+        System.err.println("You're not fancy. Get Out");
+        runde = 0;
+        
+    }
 
 }
