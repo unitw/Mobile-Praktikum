@@ -14,14 +14,23 @@ import javafx.scene.image.Image;
  */
 public class FBS_Monster_Ratte extends FBS_AbstractMonster {
 
-    public FBS_Monster_Ratte(double posx, double posy) {
+    public FBS_Monster_Ratte(double posx, double posy, int schwierigkeit) {
         this.setPosition(posx, posy);
         this.setLife(30);
-        this.setSpeed(4);
+        
+        if(schwierigkeit == 0)
+        {
+            this.setSpeed(10);
+        }
+        else if(schwierigkeit > 0) {
+            this.setSpeed(this.getSpeed()-1);
+        }
+        
         this.setLoot(100);
         this.setPicture(new Image("monsterrat.png"));
         this.setGroesse(32);
         this.setWaypoint(0);
+        this.setSchwierigkeit(schwierigkeit);
        
     }
 

@@ -34,6 +34,8 @@ public class FBS_AbstractMonster implements FBS_MonsterInterface {
     private int angle;
 
     private int groesse;
+    
+    private int schwierigkeit;
 
     ArrayList<Point2D> letztenachtzuege = new ArrayList();
 
@@ -156,5 +158,14 @@ public class FBS_AbstractMonster implements FBS_MonsterInterface {
     public void setWaypoint(int wp) {
         this.wp = wp;
     }
-
+    
+    @Override
+    public void setSchwierigkeit(int schwierigkeit) {
+        this.schwierigkeit = schwierigkeit;
+    }
+    
+    @Override
+    public int getSchwierigkeit() {
+        return this.schwierigkeit;
+    }
 }
