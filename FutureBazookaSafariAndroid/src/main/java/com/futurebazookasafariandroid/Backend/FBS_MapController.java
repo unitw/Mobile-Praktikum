@@ -97,6 +97,7 @@ public class FBS_MapController {
 
         this.is_in_round = true;
         path = getSchnellsterWeg();
+        Points2Tower();
         iteration = 0;
         timer = new AnimationTimer() {
 
