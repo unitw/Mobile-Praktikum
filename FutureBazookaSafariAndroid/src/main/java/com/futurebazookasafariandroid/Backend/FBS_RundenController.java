@@ -19,6 +19,8 @@ import com.futurebazookasafariandroid.Frontend.ControllerSpieloberflaeche;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -35,6 +37,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -50,6 +53,7 @@ import javafx.scene.input.TouchEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -67,21 +71,29 @@ public class FBS_RundenController extends AnchorPane {
 
     private ArrayList<Integer> spawntimelist;
     private ArrayList<FBS_MonsterInterface> monsterlist;
-    private FBS_MapController mapcon;
-    private FBS_MapInterface map;
+    private static FBS_MapController mapcon;
+    private static FBS_MapInterface map;
     private ControllerSpieloberflaeche controloverlay;
     private String tower;
+    private static Parent root;
     private static int runde = 0;
+    private static Stage stg;
     private Image img = new Image("Lazertower.png");
 
-    public FBS_RundenController(ActionEvent e) throws IOException {
+    public FBS_RundenController(Stage s) {
+        this.stg = s;
         Rectangle2D scr = Screen.getPrimary().getVisualBounds();
         this.map = new FBS_Safari_Map(500, 500);
-        this.mapcon = new FBS_MapController(map, e);
+        this.mapcon = new FBS_MapController(map);
         FBS_Spieler justus_jonas = new FBS_Spieler(700, 80000, 1000, 1);
         mapcon.setSpieler(justus_jonas);
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Spieloberflaeche.fxml"));
-        Parent root = (Parent) fxmlLoader.load();
+        Parent root = null;
+        try {
+            root = (Parent) fxmlLoader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(FBS_RundenController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         controloverlay = fxmlLoader.<ControllerSpieloberflaeche>getController();
         controloverlay.setCanvas(mapcon.getCanvas());
         controloverlay.initStuff();
@@ -163,77 +175,67 @@ public class FBS_RundenController extends AnchorPane {
 
     }
 
-    public static void roundFailed() {
-        
-          Stage dialog = new Stage();
-                        dialog.initStyle(StageStyle.UNDECORATED);
+    public static void roundFailed() throws IOException {
 
-                        Button reset = new Button("Try Again");
+        Rectangle2D scr = Screen.getPrimary().getVisualBounds();
 
-                        reset.setPrefSize(100, 40);
-                        reset.setTranslateX(110);
-                        reset.setTranslateY(80);
-                        reset.setOnAction((javafx.event.ActionEvent event) -> {
-                            dialog.close();
-                           
-                        });
+        Stage dialog = new Stage();
+        dialog.initStyle(StageStyle.UNDECORATED);
 
-                        Label l = new Label();
-                        l.setPrefSize(324, 137);
-                        l.setId("grave");
-                        l.getTransforms().add(new Rotate(9, 50, 30));
+        Button reset = new Button("Try Again");
+        Button menu = new Button("zum Menü");
 
-                        Label t = new Label();
-                        //  t.setTranslateY(160);
-                        t.setTranslateX(75);
-                        t.setTranslateY(10);
-                        t.setCache(true);
-                        t.setText("GAME OVER");
-                        t.setId("GAMEOVER");
-                        t.getStyleClass().add("animated-gradient");
+        reset.setOnAction((javafx.event.ActionEvent event) -> {
+            dialog.close();
+            System.err.println("You're not fancy. Get Out");
+            StackPane root = new StackPane();
 
-                        t.setFont(Font.font(null, FontWeight.BOLD, 30));
+            Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+            FBS_RundenController roundcon;
+            roundcon = new FBS_RundenController(stg);
 
-                        ObjectProperty<Color> baseColor = new SimpleObjectProperty<>();
+            root.getChildren().add(roundcon);
+            Scene scene = new Scene(root, primScreenBounds.getWidth(), primScreenBounds.getHeight());
+            //set Stage boundaries to visible bounds of the main screen
+            stg.setScene(scene);
 
-                        KeyValue keyValue1 = new KeyValue(baseColor, Color.RED);
-                        KeyValue keyValue2 = new KeyValue(baseColor, Color.YELLOW);
-                        KeyFrame keyFrame1 = new KeyFrame(Duration.ZERO, keyValue1);
-                        KeyFrame keyFrame2 = new KeyFrame(Duration.millis(500), keyValue2);
-                        Timeline timeline = new Timeline(keyFrame1, keyFrame2);
+        });
 
-                        baseColor.addListener((obs, oldColor, newColor) -> {
-                            t.setStyle(String.format("-gradient-base: #%02x%02x%02x; ",
-                                    (int) (newColor.getRed() * 255),
-                                    (int) (newColor.getGreen() * 255),
-                                    (int) (newColor.getBlue() * 255)));
-                        });
+        menu.setOnAction((javafx.event.ActionEvent event) -> {
+            dialog.close();
+            
+        });
 
-                        timeline.setAutoReverse(true);
-                        timeline.setCycleCount(Animation.INDEFINITE);
-                        timeline.play();
+        Label t = new Label();
+        //  t.setTranslateY(160);
+        t.setTranslateX(75);
+        t.setTranslateY(10);
+        t.setCache(true);
+        t.setText("You're not fancy");
+        t.setId("GAMEOVER");
+        t.getStyleClass().add("animated-gradient");
 
-                        Reflection r = new Reflection();
-                        r.setFraction(0.7f);
+        // t.getStyleClass().add("animated-gradient");
+        t.setFont(Font.font(null, FontWeight.EXTRA_BOLD, 15));
 
-                        t.setEffect(r);
+        Reflection r = new Reflection();
+        r.setFraction(0.7f);
+        t.setEffect(r);
 
-                        // t.setTranslateY(400);
-                        GridPane pane = new GridPane();
-                        Scene scene = new Scene(pane);
+        // t.setTranslateY(400);
+        GridPane pane = new GridPane();
+        Scene scene = new Scene(pane);
 
-                        pane.setPrefSize(300, 300);
-                        pane.getStyleClass().add("bordered-titled-border");
-                        pane.add(l, 0, 0);
-                        pane.add(t, 0, 1);
-                        pane.add(reset, 0, 2);
-                        dialog.setMaxHeight(600);
-                        dialog.setTitle("Game Over");
-                        dialog.setScene(scene);
-                        dialog.show();
-        System.err.println("You're not fancy. Get Out");
-        runde = 0;
-        
+        pane.setPrefSize(300, 300);
+        pane.getStyleClass().add("bordered-titled-border");
+        pane.add(t, 0, 0);
+        pane.add(reset, 0, 1);
+        pane.add(menu, 1, 1);
+        dialog.setTitle("Game Over");
+        dialog.setScene(scene);
+        dialog.setResizable(false);
+        dialog.show();
+
     }
 
 }

@@ -27,6 +27,8 @@ import javafx.stage.Stage;
  *
  * @author benjamin.wolf
  */
+
+
 public class FXMLMainMenuController implements Initializable {
 
     @FXML
@@ -37,7 +39,7 @@ public class FXMLMainMenuController implements Initializable {
         StackPane root = new StackPane();
 
         Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
-        FBS_RundenController roundcon = new FBS_RundenController(event);
+        FBS_RundenController roundcon = new FBS_RundenController(stage);
         root.getChildren().add(roundcon);
         Scene scene = new Scene(root, primScreenBounds.getWidth(), primScreenBounds.getHeight());
         //set Stage boundaries to visible bounds of the main screen

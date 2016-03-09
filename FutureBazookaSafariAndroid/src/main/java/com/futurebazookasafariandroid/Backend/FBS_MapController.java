@@ -77,7 +77,7 @@ public class FBS_MapController {
     private FBS_Canvas canvas;
     private int iteration = 0;
 
-    public FBS_MapController(FBS_MapInterface map, ActionEvent e) throws IOException {
+    public FBS_MapController(FBS_MapInterface map) {
 
         this.canvas = new FBS_Canvas(map);
         this.map = map;
@@ -157,6 +157,12 @@ public class FBS_MapController {
         };
         timer.start();
 
+    }
+
+    public void resetStuff() {
+   
+        
+        
     }
 
     public void getMouseclicks(double x, double y, String Towername) {

@@ -34,11 +34,11 @@ public class FutureBazookaSafariAndroid extends Application {
         Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
         Scene scene = new Scene(root, primScreenBounds.getWidth(), primScreenBounds.getHeight());
        
-        
-        String musicFile = "fancy.mp3";     
-        Media sound = new Media(new File(musicFile).toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(sound);
-        mediaPlayer.play();
+//        
+//        String musicFile = "fancy.mp3";     
+//        Media sound = new Media(new File(musicFile).toURI().toString());
+//        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+//        mediaPlayer.play();
 
         stage.setTitle("Future Bazooka Safari");
         stage.setScene(scene);
