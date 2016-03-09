@@ -71,16 +71,16 @@ public class FXMLMainMenuController implements Initializable {
     @FXML
     private void shopPressed(ActionEvent event) throws IOException {
         System.out.println("pressed \"Shop\"");
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-        BorderPane borderPane = new BorderPane();
-        WebView webView = new WebView();
-        webView.getEngine().load("http://localhost/projects/uni_web_shop/index.html");
-        borderPane.setCenter(webView);
-        
-        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
-        stage.setScene(new Scene(borderPane, primScreenBounds.getWidth(), primScreenBounds.getHeight()));
-        stage.show();
+//        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//
+//        BorderPane borderPane = new BorderPane();
+//        WebView webView = new WebView();
+//        webView.getEngine().load("http://localhost/projects/uni_web_shop/index.html");
+//        borderPane.setCenter(webView);
+//        
+//        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+//        stage.setScene(new Scene(borderPane, primScreenBounds.getWidth(), primScreenBounds.getHeight()));
+//        stage.show();
     }
 
     /**

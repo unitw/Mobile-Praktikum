@@ -28,7 +28,7 @@ public class FutureBazookaSafariAndroid extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        //datenbank= new FBS_DatenBank();
+        datenbank= new FBS_DatenBank();
         Parent root = FXMLLoader.load(getClass().getResource("FXMLLoginScreen.fxml"));
 
         Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();

@@ -54,7 +54,7 @@ public class FBS_Canvas extends Canvas {
     public void drawMap(ArrayList<FBS_MonsterInterface> monsterlist, ArrayList<FBS_TowerInterface> towerlist, ArrayList<FBS_Projektil_Interface> projektillist, ArrayList<FBS_HindernisInterface> hindernislist) {
 
         gc.setFill(Color.GREEN);
-         gc.fillRect(0, 0, this.getWidth(), this.getHeight());
+        gc.fillRect(0, 0, this.getWidth(), this.getHeight());
 
 //        gc.setFill(Color.CADETBLUE);
 //        gc.fillRect(0, 0, map.getMapsizex(), map.getMapsizey());

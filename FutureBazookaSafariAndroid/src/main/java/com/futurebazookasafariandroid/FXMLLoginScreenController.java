@@ -1,6 +1,8 @@
 package com.futurebazookasafariandroid;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,10 +30,10 @@ public class FXMLLoginScreenController {
     
 
     @FXML
-    private void LoginPressed(ActionEvent event) throws IOException {
+    private void LoginPressed(ActionEvent event) throws IOException, SQLException {
 
-//        try {
-//            if (FutureBazookaSafariAndroid.datenbank.login(fbs_username.getText(), fbs_passwort.getText())) {
+        try {
+            if (FutureBazookaSafariAndroid.datenbank.login(fbs_username.getText(), fbs_passwort.getText())) {
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
                 Parent root = FXMLLoader.load(getClass().getResource("FXMLMainMenu.fxml"));
@@ -41,18 +43,18 @@ public class FXMLLoginScreenController {
                 stage.setX(0);
                 stage.setY(0);
                 stage.show();
-//            }
-//        } catch (ClassNotFoundException | SQLException ex) {
-//            Logger.getLogger(FXMLLoginScreenController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            
+        }
 
     }
     
     @FXML
     private void SignUpPressed(ActionEvent event) throws IOException {
-//        
-//        try {
-//            if(FutureBazookaSafariAndroid.datenbank.register(fbs_username.getText(), fbs_passwort.getText())){
+        
+        try {
+            if(FutureBazookaSafariAndroid.datenbank.register(fbs_username.getText(), fbs_passwort.getText())){
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 
                 Parent root = FXMLLoader.load(getClass().getResource("FXMLMainMenu.fxml"));
@@ -62,10 +64,9 @@ public class FXMLLoginScreenController {
                 stage.setX(0);
                 stage.setY(0);
                 stage.show();
-//            }
-//        } catch (ClassNotFoundException | SQLException ex) {
-//            Logger.getLogger(FXMLLoginScreenController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+        }
         
         
     }
