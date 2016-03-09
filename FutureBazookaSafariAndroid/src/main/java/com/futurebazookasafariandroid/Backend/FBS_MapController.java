@@ -22,6 +22,7 @@ import com.futurebazookasafariandroid.Frontend.FBS_Canvas;
 import com.sun.javafx.collections.ObservableIntegerArrayImpl;
 import com.sun.javafx.collections.ObservableListWrapper;
 import com.sun.javafx.scene.shape.ObservableFaceArrayImpl;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import javafx.animation.AnimationTimer;
@@ -42,6 +43,8 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TouchPoint;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.ObservableFaceArray;
 import javafx.stage.Screen;
@@ -99,7 +102,9 @@ public class FBS_MapController {
 
         this.is_in_round = true;
         path = getSchnellsterWeg();
+
         Points2Tower();
+
         iteration = 0;
         timer = new AnimationTimer() {
 
@@ -116,6 +121,7 @@ public class FBS_MapController {
                 }
                 if (monsterlist.isEmpty() && monsterspawnlist.isEmpty() && projektillist.isEmpty()) {
                     stopTimer();
+
                 }
                 MonsterMovement(iteration);
                 canvas.drawMap(monsterlist, turmlist, projektillist, hindernislist);
