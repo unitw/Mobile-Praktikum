@@ -70,7 +70,7 @@ public class FBS_Canvas extends Canvas {
         
         for (int i = 0; i < ZELLEN; i++) {
             for (int j = 0; j < ZELLEN; j++) {
-                if(i == j) {
+                if((i == j) || (i == j+1) || (i == j-1)) {
                     gc.drawImage(img2, i * ratio, j * ratio, ratio, ratio);
                 } else {
                     gc.drawImage(img, i * ratio, j * ratio, ratio, ratio);
