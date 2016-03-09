@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import java.net.*?>
 <?import java.util.*?>
@@ -7,62 +8,46 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<GridPane alignment="center" prefHeight="324.0" prefWidth="299.0" styleClass="loginScreen" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="com.futurebazookasafariandroid.FXMLLoginScreenController">
+   <children>
+       <AnchorPane id="AnchorPane" GridPane.vgrow="ALWAYS">
+       <stylesheets>
+           <URL value="@fxmlloginscreen.css" />
+       </stylesheets>
+       <children>
+           <Label prefHeight="20" prefWidth="288" styleClass="logoLabel" text="Future Bazooka Safari" AnchorPane.topAnchor="0.0" />
+       </children>
+   </AnchorPane>
+     <TextField fx:id="fbs_username" prefHeight="27" prefWidth="150" promptText="Username" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+         <GridPane.margin>
+            <Insets left="40.0" right="40.0" />
+         </GridPane.margin>
+      </TextField>
+     <PasswordField fx:id="fbs_passwort" prefHeight="27" prefWidth="150.0" promptText="Password" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+         <GridPane.margin>
+            <Insets left="40.0" right="40.0" />
+         </GridPane.margin>
+      </PasswordField>
 
-<GridPane styleClass="loginScreen" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.futurebazookasafariandroid.FXMLLoginScreenController" alignment="center">
-    <AnchorPane id="AnchorPane">
-    <stylesheets>
-        <URL value="@fxmlloginscreen.css"/>
-    </stylesheets>
-    <children>
-        <Label 
-            text="Future Bazooka Safari"
-            prefHeight="20"
-            prefWidth="288"
-            styleClass="logoLabel"
-        />
-        <TextField 
-            fx:id="fbs_username" 
-            prefHeight="27"
-            prefWidth="150"
-            layoutX="75"
-            layoutY="115"
-            promptText="Username"
-        />
-        <PasswordField 
-            fx:id="fbs_passwort"
-            prefHeight="27"
-            prefWidth="150"
-            layoutX="75"
-            layoutY="150"
-            promptText="Password" 
-        />
-        <CheckBox 
-            layoutX="75"
-            layoutY="185"
-            text="automatischer Login"
-            styleClass="loginScreenCheckBox"
-        />
-
-        <Button 
-            text="Log In"
-            prefHeight="30"
-            prefWidth="150"
-            styleClass="loginScreenButton"
-            layoutX="75" 
-            layoutY="215" 
-            onAction="#LoginPressed" 
-        />
-        <Button 
-            text="Sign Up"
-            prefHeight="30"
-            prefWidth="150"
-            styleClass="loginScreenButton"
-            layoutX="75" 
-            layoutY="265" 
-            onAction="#SignUpPressed" 
-        />
-    </children>
-</AnchorPane>
+        <Button onAction="#LoginPressed" prefHeight="30" prefWidth="150" styleClass="loginScreenButton" text="Log In" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.vgrow="NEVER">
+         <GridPane.margin>
+            <Insets />
+         </GridPane.margin>
+      </Button>
+     <Button onAction="#SignUpPressed" prefHeight="30" prefWidth="150" styleClass="loginScreenButton" text="Sign Up" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+         <GridPane.margin>
+            <Insets left="30.0" right="30.0" />
+         </GridPane.margin>
+      </Button>
+   </children>
+   <columnConstraints>
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints maxHeight="40.0" prefHeight="50.0" valignment="CENTER" vgrow="NEVER" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+   </rowConstraints>
 </GridPane>
-
-
