@@ -8,6 +8,8 @@ package com.futurebazookasafariandroid.FBS_Level;
 import com.futurebazookasafariandroid.FBS_Interfaces.FBS_AbstractLevel;
 import com.futurebazookasafariandroid.FBS_Interfaces.FBS_MonsterInterface;
 import com.futurebazookasafariandroid.FBS_Monster.FBS_Monster_Ratte;
+import static java.lang.Integer.max;
+import static java.lang.Integer.min;
 import java.util.ArrayList;
 
 /**
@@ -16,13 +18,17 @@ import java.util.ArrayList;
  */
 public class FBS_LevelOne extends FBS_AbstractLevel {
 
-    private int schwierigkeit;
     
     public FBS_LevelOne(double StartX, double StartY, int schwierigkeit) {
         this.initMonsterlist();
         ArrayList<Integer> spawnlist = new ArrayList();
-        for (int i = 0; i < 10; i++) {
-            this.addMonster(new FBS_Monster_Ratte(StartX, StartY, schwierigkeit));
+        for (int i = 0; i < 10+(schwierigkeit*5); i++) {
+            FBS_Monster_Ratte rat = new FBS_Monster_Ratte(StartX, StartY);
+            rat.setLife(rat.getLife()+(schwierigkeit*10));
+            int max = min(schwierigkeit,rat.getSpeed()-1);
+            rat.setSpeed(rat.getSpeed()- max);
+            rat.setLoot(rat.getLoot() + schwierigkeit*rat.getLoot());
+            this.addMonster(rat);
             spawnlist.add(i*20);
         }
         this.setSpawntimes(spawnlist);

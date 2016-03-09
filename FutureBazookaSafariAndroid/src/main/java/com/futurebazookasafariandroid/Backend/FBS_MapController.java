@@ -437,7 +437,7 @@ public class FBS_MapController {
         Point2D start = map.getStartpunkt();
         Point2D end = map.getEndpunkt();
         System.out.println(end.toString());
-        FBS_MonsterInterface moveMon = new FBS_Monster_Ratte(start.getX(), start.getY(), 0);
+        FBS_MonsterInterface moveMon = new FBS_Monster_Ratte(start.getX(), start.getY());
         //Key = point value = vorgänger;
         ArrayList<FBS_Knoten> open = new ArrayList();
         ArrayList<FBS_Knoten> closed = new ArrayList();
