@@ -20,6 +20,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ArrayChangeListener;
 import javafx.collections.ObservableIntegerArray;
 import javafx.event.ActionEvent;
@@ -43,11 +49,13 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 
 /**
  *
@@ -154,20 +162,20 @@ public class FBS_RundenController extends AnchorPane {
     }
 
     public void mouseAction() {
-        
-        if (!mapcon.getRundenstatus() && runde%4 == 0) {
+
+        if (!mapcon.getRundenstatus() && runde % 4 == 0) {
             starteRunde(new FBS_LevelOne(map.getStartpunkt().getX(), map.getStartpunkt().getY(), schwierigkeit));
-            if(runde > 0){
+            if (runde > 0) {
                 schwierigkeit++;
             }
         }
-        if (!mapcon.getRundenstatus() && runde%4 == 1) {
+        if (!mapcon.getRundenstatus() && runde % 4 == 1) {
             starteRunde(new FBS_LevelTwo(map.getStartpunkt().getX(), map.getStartpunkt().getY(), schwierigkeit));
         }
-        if (!mapcon.getRundenstatus() && runde%4 == 2) {
+        if (!mapcon.getRundenstatus() && runde % 4 == 2) {
             starteRunde(new FBS_LevelThree(map.getStartpunkt().getX(), map.getStartpunkt().getY(), schwierigkeit));
         }
-        if (!mapcon.getRundenstatus() && runde%4 == 3) {
+        if (!mapcon.getRundenstatus() && runde % 4 == 3) {
             starteRunde(new FBS_LevelFour(map.getStartpunkt().getX(), map.getStartpunkt().getY(), schwierigkeit));
         }
 
@@ -182,6 +190,30 @@ public class FBS_RundenController extends AnchorPane {
         Button reset = new Button("Try Again");
         Button menu = new Button("Back To Menu");
 
+        reset.setStyle("-fx-padding: 8 15 15 15;\n"
+                + "    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;\n"
+                + "    -fx-background-radius: 8;\n"
+                + "    -fx-background-color: \n"
+                + "        linear-gradient(from 0% 93% to 0% 100%, #104E8B 0%, #104E8B 100%),\n"
+                + "        #104E8B,\n"
+                + "        #104E8B,\n"
+                + "        radial-gradient(center 50% 50%, radius 100%, #1E90FF, #1C86EE);\n"
+                + "    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );\n"
+                + "    -fx-font-weight: bold;\n"
+                + "    -fx-font-size: 1.1em;"
+        );
+        menu.setStyle("-fx-padding: 8 15 15 15;\n"
+                + "    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;\n"
+                + "    -fx-background-radius: 8;\n"
+                + "    -fx-background-color: \n"
+                + "        linear-gradient(from 0% 93% to 0% 100%, #104E8B 0%, #104E8B 100%),\n"
+                + "        #104E8B,\n"
+                + "        #104E8B,\n"
+                + "        radial-gradient(center 50% 50%, radius 100%, #1E90FF, #1C86EE);\n"
+                + "    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );\n"
+                + "    -fx-font-weight: bold;\n"
+                + "    -fx-font-size: 1.1em;"
+        );
 
         reset.setOnAction((javafx.event.ActionEvent event) -> {
             dialog.close();
@@ -205,11 +237,11 @@ public class FBS_RundenController extends AnchorPane {
             @Override
             public void handle(javafx.event.ActionEvent event) {
                 dialog.close();
-                
+
                 runde = 0;
                 schwierigkeit = 0;
               //  stg.close();
-                
+
                 System.out.println(getClass());
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLMainMenu.fxml"));
                 Parent root = null;
@@ -218,16 +250,15 @@ public class FBS_RundenController extends AnchorPane {
                 } catch (IOException ex) {
                     Logger.getLogger(FBS_RundenController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
-                
+
                 Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
                 stg.setScene(new Scene(root, primScreenBounds.getWidth(), primScreenBounds.getHeight()));
-                
+
             }
         });
 
         Label t = new Label();
-        
+
         t.setCache(true);
         t.setText("You're not fancy");
         t.setId("GAMEOVER");
@@ -239,9 +270,30 @@ public class FBS_RundenController extends AnchorPane {
         // t.setTranslateY(400);
         GridPane pane = new GridPane();
         Scene scene = new Scene(pane);
-        
 
-        
+        t.getStyleClass().add(" -gradient-base: red ;\n"
+                + "    -fx-text-fill: linear-gradient(to right, -gradient-base, black);"
+                + "");
+
+        ObjectProperty<Color> baseColor = new SimpleObjectProperty<>();
+
+        KeyValue keyValue1 = new KeyValue(baseColor, Color.RED);
+        KeyValue keyValue2 = new KeyValue(baseColor, Color.YELLOW);
+        KeyFrame keyFrame1 = new KeyFrame(Duration.ZERO, keyValue1);
+        KeyFrame keyFrame2 = new KeyFrame(Duration.millis(500), keyValue2);
+        Timeline timeline = new Timeline(keyFrame1, keyFrame2);
+
+        baseColor.addListener((obs, oldColor, newColor) -> {
+            t.setStyle(String.format("-gradient-base: #%02x%02x%02x; ",
+                    (int) (newColor.getRed() * 255),
+                    (int) (newColor.getGreen() * 255),
+                    (int) (newColor.getBlue() * 255)));
+        });
+
+        timeline.setAutoReverse(true);
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
+
         pane.getStyleClass().add("bordered-titled-border");
         pane.add(t, 0, 0);
         pane.add(reset, 0, 1);
