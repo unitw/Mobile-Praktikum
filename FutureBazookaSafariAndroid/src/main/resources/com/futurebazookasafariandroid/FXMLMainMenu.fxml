@@ -7,47 +7,25 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane styleClass="mainMenu" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.futurebazookasafariandroid.FBS_MainMenu.FXMLMainMenuController" alignment="center">
-
-<AnchorPane id="AnchorPane">
-    <stylesheets>
-        <URL value="@fxmlmainmenu.css"/>
-    </stylesheets>
-    <children>
-        <Label 
-            text="Future Bazooka Safari"
-            prefHeight="20"
-            prefWidth="288"
-            styleClass="logoLabel" 
-        />
-        <Button 
-            text="Neues Spiel"
-            prefHeight="30"
-            prefWidth="150"
-            styleClass="mainMenuButton"
-            layoutX="75" 
-            layoutY="115" 
-            onAction="#newGamePressed" 
-        />
-        <Button 
-            text="Spiel laden"
-            prefHeight="30"
-            prefWidth="150"
-            styleClass="mainMenuButton"
-            layoutX="75" 
-            layoutY="165" 
-            onAction="#loadGamePressed" 
-        />
-        <Button 
-            text="Shop"
-            prefHeight="30"
-            prefWidth="150"
-            styleClass="mainMenuButton"
-            layoutX="75" 
-            layoutY="215" 
-            onAction="#shopPressed" 
-        />
-    </children>
-</AnchorPane>
+<GridPane alignment="center" styleClass="mainMenu" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="com.futurebazookasafariandroid.FBS_MainMenu.FXMLMainMenuController">
+   <children>
+   
+   <AnchorPane id="AnchorPane">
+       <stylesheets>
+           <URL value="@fxmlmainmenu.css" />
+       </stylesheets>
+       <children>
+           <Label fx:id="Futurelogo" prefHeight="20" prefWidth="288" styleClass="logoLabel" text="Future Bazooka Safari" />
+           <Button fx:id="newgame" layoutX="75" layoutY="115" onAction="#newGamePressed" prefHeight="30" prefWidth="150" styleClass="mainMenuButton" text="Neues Spiel" />
+           <Button fx:id="loadgame" layoutX="75" layoutY="165" onAction="#loadGamePressed" prefHeight="30" prefWidth="150" styleClass="mainMenuButton" text="Spiel laden" />
+           <Button fx:id="shop" layoutX="75" layoutY="215" onAction="#shopPressed" prefHeight="30" prefWidth="150" styleClass="mainMenuButton" text="Shop" />
+       </children>
+   </AnchorPane>
+   </children>
+   <columnConstraints>
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+   </rowConstraints>
 </GridPane>
-        

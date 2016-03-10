@@ -15,7 +15,7 @@
            <URL value="@fxmlloginscreen.css" />
        </stylesheets>
        <children>
-           <Label fx:id="titellogin" prefHeight="20" prefWidth="288" styleClass="logoLabel" text="Future Bazooka Safari" AnchorPane.topAnchor="0.0" />
+           <Label fx:id="titellogin" prefHeight="20" prefWidth="288" styleClass="logoLabel" textFill="#d70b0b" AnchorPane.topAnchor="0.0" />
        </children>
    </AnchorPane>
      <TextField fx:id="fbs_username" prefHeight="27" prefWidth="150" promptText="Username" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
@@ -29,12 +29,12 @@
          </GridPane.margin>
       </PasswordField>
 
-        <Button onAction="#LoginPressed" prefHeight="30" prefWidth="80.0" styleClass="loginScreenButton" text="Log In" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" GridPane.vgrow="NEVER">
+        <Button fx:id="login" onAction="#LoginPressed" prefHeight="30" prefWidth="80.0" styleClass="loginScreenButton" text="Log In" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" GridPane.vgrow="NEVER">
          <GridPane.margin>
             <Insets right="40.0" />
          </GridPane.margin>
       </Button>
-     <Button onAction="#SignUpPressed" prefHeight="30" prefWidth="81.0" styleClass="loginScreenButton" text="Sign Up" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+     <Button fx:id="signin" onAction="#SignUpPressed" prefHeight="30" prefWidth="81.0" styleClass="loginScreenButton" text="Sign Up" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
          <GridPane.margin>
             <Insets left="40.0" />
          </GridPane.margin>
@@ -45,7 +45,7 @@
    </columnConstraints>
    <rowConstraints>
       <RowConstraints maxHeight="40.0" prefHeight="50.0" valignment="CENTER" vgrow="NEVER" />
-      <RowConstraints maxHeight="100.0" minHeight="10.0" prefHeight="30.0" />
+      <RowConstraints maxHeight="120.0" minHeight="10.0" prefHeight="30.0" />
       <RowConstraints minHeight="10.0" prefHeight="30.0" />
       <RowConstraints minHeight="10.0" prefHeight="30.0" />
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />

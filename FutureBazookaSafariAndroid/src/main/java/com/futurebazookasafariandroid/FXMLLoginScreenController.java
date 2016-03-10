@@ -10,6 +10,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -19,6 +20,9 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.InnerShadow;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -32,6 +36,12 @@ public class FXMLLoginScreenController {
     private GridPane gridlogin;
     @FXML
     private Label titellogin;
+    @FXML
+    private Button signin;
+    @FXML
+    private Button login;
+    
+    
 
     @FXML
     private void LoginPressed(ActionEvent event) throws IOException, SQLException {
@@ -60,6 +70,38 @@ public class FXMLLoginScreenController {
         gridlogin.setStyle("-fx-background-image: url('" + image + "'); "
                 + "-fx-background-position: center center; "
                 + "-fx-background-repeat: stretch;");
+
+        
+//        
+        signin.setStyle("-fx-padding: 8 15 15 15;\n" +
+"    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;\n" +
+"    -fx-background-radius: 8;\n" +
+"    -fx-background-color: \n" +
+"        linear-gradient(from 0% 93% to 0% 100%, #a34313 0%, #903b12 100%),\n" +
+"        #9d4024,\n" +
+"        #d86e3a,\n" +
+"        radial-gradient(center 50% 50%, radius 100%, #d86e3a, #c54e2c);\n" +
+"    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );\n" +
+"    -fx-font-weight: bold;\n" +
+"    -fx-font-size: 1.1em;");
+        signin.setPrefWidth(100);
+        
+        login.setStyle("-fx-padding: 8 15 15 15;\n" +
+"    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;\n" +
+"    -fx-background-radius: 8;\n" +
+"    -fx-background-color: \n" +
+"        linear-gradient(from 0% 93% to 0% 100%, #a34313 0%, #903b12 100%),\n" +
+"        #9d4024,\n" +
+"        #d86e3a,\n" +
+"        radial-gradient(center 50% 50%, radius 100%, #d86e3a, #c54e2c);\n" +
+"    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );\n" +
+"    -fx-font-weight: bold;\n" +
+"    -fx-font-size: 1.1em;");
+//        
+        
+        Text t = new Text("Future Bazooka Safari");
+        t.setFill(Color.RED);
+        t.setFont(Font.font(null, FontWeight.BOLD, 160));
 
         Blend blend = new Blend();
         blend.setMode(BlendMode.MULTIPLY);
@@ -100,7 +142,8 @@ public class FXMLLoginScreenController {
 
         blend.setTopInput(blend1);
 
-     
+        
+        titellogin.setText(t.getText());
         titellogin.setEffect(blend);
 
     }
