@@ -208,7 +208,7 @@ public class FBS_RundenController extends AnchorPane {
                 
                 runde = 0;
                 schwierigkeit = 0;
-                stg.close();
+              //  stg.close();
                 
                 System.out.println(getClass());
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLMainMenu.fxml"));
@@ -218,14 +218,11 @@ public class FBS_RundenController extends AnchorPane {
                 } catch (IOException ex) {
                     Logger.getLogger(FBS_RundenController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                Stage newStage = new Stage();
                 
                 
                 Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
-                newStage.setScene(new Scene(root, primScreenBounds.getWidth(), primScreenBounds.getHeight()));
-                newStage.setX(0);
-                newStage.setY(0);
-                newStage.show();
+                stg.setScene(new Scene(root, primScreenBounds.getWidth(), primScreenBounds.getHeight()));
+                
             }
         });
 

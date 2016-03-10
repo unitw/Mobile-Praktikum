@@ -13,6 +13,7 @@ import com.futurebazookasafariandroid.FBS_Interfaces.FBS_SpielerInterface;
 import com.futurebazookasafariandroid.FBS_Interfaces.FBS_TowerInterface;
 import com.futurebazookasafariandroid.FBS_Interfaces.FBS_HindernisInterface;
 import com.futurebazookasafariandroid.FBS_Monster.FBS_Monster_Ratte;
+import com.futurebazookasafariandroid.FBS_Monster.FBS_SkinnyNorris;
 import com.futurebazookasafariandroid.FBS_Projektile.FBS_BobAndrewsProjektil;
 import com.futurebazookasafariandroid.FBS_Projektile.FBS_LaserProjektil;
 import com.futurebazookasafariandroid.FBS_Tower.FBS_JustusJonas_Tower;
@@ -130,9 +131,9 @@ public class FBS_MapController {
                 } catch (IOException ex) {
                     Logger.getLogger(FBS_MapController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-               // canvas.drawMap(monsterlist, turmlist, projektillist, hindernislist);
+                canvas.drawMap(monsterlist, turmlist, projektillist, hindernislist);
                 TowerShoot(iteration);
-               // canvas.drawMap(monsterlist, turmlist, projektillist, hindernislist);
+                canvas.drawMap(monsterlist, turmlist, projektillist, hindernislist);
                 final ArrayList<FBS_Projektil_Interface> loeschliste = new ArrayList();
 
                 iteration++;
@@ -437,7 +438,7 @@ public class FBS_MapController {
         Point2D start = map.getStartpunkt();
         Point2D end = map.getEndpunkt();
         System.out.println(end.toString());
-        FBS_MonsterInterface moveMon = new FBS_Monster_Ratte(start.getX(), start.getY());
+        FBS_MonsterInterface moveMon = new FBS_SkinnyNorris(start.getX(), start.getY());
         //Key = point value = vorgänger;
         ArrayList<FBS_Knoten> open = new ArrayList();
         ArrayList<FBS_Knoten> closed = new ArrayList();
