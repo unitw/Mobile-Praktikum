@@ -22,10 +22,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.ArrayChangeListener;
 import javafx.collections.ObservableIntegerArray;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -96,7 +98,6 @@ public class FBS_RundenController extends AnchorPane {
                     ClipboardContent content = new ClipboardContent();
                     content.putImage(img);
                     db.setContent(content);
-                    System.out.println("Drag started");
                     event.consume();
                 }
             });
@@ -105,7 +106,6 @@ public class FBS_RundenController extends AnchorPane {
         controloverlay.getCanvas().setOnDragOver(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
                 event.acceptTransferModes(TransferMode.MOVE);
-                System.out.println("Drag Over");
                 event.consume();
             }
         });
@@ -114,7 +114,6 @@ public class FBS_RundenController extends AnchorPane {
                 Dragboard db = event.getDragboard();
                 System.out.println(tower);
                 mapcon.getMouseclicks(event.getX(), event.getY(), tower);
-                System.out.println("X: " + event.getX() + "\nY: " + event.getY());
                 event.setDropCompleted(true);
                 event.consume();
             }
@@ -175,16 +174,14 @@ public class FBS_RundenController extends AnchorPane {
     }
 
     public static void roundFailed() {
-
         Rectangle2D scr = Screen.getPrimary().getVisualBounds();
-
         int pw = (int) scr.getWidth() / 4;
         int ph = (int) scr.getHeight() / 4;
         Stage dialog = new Stage();
         dialog.initStyle(StageStyle.UNDECORATED);
-
         Button reset = new Button("Try Again");
-        Button menu = new Button("zum Menü");
+        Button menu = new Button("Back To Menu");
+
 
         reset.setOnAction((javafx.event.ActionEvent event) -> {
             dialog.close();
@@ -204,9 +201,32 @@ public class FBS_RundenController extends AnchorPane {
 
         });
 
-        menu.setOnAction((javafx.event.ActionEvent event) -> {
-            dialog.close();
-            
+        menu.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(javafx.event.ActionEvent event) {
+                dialog.close();
+                
+                runde = 0;
+                schwierigkeit = 0;
+                stg.close();
+                
+                System.out.println(getClass());
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLMainMenu.fxml"));
+                Parent root = null;
+                try {
+                    root = (Parent) fxmlLoader.load();
+                } catch (IOException ex) {
+                    Logger.getLogger(FBS_RundenController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                Stage newStage = new Stage();
+                
+                
+                Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+                newStage.setScene(new Scene(root, primScreenBounds.getWidth(), primScreenBounds.getHeight()));
+                newStage.setX(0);
+                newStage.setY(0);
+                newStage.show();
+            }
         });
 
         Label t = new Label();
@@ -218,10 +238,6 @@ public class FBS_RundenController extends AnchorPane {
 
         // t.getStyleClass().add("animated-gradient");
         t.setFont(Font.font(null, FontWeight.EXTRA_BOLD, 15));
-
-        Reflection r = new Reflection();
-        r.setFraction(0.7f);
-        t.setEffect(r);
 
         // t.setTranslateY(400);
         GridPane pane = new GridPane();
