@@ -45,7 +45,7 @@ public class ControllerSpieloberflaeche {
     private Label l_leben;
 
     @FXML
-    private  Label l_runde;
+    private Label l_runde;
 
     @FXML
     private GridPane gp_infos;
@@ -73,19 +73,17 @@ public class ControllerSpieloberflaeche {
 
     @FXML
     private AnchorPane anchorpane;
-    
+
     private ArrayList<Button> buttonlist;
-    
+
     @FXML
     private AnchorPane anchorpane1;
 
     @FXML
     private ScrollPane scrollpane;
-    
+
     @FXML
     private Button start;
-    
-    
 
     public ScrollPane getScrollpane() {
         return scrollpane;
@@ -94,18 +92,12 @@ public class ControllerSpieloberflaeche {
     @FXML
     SplitPane pane = new SplitPane();
 
-   
-
     private FBS_Canvas canvas1;
-
-   
 
     @FXML
     protected void initialize() {
-        
-        
-        
-         b_settings.setStyle("-fx-padding: 8 15 15 15;\n"
+
+        b_settings.setStyle("-fx-padding: 8 15 15 15;\n"
                 + "    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;\n"
                 + "    -fx-background-radius: 8;\n"
                 + "    -fx-background-color: \n"
@@ -118,38 +110,36 @@ public class ControllerSpieloberflaeche {
                 + "    -fx-font-size: 1.1em;"
         );
 
-        
     }
 
     public void initStuff() {
-        
+
         buttonlist = new ArrayList();
 
         Rectangle2D scr = Screen.getPrimary().getVisualBounds();
-        
+
         anchorpane.setPrefHeight(scr.getHeight());
         anchorpane.setPrefWidth(scr.getWidth());
         anchorpane1.setPrefHeight(canvas1.getMap().getMapsizex());
         anchorpane1.setPrefWidth(canvas1.getMap().getMapsizey());
         canvas1.prefWidth(this.getCanvas().getMap().getMapsizex());
         canvas1.prefHeight(this.getCanvas().getMap().getMapsizey());
-        
+
         stackpane.setMaxHeight(scr.getHeight());
         stackpane.setMaxWidth(scr.getWidth());
         anchorpane1.getChildren().add(canvas1);
-      
+
         initMap();
         zeichneTowerList();
-        
+
         anchorpansplitoben.getChildren().add(zeichneTowerList());
 
         gp_overlay.setAlignment(Pos.TOP_RIGHT);
 
-        
         stackpane.getChildren().remove(gp_overlay);
         stackpane.getChildren().add(gp_overlay);
         stackpane.setAlignment(gp_overlay, Pos.TOP_LEFT);
-        stackpane.setAlignment(scrollpane,Pos.TOP_LEFT);
+        stackpane.setAlignment(scrollpane, Pos.TOP_LEFT);
 
         pane.setOrientation(Orientation.VERTICAL);
 
@@ -179,7 +169,7 @@ public class ControllerSpieloberflaeche {
     public void initMap() {
         turmlist.put("Lasertower", new FBS_Laser_Tower());
         turmlist.put("JustusJonas", new FBS_JustusJonas_Tower());
-       
+
     }
 
     public GridPane zeichneTowerList() {
@@ -200,6 +190,20 @@ public class ControllerSpieloberflaeche {
             imgview.setFitWidth(tower2.getGroesse());
 
             Button b_tower = new Button(tower, imgview);
+
+            b_tower.setStyle("-fx-padding: 8 15 15 15;\n"
+                    + "    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;\n"
+                    + "    -fx-background-radius: 8;\n"
+                    + "    -fx-background-color: \n"
+                    + "        linear-gradient(from 0% 93% to 0% 100%, #104E8B 0%, #104E8B 100%),\n"
+                    + "        #9d4024,\n"
+                    + "        #d86e3a,\n"
+                    + "        radial-gradient(center 50% 50%, radius 100%, #1E90FF, #1C86EE);\n"
+                    + "    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );\n"
+                    + "    -fx-font-weight: bold;\n"
+                    + "    -fx-font-size: 1.1em;"
+            );
+
             b_tower.setId(tower);
             buttonlist.add(b_tower);
             b_tower.setOnAction(new EventHandler<ActionEvent>() {
@@ -230,15 +234,16 @@ public class ControllerSpieloberflaeche {
 
         return gridpane;
     }
-    
-    public void setGoldLabel(int gold){
+
+    public void setGoldLabel(int gold) {
         this.l_gold.setText("Gold: " + gold);
     }
-    
-    public void setLebenLabel(int leben){
+
+    public void setLebenLabel(int leben) {
         this.l_leben.setText("Leben: " + leben);
     }
-    public void setRundenLabel(int runde){
+
+    public void setRundenLabel(int runde) {
         this.l_runde.setText("Runde: " + runde);
     }
 
