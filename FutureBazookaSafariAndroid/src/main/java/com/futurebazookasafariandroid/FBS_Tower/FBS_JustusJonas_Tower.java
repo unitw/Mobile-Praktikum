@@ -36,8 +36,8 @@ public class FBS_JustusJonas_Tower extends FBS_AbstractTower {
         this.setName("JustusJonas");
         this.setPosition(posx, posy);
         this.setisAOE(false);
-        this.setAttackspeed(20);
-        this.setDamage(35);
+        this.setAttackspeed(10);
+        this.setDamage(60);
         this.setGroesse(96);
         this.setUpgradestufe(0);
         this.setRange(250);

@@ -16,8 +16,8 @@ public class FBS_JustusJonas extends FBS_AbstractMonster {
 
     public FBS_JustusJonas(double posx, double posy) {
         this.setPosition(posx, posy);
-        this.setLife(60);
-        this.setSpeed(2);
+        this.setLife(50);
+        this.setSpeed(3);
         this.setLoot(100);
         this.setPicture(new Image("stein.png"));
         this.setGroesse(32);

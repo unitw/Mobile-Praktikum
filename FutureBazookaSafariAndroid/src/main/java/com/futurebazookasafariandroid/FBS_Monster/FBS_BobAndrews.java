@@ -16,8 +16,8 @@ public class FBS_BobAndrews extends FBS_AbstractMonster {
 
     public FBS_BobAndrews(double posx, double posy) {
         this.setPosition(posx, posy);
-        this.setLife(80);
-        this.setSpeed(2);
+        this.setLife(50);
+        this.setSpeed(3);
         this.setLoot(100);
         this.setPicture(new Image("bob.png"));
         this.setGroesse(32);

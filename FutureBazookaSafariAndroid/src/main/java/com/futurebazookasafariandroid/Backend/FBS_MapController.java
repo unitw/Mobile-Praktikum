@@ -130,9 +130,9 @@ public class FBS_MapController {
                 } catch (IOException ex) {
                     Logger.getLogger(FBS_MapController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                canvas.drawMap(monsterlist, turmlist, projektillist, hindernislist);
+               // canvas.drawMap(monsterlist, turmlist, projektillist, hindernislist);
                 TowerShoot(iteration);
-                canvas.drawMap(monsterlist, turmlist, projektillist, hindernislist);
+               // canvas.drawMap(monsterlist, turmlist, projektillist, hindernislist);
                 final ArrayList<FBS_Projektil_Interface> loeschliste = new ArrayList();
 
                 iteration++;
