@@ -97,6 +97,10 @@ public class ControllerSpieloberflaeche {
 
     @FXML
     protected void initialize() {
+        
+        
+        
+        
 
         
     }
