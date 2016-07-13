@@ -19,8 +19,7 @@ import java.sql.Statement;
 public class FBS_DatenBank {
 
     //  Database credentials
-    String userName = "sa";
-    String password = "EN5_20I6";
+  
 
     String url = "jdbc:sqlserver://176.9.147.155;databaseName=FBS_Datenbank";
     //  Connection con = DriverManager.getConnection("jdbc:sqlserver://127.0.0.1;databaseName=aysha", "user=sa", "password=admin");
