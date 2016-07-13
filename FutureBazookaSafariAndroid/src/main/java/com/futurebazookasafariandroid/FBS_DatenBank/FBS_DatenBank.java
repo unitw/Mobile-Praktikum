@@ -29,8 +29,7 @@ public class FBS_DatenBank {
 
     String url1 = "jdbc:jtds:sqlserver://176.9.147.155;instance=SQLEXPRESS;DatabaseName=FBS_Datenbank";
     String driver1 = "net.sourceforge.jtds.jdbc.Driver";
-    String userName1 = "sa";
-    String password1 = "EN5_20I6";
+
 
     Connection conn = null;
     Statement stmt = null;
